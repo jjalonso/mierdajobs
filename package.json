@@ -24,6 +24,6 @@
     "styled-components": "^5",
     "typescript": "5.2.2",
     "dotenv": "^16.3.1",
-    "mongodb": "^6.0.0",
+    "mongodb": "^6.0.0"
   }
 }

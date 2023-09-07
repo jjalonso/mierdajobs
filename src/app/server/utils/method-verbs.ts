@@ -1,5 +1,4 @@
 import type { NextApiRequest } from "next";
-import methodVerbsIntl from "../../config/locale/be/method-verbs/es.json";
 import { connectDatabaseMongoDB } from "../db/mongodb";
 
 /**
@@ -13,17 +12,10 @@ export const fetchGET = async (
   collection: string,
   req: Pick<NextApiRequest, "query">
 ) => {
-  try {
-    const params = Object.keys(req.query).length > 0 ? req.query : undefined;
-    const db: any = await connectDatabaseMongoDB();
-    const response = await db.collection(collection).find(params).toArray();
-    return response;
-  } catch (error) {
-    return {
-      message: methodVerbsIntl["mierdajobs.method.verbs.get.error"],
-      error,
-    };
-  }
+  const params = Object.keys(req.query).length > 0 ? req.query : undefined;
+  const db: any = await connectDatabaseMongoDB();
+  const response = await db.collection(collection).find(params).toArray();
+  return response;
 };
 
 export const fetchPOST = async (
@@ -31,14 +23,7 @@ export const fetchPOST = async (
   req: Pick<NextApiRequest, "body">
 ) => {
   const typeInsert = typeof req.body === "object" ? "insertOne" : "insertMany";
-  try {
-    const db: any = await connectDatabaseMongoDB();
-    const response = await db.collection(collection)[typeInsert](req.body);
-    return response;
-  } catch (error) {
-    return {
-      message: methodVerbsIntl["mierdajobs.method.verbs.post.error"],
-      error,
-    };
-  }
+  const db: any = await connectDatabaseMongoDB();
+  const response = await db.collection(collection)[typeInsert](req.body);
+  return response;
 };

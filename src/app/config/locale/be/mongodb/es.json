@@ -1,4 +1,0 @@
-{
-  "mierdajobs.mongodb.connection.error": "EMDB01 - Error al conectar a la base de datos de MongoDB",
-  "mierdajobs.mongodb.disconnection.error": "EMDB02 - Error al desconectar de la base de datos de MongoDB"
-}

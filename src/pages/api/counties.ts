@@ -1,4 +1,4 @@
-import { fetchGET } from "@/app/server/utils/verbs";
+import { fetchGET } from "../../server/utils/verbs";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(

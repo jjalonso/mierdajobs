@@ -1,4 +1,3 @@
-'use client';
 
 import LayoutProps from './layout.props'
 

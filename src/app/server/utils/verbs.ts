@@ -10,7 +10,7 @@ import { connectDatabaseMongoDB } from "../db/mongodb";
 
 export const fetchGET = async (
   collection: string,
-  req: Pick<NextApiRequest, "query">
+  req: any
 ) => {
   const params = req !== undefined ? req.query : undefined;
   const db: any = await connectDatabaseMongoDB();

@@ -22,8 +22,9 @@ export const fetchPOST = async (
   collection: string,
   req: Pick<NextApiRequest, "body">
 ) => {
-  const typeInsert = typeof req.body === "object" ? "insertOne" : "insertMany";
+  const typeInsert = !Array.isArray(req.body) ? "insertOne" : "insertMany";
   const db: any = await connectDatabaseMongoDB();
+  console.log(typeof req.body);
   const response = await db.collection(collection)[typeInsert](req.body);
   return response;
 };

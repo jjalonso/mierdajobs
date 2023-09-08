@@ -21,7 +21,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     <html lang="es" className='bg-brand-purple h-full'>
         <body className={roboto.className}>
               <header className='p-10 flex'>
-                <div className='flex flex-col w-72 shrink-0 gap-1'>
+                <nav className='flex flex-col w-72 shrink-0 gap-1'>
                   {/* MENU  */}
                   <Link href="/">
                     <GhostButton active={pathname === '/'}>
@@ -35,7 +35,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                       Enviar una reseña
                     </GhostButton>
                   </Link>
-                </div>
+                </nav>
                 <div className='flex flex-grow min-w-fit justify-center px-16'>
                   <a href="/">
                     <Image src="/logo.svg" width="250" height="50" alt="logo"/>

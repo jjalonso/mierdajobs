@@ -12,7 +12,8 @@ export const fetchGET = async (
   collection: string,
   req: Pick<NextApiRequest, "query">
 ) => {
-  const params = Object.keys(req.query).length > 0 ? req.query : undefined;
+  console.log(req);
+  const params = req !== undefined ? req.query : undefined;
   const db: any = await connectDatabaseMongoDB();
   const response = await db.collection(collection).find(params).toArray();
   return response;

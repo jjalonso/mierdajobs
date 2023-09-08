@@ -23,8 +23,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               <header className='p-10 flex'>
                 <div className='flex flex-col w-72 shrink-0 gap-1'>
                   {/* MENU  */}
-                  <Link href="/buscador">
-                    <GhostButton active={pathname === '/buscador'}>
+                  <Link href="/">
+                    <GhostButton active={pathname === '/'}>
                       <Search />
                       Buscar reseñas
                     </GhostButton>

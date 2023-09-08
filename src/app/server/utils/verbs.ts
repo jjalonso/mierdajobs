@@ -12,7 +12,6 @@ export const fetchGET = async (
   collection: string,
   req: Pick<NextApiRequest, "query">
 ) => {
-  console.log(req);
   const params = req !== undefined ? req.query : undefined;
   const db: any = await connectDatabaseMongoDB();
   const response = await db.collection(collection).find(params).toArray();
@@ -25,7 +24,6 @@ export const fetchPOST = async (
 ) => {
   const typeInsert = !Array.isArray(req.body) ? "insertOne" : "insertMany";
   const db: any = await connectDatabaseMongoDB();
-  console.log(typeof req.body);
   const response = await db.collection(collection)[typeInsert](req.body);
   return response;
 };

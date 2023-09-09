@@ -1,2 +1,12 @@
 {
+  "routes": [
+    {
+      "src": "/api/counties/(.*)",
+      "dest": "src/app/api/counties/route.ts"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ]
 }

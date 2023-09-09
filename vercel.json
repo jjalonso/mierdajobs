@@ -1,9 +1,4 @@
 {
-  "version": 2,
-  "builds": [
-    { "src": "src/app/api/counties/route.ts", "use": "@vercel/node" },
-    { "src": "public/**", "use": "@vercel/static" }
-  ],
   "routes": [
     {
       "src": "/api/counties/(.*)",

@@ -22,10 +22,10 @@ const serializerParams = (request: Request) => {
 };
 
 /**
- * Retrieves data from a MongoDB collection based on the provided collection name and request query parameters.
- * @param collection - The name of the MongoDB collection from which to retrieve data.
- * @param req - The request object containing the query parameters.
- * @returns The retrieved data from the MongoDB collection or an error message along with the error object.
+ * Retrieves data from a MongoDB collection based on the provided collection name and request query parameters
+ * @param collection - The name of the MongoDB collection from which to retrieve data
+ * @param req - The request object containing the query parameters
+ * @returns The retrieved data from the MongoDB collection or an error message along with the error object
  */
 
 export const fetchGET = async (collection: string, request: Request) => {

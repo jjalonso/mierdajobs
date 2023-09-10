@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { fetchGET, fetchPOST } from "../../server/utils/verbs";
 
-const collection = "counties";
+const collection = "cities";
 
 export const GET = async (request: Request) => {
   const response = await fetchGET(collection, request);

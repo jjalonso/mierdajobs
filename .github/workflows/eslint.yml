@@ -1,4 +1,4 @@
-name: MIERDAJOBS[ESLint]
+name: ESLint
 
 on: [push]
 

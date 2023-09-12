@@ -45,10 +45,10 @@ type GooglePlaceResults = {
 };
 
 export type GooglePlaceResponse = {
-  html_attributions?: [];
+  html_attributions: [];
   next_page_token?: string;
-  results?: GooglePlaceResults[];
-  status?: string;
+  results: GooglePlaceResults[];
+  status: string;
 };
 
 export type GooglePlaceParams = {

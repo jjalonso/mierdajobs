@@ -7,8 +7,16 @@ import { serializerParams } from "@/app/server/utils/functions";
 export const GET_API_GOOGLE_PLACE = async (request: Request) => {
   const serializedParams: GooglePlaceParams | undefined =
     serializerParams(request);
-  const url = `${process.env.GOOGLE_URL_PLACE}input=${serializedParams?.query},${serializedParams?.countie},${serializedParams?.citie}&fields=place_id,name,formatted_address&types=establishment&key=${process.env.GOOGLE_API_KEY}`;
-  const response: Response = await fetch(url, { method: "GET" });
+  const params = {
+    input: `Es igual${serializedParams?.query}y ubicado en${serializedParams?.city},${serializedParams?.countie}`,
+    language: "es",
+    radius: 0,
+    types: "establishment",
+  };
+  const url = `${process.env.GOOGLE_URL_PLACE}input=${params.input}&language=${params.language}&types=${params.types}&key=${process.env.GOOGLE_API_KEY}`;
+  const response: Response = await fetch(url.replace(/ /g, "%20"), {
+    method: "GET",
+  });
   const adaptedResponse: GooglePlaceResponse = await response.json();
   return adaptedResponse;
 };

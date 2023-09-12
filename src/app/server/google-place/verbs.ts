@@ -8,7 +8,7 @@ export const GET_API_GOOGLE_PLACE = async (request: Request) => {
   const serializedParams: GooglePlaceParams | undefined =
     serializerParams(request);
   const params = {
-    input: `Es igual${serializedParams?.query}y ubicado en${serializedParams?.city},${serializedParams?.countie}`,
+    input: `${serializedParams?.city},${serializedParams?.countie}Busqueda de ${serializedParams?.query}`,
     language: "es",
     radius: 0,
     types: "establishment",

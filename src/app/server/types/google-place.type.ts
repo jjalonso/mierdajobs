@@ -1,4 +1,4 @@
-type GooglePlaceResults = {
+export type GooglePlaceResults = {
   business_status: string;
   formatted_address: string;
   geometry: {

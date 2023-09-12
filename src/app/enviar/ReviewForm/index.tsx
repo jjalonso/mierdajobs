@@ -8,11 +8,13 @@ import FormField from "@/components/FormField";
 import { Select, SelectOption } from "@/components/Select";
 
 const ReviewForm: React.FC = () => {
+  // const { counties, error, isLoading } = useSWR('/api/user/123', businessesFetcher)
+
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
   const [businessQuery, setBusinessQuery] = React.useState<string>('');
-  const debouncedBusinessQuery = useDebounce<string>(businessQuery, 500)
-  const businessFetcher = (url: string) => fetch(url).then(res => res.json());
-  const { data, error, isLoading } = useSWR('/api/user/123', fetcher)
+  // const debouncedBusinessQuery = useDebounce<string>(businessQuery, 500)
+  // const businessFetcher = (url: string) => fetch(url).then(res => res.json());
+  // const { data, error, isLoading } = useSWR('/api/user/123', businessesFetcher)
 
   const onSubmit = useCallback((data: any) => console.log('Submit', data), []);
 

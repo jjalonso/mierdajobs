@@ -23,8 +23,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     <html
       lang="es"
       className="
+        bg-primary
         h-full 
-        bg-primary 
         text-sm 
         text-black
       ">

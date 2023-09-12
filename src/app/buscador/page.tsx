@@ -1,9 +1,5 @@
-import PageProps from "./page.props"
+import PageProps from './page.props';
 
-const Page: React.FC<PageProps> = () => {
-  return (
-    <div>BUSCADOR</div>
-  )
-}
+const Page: React.FC<PageProps> = () => <div>BUSCADOR</div>;
 
 export default Page;

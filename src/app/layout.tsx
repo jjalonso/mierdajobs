@@ -1,58 +1,89 @@
-"use client"
+'use client';
+import './globals.css';
+
+import { MagnifyingGlassIcon, PencilIcon } from '@heroicons/react/24/outline';
+import { Roboto } from 'next/font/google';
 import Image from 'next/image';
-import './globals.css'
-import { Roboto } from 'next/font/google'
-// import type { Metadata } from 'next'
-import LayoutProps from './layout.props'
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { GhostButton } from '@/components/Button/Button';
-import { Search, Forward } from 'lucide-react';
+
+import LayoutProps from './layout.props';
+
+import { NavButton } from '@/components/Button';
 
 const roboto = Roboto({
   weight: '400',
   subsets: ['latin'],
-})
+});
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const pathname = usePathname();
 
   return (
-    <html lang="es" className='bg-brand-purple h-full'>
-        <body className={roboto.className}>
-              <header className='p-10 flex'>
-                <nav className='flex flex-col w-72 shrink-0 gap-1'>
-                  {/* MENU  */}
-                  <Link href="/">
-                    <GhostButton active={pathname === '/'}>
-                      <Search />
-                      Buscar reseñas
-                    </GhostButton>
-                  </Link>
-                  <Link href="/enviar">
-                    <GhostButton active={pathname === '/enviar'}>
-                      <Forward />
-                      Enviar una reseña
-                    </GhostButton>
-                  </Link>
-                </nav>
-                <div className='flex flex-grow min-w-fit justify-center px-16'>
-                  <a href="/">
-                    <Image src="/logo.svg" width="250" height="50" alt="logo"/>
-                  </a>
-                </div>
-                <div className='w-72 shrink-0'>
-                  {/* ACCOUNT INFORMATION */}
-                </div>
-              </header>
-              <main>
+    <html
+      lang="es"
+      className="
+        h-full 
+        bg-primary 
+        text-sm 
+        text-black
+      ">
+      <body className={`
+        ${roboto.className} 
+        flex 
+        flex-col 
+        gap-y-20
+      `}>
+        <header className="flex p-10">
+          <nav className="
+            flex 
+            w-72 
+            shrink-0 
+            flex-col 
+            gap-2
+          ">
+            {/* MENU  */}
+            <Link href="/">
+              <NavButton active={pathname === '/'}>
+                <MagnifyingGlassIcon className='h-6 w-6' />
+                Buscar reseñas
+              </NavButton>
+            </Link>
+            <Link href="/enviar">
+              <NavButton active={pathname === '/enviar'}>
+                <PencilIcon className='h-6 w-6' />
+                Enviar una reseña
 
-              {children}
-              </main>
+              </NavButton>
+            </Link>
+          </nav>
+          <div className="
+            flex 
+            min-w-fit 
+            grow 
+            justify-center 
+            px-16
+          ">
+            <a href="/">
+              <Image
+                src="/logo.svg"
+                width="250"
+                height="0"
+                alt="logo"
+              />
+            </a>
+          </div>
+          <div className="w-72 shrink-0">
+            {/* ACCOUNT INFORMATION */}
+          </div>
+        </header>
+        <main className='flex justify-center'>
+          {children}
+        </main>
 
-        </body>
-      </html>
+      </body>
+    </html>
   );
-}
+};
 
 export default Layout;

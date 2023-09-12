@@ -1,0 +1,12 @@
+.btn {
+  @apply flex items-center gap-x-4 px-6 py-2 rounded-md uppercase transition-all duration-300 scale-100;
+  @apply active:scale-[0.97];   
+}
+
+.btnNav {
+  @apply text-white hover:bg-shade-light;
+}
+
+.btnNavActive {
+  @apply bg-shade-light;
+}

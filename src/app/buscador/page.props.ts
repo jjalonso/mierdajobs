@@ -1,1 +1,1 @@
-export default interface PageProps {}
+export default interface PageProps { }

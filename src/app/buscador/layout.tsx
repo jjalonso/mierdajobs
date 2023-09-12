@@ -1,11 +1,5 @@
-'use client';
+import LayoutProps from './layout.props';
 
-// import type { Metadata } from 'next'
-import LayoutProps from './layout.props'
-
-
-const Layout: React.FC<LayoutProps> = ({ children }) => {
-  return children
-}
+const Layout: React.FC<LayoutProps> = ({ children }) => children;
 
 export default Layout;

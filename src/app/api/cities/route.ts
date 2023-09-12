@@ -1,17 +1,17 @@
-import { adaptResponseCountiesAndCities } from "@/app/server/utils/functions";
-import { ApiResponseProps } from "@/app/server/utils/props-type";
+import { GET_MONGODB, POST_MONGODB } from "@/app/server/db/verbs";
+import { DbResponse } from "@/app/server/types/db.type";
+import { serializerResponseCountiesAndCities } from "@/app/server/utils/functions";
 import { NextResponse } from "next/server";
-import { fetchGET, fetchPOST } from "../../server/utils/verbs";
 
 const collection = "cities";
 
 export const GET = async (request: Request) => {
-  const response: ApiResponseProps[] = await fetchGET(collection, request);
-  const adaptedResponse = adaptResponseCountiesAndCities(response);
+  const response: DbResponse[] = await GET_MONGODB(collection, request);
+  const adaptedResponse = serializerResponseCountiesAndCities(response);
   return NextResponse.json(adaptedResponse);
 };
 
 export const POST = async (request: Request) => {
-  const response: any = await fetchPOST(collection, request);
+  const response: any = await POST_MONGODB(collection, request);
   return NextResponse.json(response);
 };

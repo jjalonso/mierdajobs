@@ -1,25 +1,9 @@
-import type { NextApiRequest } from "next";
 import {
   connectDatabaseMongoDB,
   disconnectDatabaseMongoDB,
-} from "../db/mongodb";
-
-type ParamsProps = {
-  [key: string]: any;
-};
-
-const serializerParams = (request: Request) => {
-  let params: ParamsProps = {};
-  const { searchParams } = new URL(request.url);
-  if (searchParams.size === 0) {
-    return undefined;
-  } else {
-    searchParams.forEach((value: string, key: string) => {
-      params = { ...params, [key]: value };
-    });
-    return params;
-  }
-};
+} from "@/app/server/db/mongodb";
+import { DbParams } from "@/app/server/types/db.type";
+import { serializerParams } from "@/app/server/utils/functions";
 
 /**
  * Retrieves data from a MongoDB collection based on the provided collection name and request query parameters
@@ -28,8 +12,8 @@ const serializerParams = (request: Request) => {
  * @returns The retrieved data from the MongoDB collection or an error message along with the error object
  */
 
-export const fetchGET = async (collection: string, request: Request) => {
-  const serializedParams: ParamsProps | undefined = serializerParams(request);
+export const GET_MONGODB = async (collection: string, request: Request) => {
+  const serializedParams: DbParams | undefined = serializerParams(request);
   const db: any = await connectDatabaseMongoDB();
   const response = await db
     .collection(collection)
@@ -39,12 +23,12 @@ export const fetchGET = async (collection: string, request: Request) => {
   return response;
 };
 
-export const fetchPOST = async (collection: string, request: Request) => {
+export const POST_MONGODB = async (collection: string, request: Request) => {
   const adaptedRequest = await request.json();
   const typeInsert = !Array.isArray(adaptedRequest)
     ? "insertOne"
     : "insertMany";
-  const db: any = await connectDatabaseMongoDB();
+  const db = await connectDatabaseMongoDB();
   const response = await db.collection(collection)[typeInsert](adaptedRequest);
   await disconnectDatabaseMongoDB();
   return response;

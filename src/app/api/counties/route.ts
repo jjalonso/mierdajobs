@@ -1,12 +1,16 @@
-import { GET_MONGODB } from "@/app/server/db/verbs";
-import { DbResponse } from "@/app/server/types/db.type";
-import { serializerResponseIdNameRecord } from "@/app/server/utils/functions";
+import { getCollection } from "@/app/(server)/db/verbs";
+import {
+  serializerParams,
+  serializerResponseCounty,
+} from "@/app/(server)/utils/functions";
 import { NextResponse } from "next/server";
+import { CityResponse, DBCity } from "./type";
 
 const collection = "counties";
 
 export const GET = async (request: Request) => {
-  const response: DbResponse[] = await GET_MONGODB(collection, request);
-  const adaptedResponse = serializerResponseIdNameRecord(response);
-  return NextResponse.json(adaptedResponse);
+  const params = serializerParams(request, "county");
+  const response: DBCity[] = await getCollection(collection, params);
+  const serializedResponse: CityResponse[] = serializerResponseCounty(response);
+  return NextResponse.json(serializedResponse);
 };

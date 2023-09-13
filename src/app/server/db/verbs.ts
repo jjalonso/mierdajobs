@@ -22,14 +22,3 @@ export const GET_MONGODB = async (collection: string, request: Request) => {
   await disconnectDatabaseMongoDB();
   return response;
 };
-
-export const POST_MONGODB = async (collection: string, request: Request) => {
-  const adaptedRequest = await request.json();
-  const typeInsert = !Array.isArray(adaptedRequest)
-    ? "insertOne"
-    : "insertMany";
-  const db = await connectDatabaseMongoDB();
-  const response = await db.collection(collection)[typeInsert](adaptedRequest);
-  await disconnectDatabaseMongoDB();
-  return response;
-};

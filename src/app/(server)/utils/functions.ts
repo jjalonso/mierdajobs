@@ -18,13 +18,23 @@ export const serializerParams = (request: Request, type: TypeRequest) => {
     return undefined;
   } else {
     searchParams.forEach((value: string, key: string) => {
-      if (value.length === 1) {
-        value = `0${value}`;
-      }
       key = typeRequestOptions[type];
       params = { ...params, [key]: value };
     });
 
+    return params;
+  }
+};
+
+export const serializerQueryGoogle = (request: Request) => {
+  let params: Record = {};
+  const { searchParams } = new URL(request.url);
+  if (searchParams.size === 0) {
+    return undefined;
+  } else {
+    searchParams.forEach((value: string, key: string) => {
+      params = { ...params, [key]: value };
+    });
     return params;
   }
 };

@@ -1,7 +1,7 @@
-import { serializerParams } from "@/app/(server)/utils/functions";
+import { serializerQueryGoogle } from "@/app/(server)/utils/functions";
 
 export const getBusinessFromGooglePlaceApi = async (request: Request) => {
-  const reqParams = serializerParams(request);
+  const reqParams = serializerQueryGoogle(request);
   const options = {
     query: `${reqParams?.city},${reqParams?.county}Busqueda de ${reqParams?.query}`,
     language: "es",

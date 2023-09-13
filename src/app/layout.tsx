@@ -18,7 +18,6 @@ const roboto = Roboto({
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const pathname = usePathname();
-  return children
   return (
     <html
       lang="es"
@@ -34,16 +33,18 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         flex-col 
         gap-y-20
       `}>
-        <header className="flex p-10">
+        <header className="flex flex-col gap-6 p-10 md:flex-row">
           <nav className="
             flex 
-            w-72 
+            w-full
             shrink-0 
             flex-col 
-            gap-2
+            gap-2 
+            md:w-72
           ">
             {/* MENU  */}
             <Button
+              className='w-full md:w-fit'
               active={pathname === '/'}
               asChild>
               <Link href="/">
@@ -52,6 +53,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               </Link>
             </Button>
             <Button
+              className='w-full md:w-fit'
               active={pathname === '/enviar'}
               asChild>
               <Link href="/enviar">
@@ -61,11 +63,13 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             </Button>
           </nav>
           <div className="
-            flex 
-            min-w-fit 
-            grow 
+            order-first
+            flex
+            w-full
+            grow
             justify-center 
-            px-16
+            px-16 
+            md:order-none
           ">
             <a href="/">
               <Image
@@ -76,11 +80,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               />
             </a>
           </div>
-          <div className="w-72 shrink-0">
+          <div className="w-full shrink-0 md:w-72">
             {/* ACCOUNT INFORMATION */}
           </div>
         </header>
-        <main className='flex justify-center'>
+        <main className='flex justify-center p-2'>
           {children}
         </main>
 

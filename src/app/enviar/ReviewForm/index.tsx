@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useCallback } from "react"
 import { useForm } from "react-hook-form";
 import useSWR from 'swr';
@@ -5,7 +7,9 @@ import { useDebounce } from "usehooks-ts";
 
 import { Autocomplete, Option } from "@/components/Autocomplete";
 import FormField from "@/components/FormField";
-import { Select, SelectOption } from "@/components/Select";
+// import { Select, SelectOption } from "@/components/Select";
+import { Button } from "@/components/ui/button";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const ReviewForm: React.FC = () => {
   // const { counties, error, isLoading } = useSWR('/api/user/123', businessesFetcher)
@@ -28,9 +32,17 @@ const ReviewForm: React.FC = () => {
           label="Provincia"
         // error={errors.county}
         >
-          <Select placeholder="Seleccione...">
-            <SelectOption value={{ id: '1', name: 'Cadiz (mock)' }} />
-            <SelectOption value={{ id: '2', name: 'Malaga (mock)' }} />
+          <Select>
+            <SelectTrigger>
+              <SelectValue placeholder="Seleccione..." />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="apple">Apple</SelectItem>
+              <SelectItem value="banana">Banana</SelectItem>
+              <SelectItem value="blueberry">Blueberry</SelectItem>
+              <SelectItem value="grapes">Grapes</SelectItem>
+              <SelectItem value="pineapple">Pineapple</SelectItem>
+            </SelectContent>
           </Select>
         </FormField>
 
@@ -39,38 +51,62 @@ const ReviewForm: React.FC = () => {
           label="Localidad"
         // error={errors.county}
         >
-
-          <Select placeholder="Seleccione..."
-            disabled
-          >
-            <SelectOption value={{ id: '1', name: 'Puerto de Santa Maria, El (mock)' }} />
-            <SelectOption value={{ id: '2', name: 'Jerez de la frontera (mock)' }} />
+          <Select>
+            <SelectTrigger>
+              <SelectValue placeholder="Seleccione..." />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="apple">Apple</SelectItem>
+              <SelectItem value="banana">Banana</SelectItem>
+              <SelectItem value="blueberry">Blueberry</SelectItem>
+              <SelectItem value="grapes">Grapes</SelectItem>
+              <SelectItem value="pineapple">Pineapple</SelectItem>
+            </SelectContent>
           </Select>
         </FormField>
       </div>
-      <div className="flex">
-        <FormField
-          className="w-2/4"
-          label="Empresa"
-        // error={errors.county}
-        >
-          <Autocomplete
-            placeholder="Busque por el nombre del negocio..."
-            onQueryChange={(query) => setBusinessQuery(query)}
-          >
-            {/* 
-              TODO:
-              Change it to typeahead
-              Populate with data from API 
-            */}
-            <Option value={{ id: '1', name: 'Puerto de Santa Maria, El (mock)' }} />
-            <Option value={{ id: '2', name: 'Jerez de la frontera (mock)' }} />
-          </Autocomplete>
-          <button type="submit">Continuar</button>
-        </FormField>
-      </div>
+      <Button type="submit">Continuar</Button>
     </form >
   )
 }
 
 export default ReviewForm
+      //     <Select placeholder="Seleccione..."
+      //       {...register('county')}>
+      //       <SelectOption value={{ id: '1', name: 'Cadiz (mock)' }} />
+      //       <SelectOption value={{ id: '2', name: 'Malaga (mock)' }} />
+      //     </Select>
+      //   </FormField>
+
+      //   <FormField
+      //     className="w-2/4"
+      //     label="Localidad"
+      //   // error={errors.county}
+      //   >
+
+      //     <Select placeholder="Seleccione..."
+      //       disabled
+      //     >
+      //       <SelectOption value={{ id: '1', name: 'Puerto de Santa Maria, El (mock)' }} />
+      //       <SelectOption value={{ id: '2', name: 'Jerez de la frontera (mock)' }} />
+      //     </Select>
+      //   </FormField>
+      // </div>
+      // <div className="flex">
+      //   <FormField
+      //     className="w-2/4"
+      //     label="Empresa"
+      //   // error={errors.county}
+      //   >
+      //     <Autocomplete
+      //       placeholder="Busque por el nombre del negocio..."
+      //       onQueryChange={(query) => setBusinessQuery(query)}
+      //     >
+      //       {/*
+      //         TODO:
+      //         Change it to typeahead
+      //         Populate with data from API
+      //       */}
+      //       <Option value={{ id: '1', name: 'Puerto de Santa Maria, El (mock)' }} />
+      //       <Option value={{ id: '2', name: 'Jerez de la frontera (mock)' }} />
+      //     </Autocomplete>

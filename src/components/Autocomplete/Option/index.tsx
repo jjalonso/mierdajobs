@@ -8,15 +8,15 @@ const Option = ({ value }: Props) => {
     <Combobox.Option
       value={value}
       className='
-        relative
-        flex
-        cursor-pointer 
-        select-none 
-        flex-row 
-        p-2
         ui-selected:text-primary
         ui-active:bg-primary-light
-        ui-active:text-primary'
+        ui-active:text-primary 
+        relative 
+        flex 
+        cursor-pointer
+        select-none
+        flex-row
+        p-2'
     >
       {value.name}
     </Combobox.Option >

@@ -9,7 +9,7 @@ import { usePathname } from 'next/navigation';
 
 import LayoutProps from './layout.props';
 
-import { NavButton } from '@/components/Button';
+import { Button } from '@/components/ui/button';
 
 const roboto = Roboto({
   weight: '400',
@@ -18,13 +18,13 @@ const roboto = Roboto({
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const pathname = usePathname();
-
+  return children
   return (
     <html
       lang="es"
       className="
-        bg-primary
-        h-full 
+        h-full
+        bg-primary 
         text-sm 
         text-black
       ">
@@ -43,19 +43,22 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             gap-2
           ">
             {/* MENU  */}
-            <Link href="/">
-              <NavButton active={pathname === '/'}>
+            <Button
+              active={pathname === '/'}
+              asChild>
+              <Link href="/">
                 <MagnifyingGlassIcon className='h-6 w-6' />
                 Buscar reseñas
-              </NavButton>
-            </Link>
-            <Link href="/enviar">
-              <NavButton active={pathname === '/enviar'}>
+              </Link>
+            </Button>
+            <Button
+              active={pathname === '/enviar'}
+              asChild>
+              <Link href="/enviar">
                 <PencilIcon className='h-6 w-6' />
                 Enviar una reseña
-
-              </NavButton>
-            </Link>
+              </Link>
+            </Button>
           </nav>
           <div className="
             flex 

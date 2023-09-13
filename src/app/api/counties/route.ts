@@ -1,7 +1,9 @@
+import { NextResponse } from "next/server";
+
+import { fetchGET, fetchPOST } from "../../server/utils/verbs";
+
 import { adaptResponseCountiesAndCities } from "@/app/server/utils/functions";
 import { ApiResponseProps } from "@/app/server/utils/props-type";
-import { NextResponse } from "next/server";
-import { fetchGET, fetchPOST } from "../../server/utils/verbs";
 
 const collection = "counties";
 

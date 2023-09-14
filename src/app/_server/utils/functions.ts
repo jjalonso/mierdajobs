@@ -39,12 +39,10 @@ export const serializerQueryGoogle = (request: Request) => {
 };
 
 export const serializerResponseCity = (response: Record<string, string>[]) => {
-  const serializedCity: Record<string, string>[] = response.map(
-    (item: Record<string, string>) => ({
-      id: item.parent_code,
-      name: item.label,
-    })
-  );
+  const serializedCity = response.map((item: Record<string, string>) => ({
+    id: item.parent_code,
+    name: item.label,
+  }));
 
   return serializedCity;
 };
@@ -52,12 +50,10 @@ export const serializerResponseCity = (response: Record<string, string>[]) => {
 export const serializerResponseCounty = (
   response: Record<string, string>[]
 ) => {
-  const serializedCounty: Record<string, string>[] = response.map(
-    (item: Record<string, string>) => ({
-      id: item.code,
-      name: item.label,
-    })
-  );
+  const serializedCounty = response.map((item: Record<string, string>) => ({
+    id: item.code,
+    name: item.label,
+  }));
 
   return serializedCounty;
 };

@@ -1,17 +1,10 @@
-import { headers } from 'next/headers';
-
 import ReviewForm from "./ReviewForm";
 
-import Heading from "@/components/Heading";
 import { CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 
 const Page: React.FC = async () => {
-
-  const headersList = headers();
-
-  const domain = headersList.get('host') || "";
-  const CountiesFetch = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/counties`);
-  const counties = await CountiesFetch.json();
+  const countiesResponse = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/counties`);
+  const counties = await countiesResponse.json();
 
   return (
     <>
@@ -21,15 +14,9 @@ const Page: React.FC = async () => {
       </CardHeader>
       <CardContent>
         <ReviewForm counties={counties} />
+        {JSON.stringify(counties)}
       </CardContent>
-      {/* <CardFooter className="flex justify-between"> */}
-      {/* <Button>Deploy</Button> */}
-      {/* </CardFooter> */}
     </>
-    // <div className="flex grow flex-col gap-16">
-    //   <Heading level={1}
-    //     size="large">Enviar reseña</Heading>
-    // </div>
   )
 };
 

@@ -24,7 +24,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       className="
         h-full
         bg-primary 
-        text-sm 
+        text-sm
         text-black
       ">
       <body className={`
@@ -33,7 +33,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         flex-col 
         gap-y-20
       `}>
-        <header className="flex flex-col gap-6 p-10 md:flex-row">
+        <header className="flex flex-col-reverse gap-6 p-10 md:flex-row">
           <nav className="
             flex 
             w-full
@@ -63,13 +63,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             </Button>
           </nav>
           <div className="
-            order-first
             flex
             w-full
             grow
             justify-center 
             px-16 
-            md:order-none
           ">
             <a href="/">
               <Image

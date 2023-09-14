@@ -51,8 +51,14 @@ export type GooglePlaceApi = {
   status: string;
 };
 
+export type BussinessQuery = {
+  q: string;
+  county: string;
+  city: string;
+};
+
 export type BusinessResponse = {
+  id: string;
   name: string;
   address: string;
-  id: string;
 };

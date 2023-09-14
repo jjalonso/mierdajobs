@@ -6,6 +6,7 @@ const client = new MongoClient(process.env.MONGODB_URI ?? "", {
     strict: true,
     deprecationErrors: true,
   },
+  connectTimeoutMS: 15000,
 });
 
 export const connectDB = async () => {

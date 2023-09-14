@@ -1,10 +1,9 @@
 import {
   BusinessResponse,
   GooglePlaceApi,
-  Record,
   ResultGooglePlaceApi,
   TypeRequest,
-} from "./type";
+} from "./types";
 
 const typeRequestOptions = {
   county: "code",
@@ -12,7 +11,7 @@ const typeRequestOptions = {
 };
 
 export const serializerParams = (request: Request, type: TypeRequest) => {
-  let params: Record = {};
+  let params: Record<string, string> = {};
   const { searchParams } = new URL(request.url);
   if (searchParams.size === 0) {
     return undefined;
@@ -27,7 +26,7 @@ export const serializerParams = (request: Request, type: TypeRequest) => {
 };
 
 export const serializerQueryGoogle = (request: Request) => {
-  let params: Record = {};
+  let params: Record<string, string> = {};
   const { searchParams } = new URL(request.url);
   if (searchParams.size === 0) {
     return undefined;
@@ -39,20 +38,26 @@ export const serializerQueryGoogle = (request: Request) => {
   }
 };
 
-export const serializerResponseCity = (response: Record[]) => {
-  const serializedCity: Record[] = response.map((item: Record) => ({
-    id: item.parent_code,
-    name: item.label,
-  }));
+export const serializerResponseCity = (response: Record<string, string>[]) => {
+  const serializedCity: Record<string, string>[] = response.map(
+    (item: Record<string, string>) => ({
+      id: item.parent_code,
+      name: item.label,
+    })
+  );
 
   return serializedCity;
 };
 
-export const serializerResponseCounty = (response: Record[]) => {
-  const serializedCounty: Record[] = response.map((item: Record) => ({
-    id: item.code,
-    name: item.label,
-  }));
+export const serializerResponseCounty = (
+  response: Record<string, string>[]
+) => {
+  const serializedCounty: Record<string, string>[] = response.map(
+    (item: Record<string, string>) => ({
+      id: item.code,
+      name: item.label,
+    })
+  );
 
   return serializedCounty;
 };

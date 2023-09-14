@@ -1,9 +1,8 @@
 import { connectDB, disconnectDB } from "@/app/_server/db/mongodb";
-import { Record } from "../utils/type";
 
 export const getCollection = async (
   collection: string,
-  param: Record | undefined
+  param: Record<string, string>
 ) => {
   const db: any = await connectDB();
   const response = await db.collection(collection).find(param).toArray();

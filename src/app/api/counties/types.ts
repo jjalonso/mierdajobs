@@ -6,5 +6,6 @@ export type DBCounty = {
 };
 
 export type CountyResponse = {
-  [key: string]: any;
+  id: string;
+  name: string;
 };

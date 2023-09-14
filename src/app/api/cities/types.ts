@@ -6,5 +6,6 @@ export type DBCity = {
 };
 
 export type CityResponse = {
-  [key: string]: any;
+  id: string;
+  name: string;
 };

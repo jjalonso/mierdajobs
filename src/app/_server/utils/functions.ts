@@ -40,7 +40,7 @@ export const serializerQueryGoogle = (request: Request) => {
 
 export const serializerResponseCity = (response: Record<string, string>[]) => {
   const serializedCity = response.map((item: Record<string, string>) => ({
-    id: item.parent_code,
+    id: item.code,
     name: item.label,
   }));
 

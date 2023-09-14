@@ -1,10 +1,9 @@
 import {
   BusinessResponse,
   GooglePlaceApi,
-  Record,
   ResultGooglePlaceApi,
   TypeRequest,
-} from "./type";
+} from "./types";
 
 const typeRequestOptions = {
   county: "code",
@@ -12,7 +11,7 @@ const typeRequestOptions = {
 };
 
 export const serializerParams = (request: Request, type: TypeRequest) => {
-  let params: Record = {};
+  let params: Record<string, string> = {};
   const { searchParams } = new URL(request.url);
   if (searchParams.size === 0) {
     return undefined;
@@ -27,7 +26,7 @@ export const serializerParams = (request: Request, type: TypeRequest) => {
 };
 
 export const serializerQueryGoogle = (request: Request) => {
-  let params: Record = {};
+  let params: Record<string, string> = {};
   const { searchParams } = new URL(request.url);
   if (searchParams.size === 0) {
     return undefined;
@@ -39,17 +38,19 @@ export const serializerQueryGoogle = (request: Request) => {
   }
 };
 
-export const serializerResponseCity = (response: Record[]) => {
-  const serializedCity: Record[] = response.map((item: Record) => ({
-    id: item.parent_code,
+export const serializerResponseCity = (response: Record<string, string>[]) => {
+  const serializedCity = response.map((item: Record<string, string>) => ({
+    id: item.code,
     name: item.label,
   }));
 
   return serializedCity;
 };
 
-export const serializerResponseCounty = (response: Record[]) => {
-  const serializedCounty: Record[] = response.map((item: Record) => ({
+export const serializerResponseCounty = (
+  response: Record<string, string>[]
+) => {
+  const serializedCounty = response.map((item: Record<string, string>) => ({
     id: item.code,
     name: item.label,
   }));
@@ -61,7 +62,7 @@ export const serializerResponseApiGooglePlace = (response: GooglePlaceApi) => {
   let selectedFieldsResponse: BusinessResponse[] = [];
   response.results.forEach((item: ResultGooglePlaceApi) => {
     if (item.business_status !== "CLOSED_PERMANENTLY") {
-      selectedFieldsResponse.push(...selectedFieldsResponse, {
+      selectedFieldsResponse.push({
         name: item.name,
         address: item.formatted_address,
         id: item.place_id,

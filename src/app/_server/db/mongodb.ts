@@ -6,11 +6,12 @@ const client = new MongoClient(process.env.MONGODB_URI ?? "", {
     strict: true,
     deprecationErrors: true,
   },
+  connectTimeoutMS: 15000,
 });
 
 export const connectDB = async () => {
   await client.connect();
-  const db: Db = client.db(process.env.MONGODB_DATABASE_DEV);
+  const db: Db = client.db(process.env.MONGODB_DATABASE);
   return db;
 };
 

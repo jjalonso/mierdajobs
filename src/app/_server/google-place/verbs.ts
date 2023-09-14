@@ -1,9 +1,10 @@
-import { serializerQueryGoogle } from "@/app/(server)/utils/functions";
+import { serializerQueryGoogle } from "@/app/_server/utils/functions";
+import { BussinessQuery } from "@/app/api/retrieve-business/types";
 
 export const getBusinessFromGooglePlaceApi = async (request: Request) => {
-  const reqParams = serializerQueryGoogle(request);
+  const reqParams = serializerQueryGoogle(request) as BussinessQuery;
   const options = {
-    query: `${reqParams?.city},${reqParams?.county}Busqueda de ${reqParams?.query}`,
+    query: `${reqParams?.city},${reqParams?.county}Busqueda de ${reqParams?.q}`,
     language: "es",
     radius: 0,
   };

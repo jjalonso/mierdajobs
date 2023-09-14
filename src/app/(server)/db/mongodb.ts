@@ -8,10 +8,10 @@ const client = new MongoClient(process.env.MONGODB_URI ?? "", {
   },
 });
 
-export const connectDatabaseMongoDB = async () => {
+export const connectDB = async () => {
   await client.connect();
   const db: Db = client.db(process.env.MONGODB_DATABASE_DEV);
   return db;
 };
 
-export const disconnectDatabaseMongoDB = async () => await client.close();
+export const disconnectDB = async () => await client.close();

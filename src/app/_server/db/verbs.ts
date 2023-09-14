@@ -1,4 +1,4 @@
-import { connectDB, disconnectDB } from "@/app/(server)/db/mongodb";
+import { connectDB, disconnectDB } from "@/app/_server/db/mongodb";
 import { Record } from "../utils/type";
 
 export const getCollection = async (

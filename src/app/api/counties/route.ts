@@ -1,8 +1,8 @@
-import { getCollection } from "@/app/(server)/db/verbs";
+import { getCollection } from "@/app/_server/db/verbs";
 import {
   serializerParams,
   serializerResponseCounty,
-} from "@/app/(server)/utils/functions";
+} from "@/app/_server/utils/functions";
 import { NextResponse } from "next/server";
 import { CountyResponse, DBCounty } from "./types";
 

@@ -1,5 +1,5 @@
-import { getBusinessFromGooglePlaceApi } from "@/app/(server)/google-place/verbs";
-import { serializerResponseApiGooglePlace } from "@/app/(server)/utils/functions";
+import { getBusinessFromGooglePlaceApi } from "@/app/_server/google-place/verbs";
+import { serializerResponseApiGooglePlace } from "@/app/_server/utils/functions";
 import { NextResponse } from "next/server";
 import { BusinessResponse, GooglePlaceApi } from "./types";
 

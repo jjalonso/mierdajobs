@@ -1,4 +1,4 @@
-import { serializerQueryGoogle } from "@/app/(server)/utils/functions";
+import { serializerQueryGoogle } from "@/app/_server/utils/functions";
 
 export const getBusinessFromGooglePlaceApi = async (request: Request) => {
   const reqParams = serializerQueryGoogle(request);

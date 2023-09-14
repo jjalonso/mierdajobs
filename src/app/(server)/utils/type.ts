@@ -1,7 +1,7 @@
 import {
   BusinessResponse,
   GooglePlaceApi,
-} from "@/app/api/retrieve-business/type";
+} from "@/app/api/retrieve-business/types";
 
 type Record = {
   [key: string]: any;

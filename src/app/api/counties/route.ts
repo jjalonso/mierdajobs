@@ -4,13 +4,14 @@ import {
   serializerResponseCounty,
 } from "@/app/(server)/utils/functions";
 import { NextResponse } from "next/server";
-import { CityResponse, DBCity } from "./type";
+import { CountyResponse, DBCounty } from "./types";
 
 const collection = "counties";
 
 export const GET = async (request: Request) => {
   const params = serializerParams(request, "county");
-  const response: DBCity[] = await getCollection(collection, params);
-  const serializedResponse: CityResponse[] = serializerResponseCounty(response);
+  const response: DBCounty[] = await getCollection(collection, params);
+  const serializedResponse: CountyResponse[] =
+    serializerResponseCounty(response);
   return NextResponse.json(serializedResponse);
 };

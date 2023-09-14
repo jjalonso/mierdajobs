@@ -1,19 +1,16 @@
+import { getCollection } from "@/app/(server)/db/verbs";
+import {
+  serializerParams,
+  serializerResponseCity,
+} from "@/app/(server)/utils/functions";
 import { NextResponse } from "next/server";
-
-import { fetchGET, fetchPOST } from "../../server/utils/verbs";
-
-import { adaptResponseCountiesAndCities } from "@/app/server/utils/functions";
-import { ApiResponseProps } from "@/app/server/utils/props-type";
+import { CountyResponse, DBCounty } from "./type";
 
 const collection = "cities";
 
 export const GET = async (request: Request) => {
-  const response: ApiResponseProps[] = await fetchGET(collection, request);
-  const adaptedResponse = adaptResponseCountiesAndCities(response);
-  return NextResponse.json(adaptedResponse);
-};
-
-export const POST = async (request: Request) => {
-  const response: any = await fetchPOST(collection, request);
-  return NextResponse.json(response);
+  const params = serializerParams(request, "city");
+  const response: DBCounty[] = await getCollection(collection, params);
+  const serializedResponse: CountyResponse[] = serializerResponseCity(response);
+  return NextResponse.json(serializedResponse);
 };

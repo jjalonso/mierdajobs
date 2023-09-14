@@ -10,8 +10,8 @@ const Page: React.FC = async () => {
   const headersList = headers();
 
   const domain = headersList.get('host') || "";
-  // const CountiesFetch = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/counties`);
-  // const counties = await CountiesFetch.json();
+  const CountiesFetch = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/counties`);
+  const counties = await CountiesFetch.json();
 
   return (
     <>
@@ -20,7 +20,7 @@ const Page: React.FC = async () => {
         <CardDescription>Comparte con otros como fue tu experiencia.</CardDescription>
       </CardHeader>
       <CardContent>
-        <ReviewForm counties={[]} />
+        <ReviewForm counties={counties} />
       </CardContent>
       {/* <CardFooter className="flex justify-between"> */}
       {/* <Button>Deploy</Button> */}

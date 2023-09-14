@@ -66,7 +66,7 @@ export const serializerResponseApiGooglePlace = (response: GooglePlaceApi) => {
   let selectedFieldsResponse: BusinessResponse[] = [];
   response.results.forEach((item: ResultGooglePlaceApi) => {
     if (item.business_status !== "CLOSED_PERMANENTLY") {
-      selectedFieldsResponse.push(...selectedFieldsResponse, {
+      selectedFieldsResponse.push({
         name: item.name,
         address: item.formatted_address,
         id: item.place_id,

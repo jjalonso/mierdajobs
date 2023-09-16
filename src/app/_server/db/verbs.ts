@@ -1,4 +1,4 @@
-import { connectDB, disconnectDB } from "@/app/_server/db/mongodb";
+import { connectDB } from "@/app/_server/db/mongodb";
 
 export const getCollection = async (
   collection: string,
@@ -6,6 +6,18 @@ export const getCollection = async (
 ) => {
   const db: any = await connectDB();
   const response = await db.collection(collection).find(param).toArray();
-  await disconnectDB();
+  return response;
+};
+
+export const insertDataInCollection = async (
+  collection: string,
+  request: Request
+) => {
+  const adaptedRequest = await request.json();
+  const typeInsert = !Array.isArray(adaptedRequest)
+    ? "insertOne"
+    : "insertMany";
+  const db: any = await connectDB();
+  const response = await db.collection(collection)[typeInsert](adaptedRequest);
   return response;
 };

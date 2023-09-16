@@ -1,7 +1,7 @@
 import { sortListAlphabetically } from "@/app/api/utils";
 
 const TYPE_KEY: Record<string, string> = {
-  id: "code_province",
+  county: "code_province",
   name: "name",
 };
 

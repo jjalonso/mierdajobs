@@ -1,3 +1,5 @@
+import { sortListAlphabetically } from "@/app/api/utils";
+
 const TYPE_KEY: Record<string, string> = {
   id: "code_province",
   name: "name",
@@ -20,10 +22,12 @@ export const serializerParamsCity = (request: Request) => {
 };
 
 export const serializerResponseCity = (response: Record<string, string>[]) => {
-  const serializedCity = response.map((item: Record<string, string>) => ({
-    id: item.code,
-    name: item.name,
-  }));
+  const serializedCity = response
+    .map((item: Record<string, string>) => ({
+      id: item.code,
+      name: item.name,
+    }))
+    .sort(sortListAlphabetically);
 
   return serializedCity;
 };

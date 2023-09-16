@@ -1,5 +1,5 @@
 import { GooglePlaceApi } from "@/app/_server/google-place/types";
-import { BusinessResponse, BussinessParams } from "./types";
+import { BusinessResponse, BusinessParams } from "./types";
 
 export const serializerQueryBusiness = (request: Request) => {
   let params = {};
@@ -10,7 +10,7 @@ export const serializerQueryBusiness = (request: Request) => {
     searchParams.forEach((value: string, key: string) => {
       params = { ...params, [key]: value };
     });
-    return params as BussinessParams;
+    return params as BusinessParams;
   }
 };
 

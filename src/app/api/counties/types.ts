@@ -4,8 +4,3 @@ export type DBCounty = {
   code: string;
   label: string;
 };
-
-export type CountyResponse = {
-  id: string;
-  name: string;
-};

@@ -1,10 +1,10 @@
-import { serializerQueryGoogle } from "@/app/_server/utils/functions";
-import { BussinessQuery } from "@/app/api/retrieve-business/types";
+import { GooglePlaceApi } from "./types";
 
-export const getBusinessFromGooglePlaceApi = async (request: Request) => {
-  const reqParams = serializerQueryGoogle(request) as BussinessQuery;
+export const getBusinessFromGooglePlaceApi = async (
+  params: Record<string, string> | undefined
+) => {
   const options = {
-    query: `${reqParams?.city},${reqParams?.county}Busqueda de ${reqParams?.q}`,
+    query: `${params?.city},${params?.county}Busqueda de ${params?.q}`,
     language: "es",
     radius: 0,
   };
@@ -12,6 +12,6 @@ export const getBusinessFromGooglePlaceApi = async (request: Request) => {
   const response: Response = await fetch(url.replace(/ /g, "%20"), {
     method: "GET",
   });
-  const serializedResponse = await response.json();
+  const serializedResponse: GooglePlaceApi = await response.json();
   return serializedResponse;
 };

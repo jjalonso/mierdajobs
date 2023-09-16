@@ -1,8 +1,8 @@
 export type DBCity = {
-  _id: string;
-  parent_code: string;
   code: string;
-  label: string;
+  name: string;
+  code_autonomy: string;
+  code_province: string;
 };
 
 export type CityResponse = {

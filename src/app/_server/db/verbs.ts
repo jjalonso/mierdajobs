@@ -6,6 +6,5 @@ export const getCollection = async (
 ) => {
   const db: any = await connectDB();
   const response = await db.collection(collection).find(param).toArray();
-  await disconnectDB();
   return response;
 };

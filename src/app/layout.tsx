@@ -2,19 +2,17 @@
 import './globals.css';
 
 import { MagnifyingGlassIcon, PencilIcon } from '@heroicons/react/24/outline';
-import { Roboto } from 'next/font/google';
+// import { Roboto } from 'next/font/google';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import LayoutProps from './layout.props';
 
-import { Button } from '@/components/ui/button';
-
-const roboto = Roboto({
-  weight: '400',
-  subsets: ['latin'],
-});
+// const roboto = Roboto({
+//   weight: '400',
+//   subsets: ['latin'],
+// });
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const pathname = usePathname();
@@ -27,8 +25,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         text-sm
         text-black
       ">
+      {/* ${roboto.className}  */}
       <body className={`
-        ${roboto.className} 
         flex 
         flex-col 
         gap-y-20
@@ -43,7 +41,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             md:w-72
           ">
             {/* MENU  */}
-            <Button
+            {/* <Button
               className='w-full md:w-fit'
               active={pathname === '/'}
               asChild>
@@ -60,7 +58,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 <PencilIcon className='h-6 w-6' />
                 Enviar una reseña
               </Link>
-            </Button>
+            </Button> */}
           </nav>
           <div className="
             flex

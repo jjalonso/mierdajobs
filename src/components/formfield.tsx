@@ -1,13 +1,17 @@
-import { Label } from "../ui/label";
 
-import Props from "./props"
+import { ComponentPropsWithRef } from "react";
+
+interface Props extends ComponentPropsWithRef<'div'> {
+  label?: string;
+  error?: Record<string, { message: string }>;
+}
 
 const FormField: React.FC<Props> = ({ children, label, error, className }) =>
   <div className={className}>
-    <Label>
+    <label>
       {label}
       {children}
-    </Label>
+    </label>
     {error && <p className="text-sm italic">
       {/* {error.message} */}
     </p>}

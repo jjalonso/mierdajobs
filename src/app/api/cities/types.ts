@@ -4,8 +4,3 @@ export type DBCity = {
   code_autonomy: string;
   code_province: string;
 };
-
-export type CityResponse = {
-  id: string;
-  name: string;
-};

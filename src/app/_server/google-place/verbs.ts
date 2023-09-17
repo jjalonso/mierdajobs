@@ -4,7 +4,7 @@ export const getBusinessFromGooglePlaceApi = async (
   params: Record<string, string> | undefined
 ) => {
   const options = {
-    query: `${params?.city},${params?.county}Busqueda de ${params?.q}`,
+    query: `${params?.city} in ${params?.county}, ${params?.q}`,
     language: "es",
     radius: 0,
   };

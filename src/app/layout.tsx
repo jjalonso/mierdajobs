@@ -2,17 +2,19 @@
 import './globals.css';
 
 import { MagnifyingGlassIcon, PencilIcon } from '@heroicons/react/24/outline';
-// import { Roboto } from 'next/font/google';
+import { Roboto } from 'next/font/google';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import LayoutProps from './layout.props';
 
-// const roboto = Roboto({
-//   weight: '400',
-//   subsets: ['latin'],
-// });
+import { Button } from '@/components/button';
+
+const roboto = Roboto({
+  weight: '400',
+  subsets: ['latin'],
+});
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const pathname = usePathname();
@@ -25,8 +27,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         text-sm
         text-black
       ">
-      {/* ${roboto.className}  */}
       <body className={`
+        ${roboto.className} 
         flex 
         flex-col 
         gap-y-20
@@ -41,24 +43,22 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             md:w-72
           ">
             {/* MENU  */}
-            {/* <Button
-              className='w-full md:w-fit'
-              active={pathname === '/'}
-              asChild>
-              <Link href="/">
+            <Link href="/buscador">
+              <Button
+                className='w-full md:w-fit'
+                active={pathname === '/buscador'}>
                 <MagnifyingGlassIcon className='h-6 w-6' />
                 Buscar reseñas
-              </Link>
-            </Button>
-            <Button
-              className='w-full md:w-fit'
-              active={pathname === '/enviar'}
-              asChild>
-              <Link href="/enviar">
+              </Button>
+            </Link>
+            <Link href="/enviar">
+              <Button
+                className='w-full md:w-fit'
+                active={pathname === '/enviar'}>
                 <PencilIcon className='h-6 w-6' />
                 Enviar una reseña
-              </Link>
-            </Button> */}
+              </Button>
+            </Link>
           </nav>
           <div className="
             flex

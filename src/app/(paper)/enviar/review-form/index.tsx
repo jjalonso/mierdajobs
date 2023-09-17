@@ -1,22 +1,26 @@
 'use client';
 
-import React, { useCallback } from "react"
+import React, { useCallback, useState } from "react"
 import { useForm, useWatch } from "react-hook-form";
 import useSWR from 'swr';
 
 import Props from "./props";
 
-import { Autocomplete, AutocompleteOption } from "@/components/Autocomplete";
-import FormField from "@/components/FormField";
+import { CountyResponse } from "@/app/api/counties/types";
+import { Autocomplete, AutocompleteOption } from "@/components/autocomplete";
+import FormField from "@/components/formfield";
+import useSearch from "@/hooks/useSearch";
 
 const fetcher = (url: URL) => fetch(url).then((res) => res.json());
 
 const ReviewForm: React.FC<Props> = ({ counties }) => {
   const form = useForm();
   const countyValue = useWatch({ control: form.control, name: 'county' });
+  const [countyQuery, setCountyQuery] = useState<string>('')
 
-  type IndexedCollection = { id: string, name: string }[];
-  const { data: cities, isLoading } = useSWR<IndexedCollection, Error>(
+  const filteredCounties = useSearch(counties, countyQuery);
+
+  const { data: cities, isLoading } = useSWR<{ id: string, name: string }[], Error>(
     countyValue ?
       `${process.env.NEXT_PUBLIC_URL}/api/cities?county=${countyValue}` : null,
     fetcher
@@ -34,15 +38,16 @@ const ReviewForm: React.FC<Props> = ({ counties }) => {
         <div className="w-full md:w-2/5">
           <FormField label="Provincia">
             <Autocomplete
+              onQueryChange={(query) => setCountyQuery(query)}
               placeholder="Seleccione..."
             >
-              {counties.map((county) =>
-                <AutocompleteOption
-                  key={county.id}
-                  value={county}
-                >
-                  {county.name}
-                </AutocompleteOption>
+              {filteredCounties.map((county as Indexed) =>
+              <AutocompleteOption
+                key={county.id}
+                value={county}
+              >
+                {county.name}
+              </AutocompleteOption>
               )}
             </Autocomplete>
           </FormField>
@@ -71,17 +76,17 @@ const ReviewForm: React.FC<Props> = ({ counties }) => {
 
       {/*  BUSINESS */}
 
-      <div className="flex w-full flex-col md:w-2/4">
-        {/* <Autocomplete placeholder="Escribe el nombre de la empresa">
-          <Option value={{ id: '1', name: 'Pepe Mesa' }} />
-          <Option value={{ id: '2', name: 'Pepe Antonio' }} />
-          <Option value={{ id: '3', name: 'Pepa' }} />
-        </Autocomplete> */}
-      </div>
+      {/* <div className="flex w-full flex-col md:w-2/4">
+        <Autocomplete placeholder="Escribe el nombre de la empresa">
+          <AutocompleteOption value={{ id: '1', name: 'Pepe Mesa' }}></AutocompleteOption>
+          <AutocompleteOption value={{ id: '2', name: 'Pepe Antonio' }} />
+          <AutocompleteOption value={{ id: '3', name: 'Pepa' }} />
+        </Autocomplete>
+      </div> */}
 
       {/* <Button className="self-end"
         type="submit">Continuar</Button> */}
-    </form>
+    </form >
   )
 }
 

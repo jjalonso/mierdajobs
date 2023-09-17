@@ -1,6 +1,4 @@
-import ReviewForm from "./ReviewForm";
-
-import Heading from "@/components/heading";
+import ReviewForm from "./review-form";
 
 const Page: React.FC = async () => {
   const countiesResponse = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/counties`);
@@ -14,7 +12,6 @@ const Page: React.FC = async () => {
         <span>Comparte con otros como fue tu experiencia.</span>
       </div>
       <ReviewForm counties={counties} />
-
     </>
   )
 };

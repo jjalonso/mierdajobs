@@ -1,4 +1,4 @@
-export type BussinessParams = {
+export type BusinessParams = {
   q: string;
   county: string;
   city: string;

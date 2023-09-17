@@ -1,14 +1,13 @@
-import { getCollection } from "@/app/_server/db/verbs";
 import { NextResponse } from "next/server";
-import { IndexedName } from "../types";
-import { serializerParamsCity, serializerResponseCity } from "./function";
-import { DBCity } from "./types";
-
-const collection = "cities";
+import { parseParams } from "../utils";
+import { getCities } from "./actions";
 
 export const GET = async (request: Request) => {
-  const params = serializerParamsCity(request);
-  const response: DBCity[] = await getCollection(collection, params);
-  const serializedResponse: IndexedName[] = serializerResponseCity(response);
-  return NextResponse.json(serializedResponse);
+  const params = parseParams(request.url);
+  const county = params.get("county");
+
+  if (county) {
+    const response = await getCities(county);
+    return NextResponse.json(response);
+  }
 };

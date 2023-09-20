@@ -3,11 +3,11 @@ import { DBCounty } from "../counties/types";
 import { IndexedName } from "../types";
 import { serializeIndexedName } from "../utils";
 
-export const getCities = async (county: string, hasCode: boolean = false) => {
-  const queryObject: Record<string, string> = !hasCode
-    ? { code_province: county }
-    : { code: county };
-  const response: DBCounty[] = await getCollection("cities", queryObject);
+const getResponseDb = async (
+  collection: string,
+  queryObject: Record<string, string> | undefined = undefined
+) => {
+  const response: DBCounty[] = await getCollection(collection, queryObject);
   const serializedResponse: IndexedName[] = serializeIndexedName(
     response,
     "code",
@@ -15,3 +15,9 @@ export const getCities = async (county: string, hasCode: boolean = false) => {
   );
   return serializedResponse;
 };
+
+export const getCities = async (county: string) =>
+  await getResponseDb("cities", { code_province: county });
+
+export const getOneCity = async (code: string) =>
+  await getResponseDb("cities", { code });

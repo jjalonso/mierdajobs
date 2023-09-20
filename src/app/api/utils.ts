@@ -1,5 +1,4 @@
 import { GooglePlaceApi } from "../_server/google-place/types";
-import { BusinessResponse } from "./retrieve-business/types";
 
 export const sortListAlphabetically = (
   a: Record<string, string>,
@@ -24,8 +23,8 @@ export const parseParams = (url: string) => {
 };
 
 export const serializeIndexedBusiness = (response: GooglePlaceApi) => {
-  let selectedFieldsResponse: BusinessResponse[] = [];
-  response.results.forEach((item: GooglePlaceApi["results"][0]) => {
+  let selectedFieldsResponse: Record<string, string>[] = [];
+  response.results.forEach((item) => {
     if (item.business_status !== "CLOSED_PERMANENTLY") {
       selectedFieldsResponse.push({
         name: item.name,
@@ -34,7 +33,7 @@ export const serializeIndexedBusiness = (response: GooglePlaceApi) => {
       });
     }
   });
-  return selectedFieldsResponse;
+  return selectedFieldsResponse.sort(sortListAlphabetically);
 };
 
 export const handleErrors = (message: string, status: number) =>

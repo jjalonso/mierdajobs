@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { handleErrors, parseParams } from "../utils";
-import { getBussiness } from "./actions";
+import { getGoogleBusiness } from "./actions";
 
 export const GET = async (request: Request) => {
   const params = parseParams(request.url);
@@ -10,7 +10,7 @@ export const GET = async (request: Request) => {
 
   if (q && county && city) {
     try {
-      const response = await getBussiness(q, county, city);
+      const response = await getGoogleBusiness(q, county, city);
       return NextResponse.json(response);
     } catch (error) {
       return handleErrors("Hubo un problema al recuperar el negocio", 500);

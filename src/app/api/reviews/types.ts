@@ -1,4 +1,4 @@
-export type DBReviews = {
+export type DBReviews = Record<string, string> & {
   county: string;
   city: string;
   business: string;

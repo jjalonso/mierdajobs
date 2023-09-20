@@ -11,13 +11,10 @@ export const getCollection = async (
 
 export const insertDataInCollection = async (
   collection: string,
-  request: Request
+  body: Record<string, string>
 ) => {
-  const adaptedRequest = await request.json();
-  const typeInsert = !Array.isArray(adaptedRequest)
-    ? "insertOne"
-    : "insertMany";
+  const typeInsert = !Array.isArray(body) ? "insertOne" : "insertMany";
   const db: any = await connectDB();
-  const response = await db.collection(collection)[typeInsert](adaptedRequest);
+  const response = await db.collection(collection)[typeInsert](body);
   return response;
 };

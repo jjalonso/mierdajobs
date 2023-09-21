@@ -11,9 +11,9 @@ export const getBusinessFromGooglePlaceApi = async ({
   county: string;
   city: string;
 }) => {
-  const _county = await getOneCounty(county);
-  const _city = await getOneCity(city);
-  const url = `${process.env.GOOGLE_URL_PLACE}?query=${_county[0].name} in ${_city[0].name}, ${q}&language=es&key=${process.env.GOOGLE_API_KEY}`;
+  const gettedCounty = await getOneCounty(county);
+  const gettedCity = await getOneCity(city);
+  const url = `${process.env.GOOGLE_URL_PLACE}?query=${gettedCounty[0].name} in ${gettedCity[0].name}, ${q}&language=es&key=${process.env.GOOGLE_API_KEY}`;
   const response: Response = await fetch(url.replace(/ /g, "%20"), {
     method: "GET",
   });

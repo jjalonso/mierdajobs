@@ -40,7 +40,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             shrink-0 
             flex-col 
             gap-2 
-            md:w-72
+            md:w-60
           ">
             {/* MENU  */}
             <Link href="/buscador">
@@ -76,7 +76,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               />
             </a>
           </div>
-          <div className="w-full shrink-0 md:w-72">
+          <div className="w-full shrink-0 md:w-60">
             {/* ACCOUNT INFORMATION */}
           </div>
         </header>

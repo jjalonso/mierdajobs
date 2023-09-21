@@ -1,9 +1,10 @@
 // import cls from "classnames";
 // import { ComponentPropsWithRef } from "react";
 
-import { cva } from "class-variance-authority";
+import { VariantProps, cva } from "class-variance-authority";
+import { twMerge } from "tailwind-merge";
 
-const button = cva([""], {
+const headingVariants = cva(["font-bold"], {
   variants: {
     size: {
       xs: ["text-xl"],
@@ -11,15 +12,6 @@ const button = cva([""], {
       xl: ["text-3xl"]
     },
   },
-  // compoundVariants: [
-  //   {
-  //     intent: "primary",
-  //     size: "medium",
-  //     class: "uppercase",
-  //     // **or** if you're a React.js user, `className` may feel more consistent:
-  //     // className: "uppercase"
-  //   },
-  // ],
   defaultVariants: {
     size: "base",
   },
@@ -55,9 +47,16 @@ const button = cva([""], {
 //     },
 // });
 
-// // const Heading: React.FC<Props> = ({ children, level, ...props }) => {
-// //     const Component = `h${level}` as any;
-// //     return <Component className={button(props)}> {children}</Component>;
-// // };
+export interface Props
+  extends React.ButtonHTMLAttributes<HTMLHeadingElement>,
+  VariantProps<typeof headingVariants> {
+  level: 1 | 2 | 3;
+}
 
-// export default Heading;
+const Heading: React.FC<Props> = ({ children, level, size }) => {
+  const Component: keyof JSX.IntrinsicElements = `h${level}` as any;
+  return <Component className={twMerge(headingVariants({ size }))}> {children}</Component>;
+
+};
+
+export default Heading;

@@ -1,31 +1,49 @@
 import { Combobox, Transition } from '@headlessui/react'
-import { CheckIcon, ChevronUpDownIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-import { Fragment, } from 'react';
+import { ArrowPathIcon, CheckIcon, FaceFrownIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import { Children, Fragment, forwardRef } from 'react';
 
-interface AutocompleteValue {
-  name: string,
-  id: string,
-};
+import { IndexedName } from '@/app/api/types';
 
 interface AutocompleteProps {
   children: React.ReactNode,
-  onQueryChange?: (query: string) => void,
   placeholder?: string,
-  disabled?: boolean,
+  disabled?: boolean
+  value?: IndexedName
+  isLoading?: boolean
+  onQueryChange?: (query: string) => void,
+  onChange?: (v: IndexedName) => void,
 };
 
 interface AutocompleteOptionProps {
   children: React.ReactNode,
-  value: AutocompleteValue
+  value: IndexedName
+  noCheckIcon?: boolean
 };
 
-const Autocomplete: React.FC<AutocompleteProps> = ({ children, onQueryChange, disabled, placeholder }) =>
-  <Combobox disabled={disabled}>
+const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(({
+  children,
+  onQueryChange,
+  disabled,
+  placeholder,
+  value,
+  onChange,
+  isLoading
+}, ref) => (
+
+  <Combobox
+    ref={ref}
+    disabled={disabled}
+    onChange={onChange}
+    value={value}
+    by="id"
+  >
     <div className="relative mt-1">
       <span className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-        <MagnifyingGlassIcon className={`z-10 h-6 w-6 ${disabled ? 'text-gray-dark' : 'text-primary'}`} />
+        {isLoading ?
+          <ArrowPathIcon className="z-10 h-5 w-5 animate-spin text-gray-dark" /> :
+          <MagnifyingGlassIcon className={`z-10 h-5 w-5 ${disabled ? 'text-gray ' : 'text-primary'}`} />
+        }
       </span>
-
       <div className="
         relative h-11 
         w-full 
@@ -48,19 +66,18 @@ const Autocomplete: React.FC<AutocompleteProps> = ({ children, onQueryChange, di
             pl-11 
             placeholder:text-gray-dark 
             focus:outline-none 
-            disabled:cursor-not-allowed 
             disabled:bg-gray-light 
-            disabled:text-gray"
+            disabled:text-gray
+            disabled:opacity-50"
           placeholder={placeholder}
           autoComplete={'off'}
           onChange={(e) => onQueryChange?.(e.currentTarget.value)}
-          displayValue={(value) => value?.name}
+          displayValue={(value: IndexedName) => value?.name}
         />
         {/* Hack: Button is on top of the text to force popup opening */}
         <div className="absolute top-0 w-full">
-          <Combobox.Button className="h-11 w-full" />
+          <Combobox.Button className="h-11 w-full disabled:cursor-not-allowed" />
         </div>
-
       </div>
       <Transition
         as={Fragment}
@@ -68,8 +85,10 @@ const Autocomplete: React.FC<AutocompleteProps> = ({ children, onQueryChange, di
         leaveFrom="opacity-100"
         leaveTo="opacity-0"
       >
-        <Combobox.Options className="
-          absolute z-20 
+        <Combobox.Options
+          className="
+          absolute
+          z-20
           mt-1
           max-h-60
           w-full
@@ -78,48 +97,60 @@ const Autocomplete: React.FC<AutocompleteProps> = ({ children, onQueryChange, di
           border
           border-gray-light
           bg-white
-          py-1 drop-shadow-sm
-          focus:outline-none"
-        >
-          {children}
+          py-1
+          drop-shadow-sm
+          focus:outline-none
+        ">
+          {Children.count(children) > 0 && !isLoading ? children :
+            <div className="flex flex-col items-center gap-2 p-3">
+              <FaceFrownIcon className="h-6 w-6 text-gray" />
+              <p className="text-sm text-gray">No se encontraron resultados</p>
+            </div>}
         </Combobox.Options>
       </Transition>
     </div>
-  </Combobox>
+  </Combobox >
+));
 
-const AutocompleteOption: React.FC<AutocompleteOptionProps> = ({ children, value }) =>
+Autocomplete.displayName = 'Autocomplete';
+
+const AutocompleteOption = forwardRef<HTMLLIElement, AutocompleteOptionProps>(({ children, value, noCheckIcon = false }, ref) =>
   <Combobox.Option
-    className='
+    ref={ref}
+    value={value}
+    className={`
       relative
       flex
       cursor-pointer
       select-none
       flex-row
       p-2
-      pl-11
+      ${noCheckIcon ? '' : 'pl-11'}
       ui-selected:text-primary-dark
       ui-active:bg-primary-tint
       ui-active:text-primary-dark
-    '
-    value={value}
-  >
-    <span className='
-      absolute 
-      inset-y-0 
-      left-0 
-      flex 
-      items-center 
-      pl-3 
+    `}>
+    {!noCheckIcon && (
+      <span className='
+      absolute
+      inset-y-0
+      left-0
+      flex
+      items-center
+      pl-3
       text-primary
     '>
-      <CheckIcon className='
-        hidden 
-        h-6 
-        w-6 
-        ui-selected:block
-      '/>
-    </span>
+        <CheckIcon className='
+        hidden
+        h-5 
+        w-5 ui-selected:block'
+        />
+      </span>
+    )}
     {children}
   </Combobox.Option>
+);
+
+AutocompleteOption.displayName = 'AutocompleteOption';
 
 export { Autocomplete, AutocompleteOption };

@@ -1,5 +1,6 @@
-import { GooglePlaceApi } from "@/app/_server/google-place/types";
 import { BusinessResponse, BusinessParams } from "./types";
+
+import { GooglePlaceApi } from "@/app/_server/google-place/types";
 
 export const serializerQueryBusiness = (request: Request) => {
   let params = {};

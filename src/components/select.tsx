@@ -2,12 +2,14 @@ import { Listbox, Transition } from "@headlessui/react";
 import { ChevronUpDownIcon } from "@heroicons/react/24/outline";
 import { Fragment } from "react";
 
+import { IndexedName } from "@/app/api/types";
+
 interface SelectProps {
   children: React.ReactNode;
   placeholder?: string;
-  defaultValue?: any;
-  value?: any;
-  onChange?: (value: string) => void;
+  defaultValue?: IndexedName;
+  value?: IndexedName;
+  onChange?: (value: IndexedName) => void;
   disabled?: boolean;
 }
 

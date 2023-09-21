@@ -8,6 +8,7 @@ export const GET = async (request: Request) => {
   const county = params.get("county");
   const city = params.get("city");
 
+  // TODO: Change it to use a schema lib
   if (q && county && city) {
     try {
       const response = await getGoogleBusiness(q, county, city);

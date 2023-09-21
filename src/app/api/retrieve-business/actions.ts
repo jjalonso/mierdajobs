@@ -1,5 +1,5 @@
 import { getBusinessFromGooglePlaceApi } from "@/app/_server/google-place/verbs";
-import { serializeIndexedBusiness } from "../utils";
+import { serializeIndexedBusiness } from "./utils";
 
 export const getGoogleBusiness = async (
   q: string,

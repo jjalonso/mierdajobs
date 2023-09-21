@@ -30,20 +30,6 @@ export const serializeIndexedName = (
     }))
     .sort(sortListAlphabetically);
 
-export const serializeIndexedBusiness = (response: GooglePlaceApi) => {
-  let selectedFieldsResponse: Record<string, string>[] = [];
-  response.results.forEach((item) => {
-    if (item.business_status !== "CLOSED_PERMANENTLY") {
-      selectedFieldsResponse.push({
-        name: item.name,
-        address: item.formatted_address,
-        id: item.place_id,
-      });
-    }
-  });
-  return selectedFieldsResponse.sort(sortListAlphabetically);
-};
-
 export const handleErrors = (message: string, status: number) =>
   new Response(JSON.stringify({ error: message, status }), {
     status,

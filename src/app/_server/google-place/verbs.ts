@@ -1,14 +1,19 @@
+import { getOneCity } from "@/app/api/cities/actions";
+import { getOneCounty } from "@/app/api/counties/actions";
 import { GooglePlaceApi } from "./types";
 
-export const getBusinessFromGooglePlaceApi = async (
-  params: Record<string, string> | undefined
-) => {
-  const options = {
-    query: `${params?.city},${params?.county}Busqueda de ${params?.q}`,
-    language: "es",
-    radius: 0,
-  };
-  const url = `${process.env.GOOGLE_URL_PLACE}?query=${options.query}&language=${options.language}&radius=${options.radius}&key=${process.env.GOOGLE_API_KEY}`;
+export const getBusinessFromGooglePlaceApi = async ({
+  q,
+  county,
+  city,
+}: {
+  q: string;
+  county: string;
+  city: string;
+}) => {
+  const gettedCounty = await getOneCounty(county);
+  const gettedCity = await getOneCity(city);
+  const url = `${process.env.GOOGLE_URL_PLACE}?query=${gettedCounty[0].name} in ${gettedCity[0].name}, ${q}&language=es&key=${process.env.GOOGLE_API_KEY}`;
   const response: Response = await fetch(url.replace(/ /g, "%20"), {
     method: "GET",
   });

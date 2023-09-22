@@ -6,9 +6,11 @@ import { serializeIndexedName } from "../utils";
 
 import { getCollection } from "@/app/_server/db/verbs";
 
-export const getCities = async (county: string) => {
-  const queryObject = { code_province: county };
-  const response: DBCounty[] = await getCollection("cities", queryObject);
+const getResponseDb = async (
+  collection: string,
+  queryObject: Record<string, string> | undefined = undefined
+) => {
+  const response: DBCounty[] = await getCollection(collection, queryObject);
   const serializedResponse: IndexedName[] = serializeIndexedName(
     response,
     "code",
@@ -16,3 +18,9 @@ export const getCities = async (county: string) => {
   );
   return serializedResponse;
 };
+
+export const getCities = async (county: string) =>
+  await getResponseDb("cities", { code_province: county });
+
+export const getOneCity = async (code: string) =>
+  await getResponseDb("cities", { code });

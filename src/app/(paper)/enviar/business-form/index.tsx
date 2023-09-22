@@ -19,8 +19,6 @@ import useSearch from "@/hooks/useSearch";
 const BusinessForm: React.FC<Props> = ({ counties }) => {
   const [countyQuery, setCountyQuery] = useState<string>('');
   const [cityQuery, setCityQuery] = useState<string>('');
-  const [businessQuery, setBusinessQuery] = useState<string>('');
-  const debouncedBusinessQuery = useDebounce<string>(businessQuery, 500)
 
   interface formValues {
     county: IndexedName,

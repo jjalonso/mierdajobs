@@ -6,6 +6,7 @@ import { set, useForm, useWatch } from "react-hook-form";
 import useSWR from 'swr';
 import { useDebounce } from "usehooks-ts";
 
+import { useBusinessField, useCityField } from './hooks';
 import Props from "./props";
 
 import { getCities } from "@/app/api/cities/actions";
@@ -18,7 +19,6 @@ import useSearch from "@/hooks/useSearch";
 
 const BusinessForm: React.FC<Props> = ({ counties }) => {
   const [countyQuery, setCountyQuery] = useState<string>('');
-  const [cityQuery, setCityQuery] = useState<string>('');
 
   interface formValues {
     county: IndexedName,
@@ -38,20 +38,15 @@ const BusinessForm: React.FC<Props> = ({ counties }) => {
   const businessValue = useWatch({ control: form.control, name: 'business' });
 
   console.log(countyValue, cityValue, businessValue)
-  const { data: cities, isLoading: isCitiesLoading } = useSWR<IndexedName[], Error>(
-    countyValue ? `get-cities/${countyValue.id}` : null,
-    () => getCities(countyValue.id)
-  );
+  // const { data: cities, isLoading: isCitiesLoading } = useSWR<IndexedName[], Error>(
+  //   countyValue ? `get-cities/${countyValue.id}` : null,
+  //   () => getCities(countyValue.id)
+  // );
 
-  const { data: businesses, isLoading: isBusinessesLoading } = useSWR<BusinessResponse[], Error>(
-    debouncedBusinessQuery ?
-      `${process.env.NEXT_PUBLIC_URL}/api/retrieve-business?q=${debouncedBusinessQuery}&county=${countyValue.name}&city=${cityValue.name}
-      ` : null,
-    (url: URL) => fetch(url).then((res) => res.json())
-  );
+  const [setBusinessQuery, businesses, isBusinessesLoading] = useBusinessField(countyValue?.id, cityValue?.id)
+  const [setCityQuery, cities, isCitiesLoading] = useCityField(countyValue?.id)
 
   const filteredCounties: IndexedName[] = useSearch(counties, countyQuery);
-  const filteredCities: IndexedName[] = useSearch(cities, cityQuery);
 
   const onSubmit = useCallback((data: any) => console.log('Submit', data), []);
 
@@ -63,7 +58,7 @@ const BusinessForm: React.FC<Props> = ({ counties }) => {
       setCityQuery('')
       setBusinessQuery('')
     }
-  }, [countyValue, form]);
+  }, [countyValue, form, setBusinessQuery, setCityQuery]);
 
   // If city change, reset business field
   useEffect(() => {
@@ -71,7 +66,7 @@ const BusinessForm: React.FC<Props> = ({ counties }) => {
       form.resetField('business')
       setBusinessQuery('')
     }
-  }, [cityValue, form]);
+  }, [cityValue, form, setBusinessQuery]);
 
   return (
     <form onSubmit={form.handleSubmit(onSubmit)}
@@ -121,7 +116,7 @@ const BusinessForm: React.FC<Props> = ({ counties }) => {
                 isLoading={isCitiesLoading}
                 onQueryChange={(query) => setCityQuery(query)}
               >
-                {filteredCities?.map((city) =>
+                {cities?.map((city) =>
                   <AutocompleteOption
                     key={city.id}
                     value={city}
@@ -150,6 +145,7 @@ const BusinessForm: React.FC<Props> = ({ counties }) => {
               placeholder="Escribe para buscar..."
               isLoading={isBusinessesLoading}
               onQueryChange={(query) => setBusinessQuery(query)}
+              nullable
             >
               {businesses?.map((business) =>
                 <AutocompleteOption

@@ -5,13 +5,14 @@ import { Children, Fragment, forwardRef } from 'react';
 import { IndexedName } from '@/app/api/types';
 
 interface AutocompleteProps {
-  children: React.ReactNode,
-  placeholder?: string,
+  children: React.ReactNode
+  placeholder?: string
   disabled?: boolean
   value?: IndexedName
   isLoading?: boolean
-  onQueryChange?: (query: string) => void,
-  onChange?: (v: IndexedName) => void,
+  nullable?: boolean
+  onQueryChange?: (query: string) => void
+  onChange?: (v: IndexedName) => void
 };
 
 interface AutocompleteOptionProps {
@@ -27,15 +28,17 @@ const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(({
   placeholder,
   value,
   onChange,
-  isLoading
+  isLoading,
+  nullable
 }, ref) => (
-
   <Combobox
     ref={ref}
     disabled={disabled}
     onChange={onChange}
     value={value}
     by="id"
+    // Compliance with original types
+    nullable={nullable as false | undefined}
   >
     <div className="relative mt-1">
       <span className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
@@ -103,8 +106,18 @@ const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(({
         ">
           {Children.count(children) > 0 && !isLoading ? children :
             <div className="flex flex-col items-center gap-2 p-3">
-              <FaceFrownIcon className="h-6 w-6 text-gray" />
-              <p className="text-sm text-gray">No se encontraron resultados</p>
+              {isLoading ?
+                <>
+                  <ArrowPathIcon className="h-5 w-5 animate-spin text-gray" />
+                  <p className="text-sm text-gray">Buscando negocios...</p>
+
+                </>
+                :
+                <>
+                  <FaceFrownIcon className="h-5 w-5 text-gray" />
+                  <p className="text-sm text-gray">No se encontraron resultados</p>
+                </>
+              }
             </div>}
         </Combobox.Options>
       </Transition>
@@ -119,16 +132,16 @@ const AutocompleteOption = forwardRef<HTMLLIElement, AutocompleteOptionProps>(({
     ref={ref}
     value={value}
     className={`
-      relative
-      flex
-      cursor-pointer
-      select-none
-      flex-row
-      p-2
-      ${noCheckIcon ? '' : 'pl-11'}
-      ui-selected:text-primary-dark
-      ui-active:bg-primary-tint
-      ui-active:text-primary-dark
+    relative
+    flex
+    cursor-pointer
+    select-none
+    flex-row
+    p-2
+    ui-selected:text-primary-dark
+    ui-active:bg-primary-tint
+    ui-active:text-primary-dark
+    ${noCheckIcon ? '' : 'pl-11'}
     `}>
     {!noCheckIcon && (
       <span className='

@@ -1,4 +1,5 @@
-import ReviewForm from "./review-form";
+
+import BusinessForm from "./business-form";
 
 import { getCounties } from "@/app/api/counties/actions";
 import Heading from "@/components/heading";
@@ -8,11 +9,12 @@ const Page: React.FC = async () => {
 
   return (
     <>
-      <div className='pb-20 flex flex-col gap-2'>
-        <Heading level={1} size="xl">Enviar Reseña</Heading>
-        <span className="text-gray-dark text-xl">Comparte con otros como fue tu experiencia.</span>
+      <div className='flex flex-col gap-2 pb-20'>
+        <Heading level={1}
+          size="xl">Enviar Reseña</Heading>
+        <span className="text-xl text-gray-dark">Comparte con otros como fue tu experiencia.</span>
       </div>
-      <ReviewForm counties={counties} />
+      <BusinessForm counties={counties} />
     </>
   )
 };

@@ -9,7 +9,7 @@ function getFn(item: IndexedName, path: any) {
   return diacritics.remove(Fuse.config.getFn(item, path) as string);
 }
 
-const useSearch = (data: any, query: string, by = ['name']) => {
+const useSearch = (data: any, query: string, by = ['name']): IndexedName[] => {
   const options = useMemo(() => ({
     keys: by,
     getFn,

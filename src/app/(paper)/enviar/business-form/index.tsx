@@ -6,26 +6,18 @@ import { set, useForm, useWatch } from "react-hook-form";
 import useSWR from 'swr';
 import { useDebounce } from "usehooks-ts";
 
-import { useBusinessField, useCityField } from './hooks';
+import { useBusinessField, useCityField, useCountyField } from './hooks';
 import Props from "./props";
+import { formValues } from './types';
 
 import { getCities } from "@/app/api/cities/actions";
-import { BusinessResponse } from "@/app/api/retrieve-business/types";
 import { IndexedName } from "@/app/api/types";
 import { Autocomplete, AutocompleteOption } from "@/components/autocomplete";
 import { Button } from "@/components/button";
 import FormField from "@/components/formfield";
 import useSearch from "@/hooks/useSearch";
 
-const BusinessForm: React.FC<Props> = ({ counties }) => {
-  const [countyQuery, setCountyQuery] = useState<string>('');
-
-  interface formValues {
-    county: IndexedName,
-    city: IndexedName,
-    business: IndexedName
-  }
-
+const BusinessForm: React.FC<Props> = ({ counties: dataCounties }) => {
   const form = useForm<formValues>({
     defaultValues: {
       county: {},
@@ -33,20 +25,14 @@ const BusinessForm: React.FC<Props> = ({ counties }) => {
       business: {}
     }
   });
+
   const countyValue = useWatch({ control: form.control, name: 'county' });
   const cityValue = useWatch({ control: form.control, name: 'city' });
   const businessValue = useWatch({ control: form.control, name: 'business' });
 
-  console.log(countyValue, cityValue, businessValue)
-  // const { data: cities, isLoading: isCitiesLoading } = useSWR<IndexedName[], Error>(
-  //   countyValue ? `get-cities/${countyValue.id}` : null,
-  //   () => getCities(countyValue.id)
-  // );
-
-  const [setBusinessQuery, businesses, isBusinessesLoading] = useBusinessField(countyValue?.id, cityValue?.id)
+  const [setCountyQuery, counties] = useCountyField(dataCounties)
   const [setCityQuery, cities, isCitiesLoading] = useCityField(countyValue?.id)
-
-  const filteredCounties: IndexedName[] = useSearch(counties, countyQuery);
+  const [setBusinessQuery, businesses, isBusinessesLoading] = useBusinessField(countyValue?.id, cityValue?.id)
 
   const onSubmit = useCallback((data: any) => console.log('Submit', data), []);
 
@@ -87,7 +73,7 @@ const BusinessForm: React.FC<Props> = ({ counties }) => {
                 onQueryChange={(query) => setCountyQuery(query)}
                 placeholder="Seleccione..."
               >
-                {filteredCounties.map((county) =>
+                {counties.map((county) =>
                   <AutocompleteOption
                     key={county.id}
                     value={county}
@@ -145,7 +131,6 @@ const BusinessForm: React.FC<Props> = ({ counties }) => {
               placeholder="Escribe para buscar..."
               isLoading={isBusinessesLoading}
               onQueryChange={(query) => setBusinessQuery(query)}
-              nullable
             >
               {businesses?.map((business) =>
                 <AutocompleteOption

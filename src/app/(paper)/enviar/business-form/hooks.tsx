@@ -49,4 +49,16 @@ const useCityField = (countyId: string): useCityFieldReturn => {
 
   return [setQuery, filteredData, isLoading];
 }
-export { useBusinessField, useCityField };
+
+type useCountyFieldReturn = [
+  Dispatch<SetStateAction<string>>,
+  IndexedName[],
+]
+
+const useCountyField = (counties: IndexedName[]): useCountyFieldReturn => {
+  const [query, setQuery] = useState<string>('');
+  const data: IndexedName[] = useSearch(counties, query);
+
+  return [setQuery, data];
+}
+export { useBusinessField, useCityField, useCountyField };

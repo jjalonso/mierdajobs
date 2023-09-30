@@ -30,7 +30,7 @@ export const serializeIndexedName = (
     }))
     .sort(sortListAlphabetically);
 
-export const handleErrors = (message: string, status: number) =>
-  new Response(JSON.stringify({ error: message, status }), {
+export const handleErrors = (message: string, status: number, error?: Error) =>
+  new Response(JSON.stringify({ message, status, error }), {
     status,
   });

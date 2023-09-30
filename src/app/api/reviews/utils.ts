@@ -10,18 +10,20 @@ export const serializeBodyReview = (review: Reviews) => {
   const {
     gplace_id,
     monthly_salary,
-    working_hours_pw,
     contract_fraud,
     annual_leave,
     comment,
+    working_hours,
+    working_hours_period,
   } = review;
   return {
-    gplace_id,
     created_at,
+    gplace_id,
     monthly_salary,
-    working_hours_pw,
     contract_fraud,
     annual_leave,
     comment,
+    working_hours,
+    working_hours_period,
   };
 };

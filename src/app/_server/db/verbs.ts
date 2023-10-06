@@ -18,3 +18,16 @@ export const insertDataInCollection = async (
   const response = await db.collection(collection)[typeInsert](body);
   return response;
 };
+
+export const updateDataInCollection = async (
+  collection: string,
+  filter: Record<string, any>,
+  body: Record<string, any>
+) => {
+  const typeInsert = !Array.isArray(body) ? "updateOne" : "updateMany";
+  const db: any = await connectDB();
+  const response = await db
+    .collection(collection)
+    [typeInsert](filter, { $set: body });
+  return response;
+};

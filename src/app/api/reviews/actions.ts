@@ -1,8 +1,5 @@
 import { RequestReviews } from "./types";
-import { insertDataInBussinessDB } from "./utils";
+import { insertReviews } from "./utils";
 
-export const insertReview = async (body: RequestReviews) => {
-  const x = await insertDataInBussinessDB(body);
-  //PRUEBAS
-  return x;
-};
+export const postReviews = async (body: RequestReviews) =>
+  await insertReviews(body);

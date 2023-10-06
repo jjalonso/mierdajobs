@@ -1,3 +1,5 @@
+import { NextResponse } from "next/server";
+
 export const sortListAlphabetically = (
   a: Record<string, string>,
   b: Record<string, string>
@@ -28,7 +30,30 @@ export const serializeIndexedName = (
     }))
     .sort(sortListAlphabetically);
 
-export const handleErrors = (message: string, status: number, error?: Error) =>
-  new Response(JSON.stringify({ message, status, error }), {
-    status,
-  });
+export const handleErrors = (
+  message: string,
+  status: number,
+  error?: Error | unknown
+) =>
+  NextResponse.json(
+    {
+      message,
+      status,
+      error,
+    },
+    {
+      status,
+    }
+  );
+
+export const handleSuccess = (message: string, status: number, data?: any) =>
+  NextResponse.json(
+    {
+      message,
+      status,
+      data,
+    },
+    {
+      status,
+    }
+  );

@@ -3,14 +3,14 @@ import {
   insertDataInCollection,
   updateDataInCollection,
 } from "@/app/_server/db/verbs";
-import { Business, Reviews } from "./types";
+import { Business, RequestReviews, Reviews } from "./types";
 
-export const serializeBodyBusiness = (business: Business) => {
+const serializeBodyBusiness = (business: Business) => {
   const { gplace_id, county, city, address, name } = business;
   return { gplace_id, county, city, address, name };
 };
 
-export const serializeBodyReview = (review: Reviews) => {
+const serializeBodyReview = (review: Reviews) => {
   const created_at = new Date().toISOString();
   const {
     gplace_id,
@@ -33,21 +33,32 @@ export const serializeBodyReview = (review: Reviews) => {
   };
 };
 
-export const checkBusssinessInDB = async (gplace_id: string) =>
-  getCollection("bussiness", { gplace_id });
+const checkIfBusinessExistsInReviewDB = async (gplace_id: string) =>
+  await getCollection("bussiness", { gplace_id });
 
-export const insertDataInBussinessDB = async (body: Business) => {
+const insertDataBussinessForReviewDB = async (body: Business) => {
   const bodyObjectBusiness = serializeBodyBusiness(body);
   const { gplace_id } = bodyObjectBusiness;
-  const foundBussinessInDB = await checkBusssinessInDB(gplace_id);
+  const foundBussinessInDB = await checkIfBusinessExistsInReviewDB(gplace_id);
 
   if (foundBussinessInDB.length > 0) {
-    await updateDataInCollection(
+    return await updateDataInCollection(
       "bussiness",
       { gplace_id },
       bodyObjectBusiness
     );
   } else {
-    await insertDataInCollection("bussiness", bodyObjectBusiness);
+    return await insertDataInCollection("bussiness", bodyObjectBusiness);
   }
 };
+
+const insertDataReviewForReviewDB = async (body: Reviews) => {
+  const bodyObjecReviews = serializeBodyReview(body);
+  return await insertDataInCollection("reviews", bodyObjecReviews);
+};
+
+export const insertReviews = async (body: RequestReviews) =>
+  await Promise.all([
+    insertDataBussinessForReviewDB(body),
+    insertDataReviewForReviewDB(body),
+  ]);

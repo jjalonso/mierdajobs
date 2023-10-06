@@ -18,7 +18,6 @@ export const getBusinessFromGooglePlaceApi = async ({
 
   const query = `${q} en ${gettedCounty[0].name}, ${gettedCity[0].name}, `;
   const url = `${process.env.GOOGLE_URL_PLACE}?fields=formatted_address,place_id,name&input=${query}&inputtype=textquery&language=es&key=${process.env.GOOGLE_API_KEY}`;
-
   const response = await fetch(url.replace(/ /g, "%20"), {
     method: "GET",
   });

@@ -1,5 +1,6 @@
 import { disconnectDB } from "@/app/_server/db/mongodb";
-import { handleErrors, handleSuccess, parseParams } from "../utils";
+import { NextResponse } from "next/server";
+import { handleErrors, parseParams } from "../utils";
 import { getCities } from "./actions";
 import { schemaGetCities } from "./schema";
 
@@ -21,11 +22,7 @@ export const GET = async (request: Request) => {
 
   try {
     const response = await getCities(county);
-    return handleSuccess(
-      "Localidades recuperadas correctamente",
-      200,
-      response
-    );
+    return NextResponse.json(response);
   } catch (error) {
     await disconnectDB();
     return handleErrors(

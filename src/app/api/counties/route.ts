@@ -1,11 +1,12 @@
 import { disconnectDB } from "@/app/_server/db/mongodb";
-import { handleErrors, handleSuccess } from "../utils";
+import { NextResponse } from "next/server";
+import { handleErrors } from "../utils";
 import { getCounties } from "./actions";
 
 export const GET = async () => {
   try {
     const response = await getCounties();
-    return handleSuccess("Ciudades recuperadas correctamente", 200, response);
+    return NextResponse.json(response);
   } catch (error) {
     await disconnectDB();
     return handleErrors(

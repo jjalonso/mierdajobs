@@ -13,10 +13,10 @@ export const GET = async (request: Request) => {
     return NextResponse.json(error.message, { status: 424 });
   }
 
-  const { q, county, city } = value;
+  const { q } = value;
 
   try {
-    const response = await getGoogleBusiness(q, county, city);
+    const response = await getGoogleBusiness(q);
     return NextResponse.json(response);
   } catch (error) {
     return NextResponse.json(error, { status: 500 });

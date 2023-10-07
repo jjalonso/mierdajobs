@@ -29,31 +29,3 @@ export const serializeIndexedName = (
       name: item[nameKey],
     }))
     .sort(sortListAlphabetically);
-
-export const handleErrors = (
-  message: string,
-  status: number,
-  error?: Error | unknown
-) =>
-  NextResponse.json(
-    {
-      message,
-      status,
-      error,
-    },
-    {
-      status,
-    }
-  );
-
-export const handleSuccess = (message: string, status: number, data?: any) =>
-  NextResponse.json(
-    {
-      message,
-      status,
-      data,
-    },
-    {
-      status,
-    }
-  );

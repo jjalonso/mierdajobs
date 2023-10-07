@@ -3,12 +3,8 @@ import {
   insertDataInCollection,
   updateDataInCollection,
 } from "@/app/_server/db/verbs";
-import { Business, RequestReviews, Reviews } from "./types";
-
-const serializeBodyBusiness = (business: Business) => {
-  const { gplace_id, county, city, address, name } = business;
-  return { gplace_id, county, city, address, name };
-};
+import { RequestReviews, Reviews } from "./types";
+import { getBusinessFromGooglePlaceApiById } from "@/app/_server/google-place/verbs";
 
 const serializeBodyReview = (review: Reviews) => {
   const created_at = new Date().toISOString();
@@ -36,19 +32,28 @@ const serializeBodyReview = (review: Reviews) => {
 const checkIfBusinessExistsInReviewDB = async (gplace_id: string) =>
   await getCollection("bussiness", { gplace_id });
 
-const insertDataBussinessForReviewDB = async (body: Business) => {
-  const bodyObjectBusiness = serializeBodyBusiness(body);
-  const { gplace_id } = bodyObjectBusiness;
+const insertDataBussinessForReviewDB = async (gplace_id: string) => {
   const foundBussinessInDB = await checkIfBusinessExistsInReviewDB(gplace_id);
+  const businessFromGooglePlaceApi = await getBusinessFromGooglePlaceApiById(
+    gplace_id
+  );
+  const { formatted_address, name, place_id } =
+    businessFromGooglePlaceApi.result;
+
+  const objectBodyBussiness = {
+    formatted_address,
+    name,
+    gplace_id: place_id,
+  };
 
   if (foundBussinessInDB.length > 0) {
     return await updateDataInCollection(
       "bussiness",
       { gplace_id },
-      bodyObjectBusiness
+      objectBodyBussiness
     );
   } else {
-    return await insertDataInCollection("bussiness", bodyObjectBusiness);
+    return await insertDataInCollection("bussiness", objectBodyBussiness);
   }
 };
 
@@ -59,6 +64,6 @@ const insertDataReviewForReviewDB = async (body: Reviews) => {
 
 export const insertReviews = async (body: RequestReviews) =>
   await Promise.all([
-    insertDataBussinessForReviewDB(body),
+    insertDataBussinessForReviewDB(body.gplace_id),
     insertDataReviewForReviewDB(body),
   ]);

@@ -1,6 +1,5 @@
 import { disconnectDB } from "@/app/_server/db/mongodb";
 import { NextResponse } from "next/server";
-import { handleErrors } from "../utils";
 import { getCounties } from "./actions";
 
 export const GET = async () => {
@@ -9,10 +8,6 @@ export const GET = async () => {
     return NextResponse.json(response);
   } catch (error) {
     await disconnectDB();
-    return handleErrors(
-      "Hubo un problema al recuperar la provincia",
-      500,
-      error
-    );
+    return NextResponse.json(error, { status: 500 });
   }
 };

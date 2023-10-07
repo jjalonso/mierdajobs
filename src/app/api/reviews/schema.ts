@@ -2,15 +2,12 @@ import Joi from "joi";
 
 export const schemaReviews = Joi.object({
   gplace_id: Joi.string().required(),
-  county: Joi.string().required(),
-  city: Joi.string().required(),
-  address: Joi.string().required(),
-  name: Joi.string().required(),
-  user: Joi.string().optional(), //v2
-  monthly_salary: Joi.number().required(),
-  working_hours: Joi.number().required(),
-  working_hours_period: Joi.string().required(),
-  contract_fraud: Joi.string().optional(),
-  annual_leave: Joi.number().required(),
+  monthly_salary: Joi.number().min(1).required(),
+  working_hours: Joi.number().min(1).required(),
+  working_hours_period: Joi.string().valid("PER_WEEK", "PER_MONTH").required(),
+  contract_fraud: Joi.string()
+    .valid("NO_CONTRACT", "HOURS_MISMATCH")
+    .optional(),
+  annual_leave: Joi.number().min(0).max(365).required(),
   comment: Joi.string().required(),
 });

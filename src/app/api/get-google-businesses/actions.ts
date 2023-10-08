@@ -1,13 +1,7 @@
-import { getBusinessFromGooglePlaceApi } from "@/app/_server/google-place/verbs";
-import { serializeIndexedBusiness } from "./utils";
+import { getGooglePlaceBusinesses } from "@/app/_server/google-place/verbs";
+import { serializeIndexedGoogleBusinessess } from "./utils";
 
-export const getGoogleBusiness = async (
-  q: string,
-  county: string,
-  city: string
-) => {
-  const queryObject = { q, county, city };
-  const response = await getBusinessFromGooglePlaceApi(queryObject);
-  const serializedResponse = serializeIndexedBusiness(response);
-  return serializedResponse;
+export const getGoogleBusiness = async (q: string) => {
+  const response = await getGooglePlaceBusinesses(q);
+  return serializeIndexedGoogleBusinessess(response);
 };

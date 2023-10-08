@@ -45,6 +45,8 @@
     "eslint-plugin-unused-imports": "^3.0.0",
     "fuse.js": "^6.6.2",
     "lodash": "^4.17.21",
+    "joi": "^17.10.2",
+    "lucide-react": "^0.274.0",
     "mongodb": "^6.0.0",
     "next": "13.4.19",
     "postcss": "^8.4.29",

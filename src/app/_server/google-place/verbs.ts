@@ -1,23 +1,19 @@
-import { GooglePlaceApi } from "./types";
+import { GooglePlaceAutocomplete } from "./types";
 
-import { getOneCity } from "@/app/api/cities/actions";
-import { getOneCounty } from "@/app/api/counties/actions";
+const GOOGLE_QUERY = {
+  url_google: "https://maps.googleapis.com/maps/api/place/autocomplete/json?",
+  language: "es",
+  components: "country:es",
+  types: "establishment",
+};
 
-export const getBusinessFromGooglePlaceApi = async ({
-  q,
-  county,
-  city,
-}: {
-  q: string;
-  county: string;
-  city: string;
-}) => {
-  const gettedCounty = await getOneCounty(county);
-  const gettedCity = await getOneCity(city);
-  const url = `${process.env.GOOGLE_URL_PLACE}?query=${gettedCounty[0].name} in ${gettedCity[0].name}, ${q}&language=es&key=${process.env.GOOGLE_API_KEY}`;
-  const response: Response = await fetch(url.replace(/ /g, "%20"), {
+export const getGooglePlaceBusinesses = async (
+  q: string
+): Promise<GooglePlaceAutocomplete> => {
+  const url = `${GOOGLE_QUERY.url_google}input=${q}&language=${GOOGLE_QUERY.language}&components=${GOOGLE_QUERY.components}&types=${GOOGLE_QUERY.types}&key=${process.env.GOOGLE_API_KEY}`;
+  const response = await fetch(url.replace(/ /g, "%20"), {
     method: "GET",
   });
-  const serializedResponse: GooglePlaceApi = await response.json();
-  return serializedResponse;
+
+  return await response.json();
 };

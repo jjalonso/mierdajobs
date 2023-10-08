@@ -1,7 +1,6 @@
-
 export const sortListAlphabetically = (
-  a: Record<string, string>,
-  b: Record<string, string>
+  a: Record<string, any>,
+  b: Record<string, any>
 ) => a.name.localeCompare(b.name, "es", { sensitivity: "accent" });
 
 export const parseParams = (url: string) => {
@@ -16,20 +15,3 @@ export const serializeIndexed = (data: URLSearchParams) => {
   });
   return params;
 };
-
-export const serializeIndexedName = (
-  data: Record<string, string>[],
-  idKey: string,
-  nameKey: string
-) =>
-  data
-    .map((item) => ({
-      id: item[idKey],
-      name: item[nameKey],
-    }))
-    .sort(sortListAlphabetically);
-
-export const handleErrors = (message: string, status: number) =>
-  new Response(JSON.stringify({ error: message, status }), {
-    status,
-  });

@@ -1,15 +1,27 @@
 import { NextResponse } from "next/server";
 
-import { handleErrors } from "../utils";
-
 import { insertReview } from "./actions";
+import { insertReview } from "./actions";
+import { schemaReviews } from "./schema";
+
+import { disconnectDB } from "@/app/_server/db/mongodb";
 
 export const POST = async (request: Request) => {
   try {
     const bodyObject = await request.json();
-    const response = await insertReview(bodyObject);
-    return NextResponse.json(response);
+
+    const { error, value } = schemaReviews.validate(bodyObject);
+
+    if (error) {
+      return NextResponse.json(error.message, { status: 424 });
+    }
+
+    await insertReview(value);
+
+    return NextResponse.json("Reseña insertada correctamente", { status: 201 });
   } catch (error) {
-    return handleErrors("Hubo un problema al insertar la reseña", 500);
+    return NextResponse.json(error, { status: 500 });
+  } finally {
+    await disconnectDB();
   }
 };

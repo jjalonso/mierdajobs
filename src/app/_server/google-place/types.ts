@@ -4,8 +4,8 @@ type LengthOffSet = {
 };
 
 type ValueOffSet = {
-  offset: number;
   value: string;
+  offset: number;
 };
 
 export type GooglePlaceAutocomplete = {

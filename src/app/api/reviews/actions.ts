@@ -1,5 +1,6 @@
-import { RequestReviews } from "./types";
-import { insertReviews } from "./utils";
+import { insertDataInCollection } from "@/app/_server/db/verbs";
+import { ReviewsRequest } from "./types";
+import { bodyObjectReview } from "./utils";
 
-export const postReviews = async (body: RequestReviews) =>
-  await insertReviews(body);
+export const insertReview = async (review: ReviewsRequest) =>
+  await insertDataInCollection("reviews", bodyObjectReview(review));

@@ -1,4 +1,4 @@
-export type RequestReviews = {
+export type ReviewsRequest = {
   gplace_id: string;
   monthly_salary: number;
   working_hours: number;
@@ -8,13 +8,6 @@ export type RequestReviews = {
   comment: string;
 };
 
-export type Reviews = Pick<
-  RequestReviews,
-  | "gplace_id"
-  | "monthly_salary"
-  | "working_hours"
-  | "working_hours_period"
-  | "contract_fraud"
-  | "annual_leave"
-  | "comment"
->;
+export type ReviewsDB = ReviewsRequest & {
+  created_at: string;
+};

@@ -1,10 +1,14 @@
-// import cls from "classnames";
-// import { ComponentPropsWithRef } from "react";
-
 import { VariantProps, cva } from "class-variance-authority";
+import { Roboto } from "next/font/google";
+import React, { createElement } from "react";
 import { twMerge } from "tailwind-merge";
 
-const headingVariants = cva(["font-bold"], {
+const roboto = Roboto({
+  weight: "300",
+  subsets: ["latin"],
+});
+
+const headingVariants = cva([`${roboto.className} font-bold`], {
   variants: {
     size: {
       xs: ["text-xl"],
@@ -17,46 +21,15 @@ const headingVariants = cva(["font-bold"], {
   },
 });
 
-// interface Props {
-//     children: React.ReactNode;
-//     level: 1 | 2 | 3;
-// }
-
-// const style = ['px-2 py-2', {
-//     variants: {
-//         size: {
-//             xs: 'text-xl',
-//             base: 'text-2xl',
-//             xl: 'text-3xl',
-//         },
-//     },
-// }]
-
-// const Heading = w.[`h${level}`](style);
-
-// const button = wx({
-//     variants: {
-//         size: {
-//             xs: 'text-xl',
-//             base: 'text-2xl',
-//             xl: 'text-3xl',
-//         },
-//     },
-//     defaultVariants: {
-//         size: 'base',
-//     },
-// });
-
 export interface Props
   extends React.ButtonHTMLAttributes<HTMLHeadingElement>,
   VariantProps<typeof headingVariants> {
   level: 1 | 2 | 3;
 }
 
-const Heading: React.FC<Props> = ({ children, level, size }) => {
-  const Component: keyof JSX.IntrinsicElements = `h${level}` as any;
-  return <Component className={twMerge(headingVariants({ size }))}> {children}</Component>;
-
+const Heading: React.FC<Props> = ({ className, children, level, size }) => {
+  const Component = `h${level}`;
+  return createElement(Component, { className: twMerge(headingVariants({ size }), className) }, children);
 };
 
-export default Heading;
+export { Heading };

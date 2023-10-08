@@ -1,6 +1,7 @@
+import { GooglePlaceApi } from "./types";
+
 import { getOneCity } from "@/app/api/cities/actions";
 import { getOneCounty } from "@/app/api/counties/actions";
-import { GooglePlaceApi } from "./types";
 
 export const getBusinessFromGooglePlaceApi = async ({
   q,

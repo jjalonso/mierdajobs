@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
+
 import { handleErrors } from "../utils";
+
 import { getCounties } from "./actions";
 
 export const GET = async () => {

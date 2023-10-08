@@ -1,23 +1,18 @@
 
-import diacritics from 'diacritics';
-import Fuse from 'fuse.js'
-import { useEffect, useMemo } from "react"
+import diacritics from "diacritics";
+import Fuse from "fuse.js"
+import { useMemo } from "react"
 
-import { IndexedName } from '@/app/api/types'
-
-function getFn(item: IndexedName, path: any) {
+const getFn = <T,>(item: T, path: string | string[]) => {
   return diacritics.remove(Fuse.config.getFn(item, path) as string);
 }
 
-const useSearch = (data: any, query: string, by = ['name']): IndexedName[] => {
+const useSearch = <T,>(data: T[], query: string, by: string[] = ["name"]): T[] => {
   const options = useMemo(() => ({
     keys: by,
-    getFn,
-    threshold: 0,
-    location: 0,
-    distance: 0,
+    getFn: getFn<T>,
   }), [by])
-  const fuse = useMemo(() => new Fuse<IndexedName>(data, options), [data, options])
+  const fuse = useMemo(() => new Fuse<T>(data, options), [data, options])
   if (query.length === 0) return data
   const cleanQuery = diacritics.remove(query);
   return fuse.search(cleanQuery).map(result => result.item);

@@ -1,39 +1,40 @@
 
-import { ComponentPropsWithRef, ComponentPropsWithoutRef, ReactElement, ReactNode, cloneElement } from "react";
-import { Control, ControllerRenderProps, FieldValues, RegisterOptions, useController } from "react-hook-form";
+import { ReactNode } from "react";
+import { ControllerRenderProps, RegisterOptions, useController } from "react-hook-form";
 import { DivProps } from "react-html-props";
+import { twMerge } from "tailwind-merge";
 
-interface Props extends Omit<DivProps, 'children'> {
+export interface Props extends Omit<DivProps, "children"> {
   label?: string;
   name: string;
-  control?: Control<any>;
   rules?: RegisterOptions;
   disabled?: boolean;
-  children: (field: ControllerRenderProps<FieldValues, string>) => ReactNode;
+  children: (field: ControllerRenderProps & { id: string }) => ReactNode;
 }
 
-// name, control, rules
-const FormField: React.FC<Props> = ({ children, label, name, control, rules, className, disabled }) => {
+const FormField: React.FC<Props> = ({ children, label, className, name, rules, disabled }) => {
   const {
     field,
     fieldState: { error: fieldError },
   } = useController({
     disabled,
     name,
-    control,
     rules,
   });
   return (
-    <div className={className}>
-      <label>
-        {label}
-        {children(field)}
-      </label>
-      {fieldError && <p className="text-sm">
-        {fieldError.message}
-      </p>}
+    <div className={twMerge("flex flex-col", className)}>
+      <div className="flex flex-col gap-4">
+        <label htmlFor={name}>
+          {label}
+        </label>
+        {children({ id: name, ...field })}
+      </div>
+      <div className="flex h-9 w-fit items-center text-sm text-error">
+        {fieldError && fieldError.message}
+      </div>
     </div>
+
   )
 }
 
-export default FormField;
+export { FormField };

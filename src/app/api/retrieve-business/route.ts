@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
+
 import { handleErrors, parseParams } from "../utils";
+
 import { getGoogleBusiness } from "./actions";
 
 export const GET = async (request: Request) => {

@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
-import { insertReview } from "./actions";
+
 import { handleErrors } from "../utils";
+
+import { insertReview } from "./actions";
 
 export const POST = async (request: Request) => {
   try {

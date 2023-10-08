@@ -1,8 +1,8 @@
-import { Combobox, Transition } from '@headlessui/react'
-import { ArrowPathIcon, CheckIcon, FaceFrownIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-import { Children, Fragment, forwardRef } from 'react';
+import { Combobox, Transition } from "@headlessui/react"
+import { ArrowPathIcon, CheckIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { Children, Fragment } from "react";
 
-import { IndexedName } from '@/app/api/types';
+import { IndexedName } from "@/app/api/types";
 
 interface AutocompleteProps {
   children: React.ReactNode
@@ -21,7 +21,7 @@ interface AutocompleteOptionProps {
   noCheckIcon?: boolean
 };
 
-const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(({
+const Autocomplete = ({
   children,
   onQueryChange,
   disabled,
@@ -30,9 +30,8 @@ const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(({
   onChange,
   isLoading,
   nullable
-}, ref) => (
+}: AutocompleteProps) =>
   <Combobox
-    ref={ref}
     disabled={disabled}
     onChange={onChange}
     value={value}
@@ -41,55 +40,59 @@ const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(({
     nullable={nullable as false | undefined}
   >
     <div className="relative mt-1">
-      <span className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+      <span className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
         {isLoading ?
           <ArrowPathIcon className="z-10 h-5 w-5 animate-spin text-gray-dark" /> :
-          <MagnifyingGlassIcon className={`z-10 h-5 w-5 ${disabled ? 'text-gray ' : 'text-primary'}`} />
+          <MagnifyingGlassIcon className={`z-10 h-5 w-5 ${disabled ? "text-gray " : "text-primary"}`} />
         }
       </span>
-      <div className="
-        relative h-11 
+      <div className={`
+        border: 
+        relative 
+        h-14
         w-full 
         cursor-default 
         overflow-hidden 
         rounded-md 
         border 
-        border-gray-light
-        bg-white 
-        text-left 
-        focus:outline-none"
-      >
+        border-gray-light 
+        bg-white
+        text-left
+        focus:outline-none 
+        ${disabled && "border-gray-tint"}
+      `}>
         <Combobox.Input
           onFocus={(e) => e.currentTarget.setSelectionRange(e.currentTarget.value.length, e.currentTarget.value.length)}
           className="
             h-full 
             w-full 
+            truncate 
             border-none 
             py-2 
-            pl-11 
+            pl-12
             placeholder:text-gray-dark 
             focus:outline-none 
-            disabled:bg-gray-light 
+            disabled:cursor-not-allowed
+            disabled:bg-gray-tint
             disabled:text-gray
-            disabled:opacity-50"
+          "
           placeholder={placeholder}
-          autoComplete={'off'}
+          autoComplete={"off"}
           onChange={(e) => onQueryChange?.(e.currentTarget.value)}
           displayValue={(value: IndexedName) => value?.name}
         />
-        {/* Hack: Button is on top of the text to force popup opening */}
-        <div className="absolute top-0 w-full">
-          <Combobox.Button className="h-11 w-full disabled:cursor-not-allowed" />
-        </div>
       </div>
       <Transition
+        show={Children.count(children) > 0 && !isLoading}
         as={Fragment}
-        leave="transition ease-in duration-100"
+        enter="transition-opacity duration-300"
+        enterFrom="opacity-0"
+        enterTo="opacity-100"
+        leave="transition ease-in duration-300"
         leaveFrom="opacity-100"
         leaveTo="opacity-0"
       >
-        <Combobox.Options
-          className="
+        <Combobox.Options className="
           absolute
           z-20
           mt-1
@@ -104,32 +107,19 @@ const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(({
           drop-shadow-sm
           focus:outline-none
         ">
-          {Children.count(children) > 0 && !isLoading ? children :
-            <div className="flex flex-col items-center gap-2 p-3">
-              {isLoading ?
-                <>
-                  <ArrowPathIcon className="h-5 w-5 animate-spin text-gray" />
-                  <p className="text-sm text-gray">Buscando negocios...</p>
-
-                </>
-                :
-                <>
-                  <FaceFrownIcon className="h-5 w-5 text-gray" />
-                  <p className="text-sm text-gray">No se encontraron resultados</p>
-                </>
-              }
-            </div>}
+          {children}
+          {/* {isLoading ?
+            <>
+              <ArrowPathIcon className="h-5 w-5 animate-spin text-gray" />
+              <p className="text-sm text-gray">Buscando negocios...</p>
+            </> : null} */}
         </Combobox.Options>
       </Transition>
     </div>
   </Combobox >
-));
 
-Autocomplete.displayName = 'Autocomplete';
-
-const AutocompleteOption = forwardRef<HTMLLIElement, AutocompleteOptionProps>(({ children, value, noCheckIcon = false }, ref) =>
+const AutocompleteOption = ({ children, value, noCheckIcon = false }: AutocompleteOptionProps) =>
   <Combobox.Option
-    ref={ref}
     value={value}
     className={`
     relative
@@ -137,14 +127,15 @@ const AutocompleteOption = forwardRef<HTMLLIElement, AutocompleteOptionProps>(({
     cursor-pointer
     select-none
     flex-row
-    p-2
+    px-2
+    py-4
     ui-selected:text-primary-dark
     ui-active:bg-primary-tint
     ui-active:text-primary-dark
-    ${noCheckIcon ? '' : 'pl-11'}
+    ${noCheckIcon ? "" : "pl-11"}
     `}>
     {!noCheckIcon && (
-      <span className='
+      <span className="
       absolute
       inset-y-0
       left-0
@@ -152,18 +143,15 @@ const AutocompleteOption = forwardRef<HTMLLIElement, AutocompleteOptionProps>(({
       items-center
       pl-3
       text-primary
-    '>
-        <CheckIcon className='
-        hidden
-        h-5 
-        w-5 ui-selected:block'
+    ">
+        <CheckIcon className="
+          hidden
+          h-5 
+          w-5 ui-selected:block"
         />
       </span>
     )}
     {children}
   </Combobox.Option>
-);
-
-AutocompleteOption.displayName = 'AutocompleteOption';
 
 export { Autocomplete, AutocompleteOption };

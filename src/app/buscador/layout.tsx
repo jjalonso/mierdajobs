@@ -1,4 +1,4 @@
-import LayoutProps from './layout.props';
+import LayoutProps from "./layout.props";
 
 const Layout: React.FC<LayoutProps> = ({ children }) => children;
 

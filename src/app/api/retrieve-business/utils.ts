@@ -1,8 +1,9 @@
-import { GooglePlaceApi } from "@/app/_server/google-place/types";
 import { sortListAlphabetically } from "../utils";
 
+import { GooglePlaceApi } from "@/app/_server/google-place/types";
+
 export const serializeIndexedBusiness = (response: GooglePlaceApi) => {
-  let selectedFieldsResponse: Record<string, string>[] = [];
+  const selectedFieldsResponse: Record<string, string>[] = [];
   response.results.forEach((item) => {
     if (item.business_status !== "CLOSED_PERMANENTLY") {
       selectedFieldsResponse.push({

@@ -1,20 +1,26 @@
 import { cva, type VariantProps } from "class-variance-authority";
+import { Roboto } from "next/font/google";
 import React from "react";
-import { twMerge } from 'tailwind-merge';
+import { twMerge } from "tailwind-merge";
+
+const roboto = Roboto({
+  weight: "400",
+  subsets: ["latin"],
+});
 
 const buttonVariants = cva(
-  "inline-flex w-fit  min-w-[180px] items-center justify-center gap-4 rounded-md font-medium uppercase transition-colors duration-300 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50",
+  `${roboto.className} inline-flex w-fit min-w-[180px] items-center justify-center gap-4 rounded-md font-medium uppercase tracking-widest transition-colors duration-300 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50`,
   {
     variants: {
       variant: {
         default: "bg-primary text-white hover:bg-primary-light",
       },
       active: {
-        true: 'bg-primary-light',
+        true: "bg-primary-light",
       },
       size: {
-        default: "h-11 px-4 py-2",
-        icon: "h-10 w-10",
+        default: "h-14 px-4 py-2",
+        icon: "h-11 w-11",
       },
     },
     defaultVariants: {

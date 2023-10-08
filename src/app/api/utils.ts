@@ -1,4 +1,3 @@
-import { GooglePlaceApi } from "../_server/google-place/types";
 
 export const sortListAlphabetically = (
   a: Record<string, string>,

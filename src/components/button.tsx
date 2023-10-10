@@ -1,3 +1,4 @@
+import { ArrowPathIcon } from "@heroicons/react/24/outline";
 import { cva, type VariantProps } from "class-variance-authority";
 import { Roboto } from "next/font/google";
 import React from "react";
@@ -8,8 +9,24 @@ const roboto = Roboto({
   subsets: ["latin"],
 });
 
-const buttonVariants = cva(
-  `${roboto.className} inline-flex w-fit min-w-[180px] items-center justify-center gap-4 rounded-md font-medium uppercase tracking-widest transition-colors duration-300 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50`,
+const buttonVariants = cva(`
+    ${roboto.className} 
+    inline-flex
+    w-fit 
+    min-w-[180px] 
+    items-center 
+    justify-center 
+    gap-4 
+    rounded-md 
+    font-medium 
+    uppercase 
+    tracking-widest 
+    transition
+    duration-300 
+    focus-visible:outline-none 
+    disabled:cursor-not-allowed
+    disabled:bg-gray
+  `,
   {
     variants: {
       variant: {
@@ -34,13 +51,32 @@ export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
   VariantProps<typeof buttonVariants> {
   asChild?: boolean
+  loading?: boolean
 }
 
-const Button: React.FC<ButtonProps> =
-  ({ className, variant, size, active, ...props }) =>
-    <button
-      className={twMerge(buttonVariants({ variant, size, className, active }))}
-      {...props}
-    />
+const Button = ({
+  className,
+  variant,
+  size,
+  active,
+  loading,
+  disabled,
+  children,
+  ...props
+}: ButtonProps) =>
+  <button
+    disabled={disabled || loading}
+    className={twMerge(buttonVariants({ variant, size, className, active }))}
+    {...props}
+  >
+    {loading ?
+      <>
+        <ArrowPathIcon className="z-10 h-5 w-5 animate-spin" />
+        <div>Espere...</div>
+      </> :
+      children
+    }
+
+  </button>
 
 export { Button, buttonVariants }

@@ -2,6 +2,6 @@
 
 import { redirect } from "next/navigation";
 
-const Page: React.FC = () => redirect("/buscador");
+const Page = () => redirect("/buscador");
 
 export default Page;

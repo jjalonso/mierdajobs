@@ -10,6 +10,7 @@ export interface Props extends Omit<DivProps, "children"> {
   rules?: RegisterOptions;
   disabled?: boolean;
   children: (field: ControllerRenderProps & { id: string }) => ReactNode;
+  asNumber?: boolean;
 }
 
 const FormField: React.FC<Props> = ({ children, label, className, name, rules, disabled }) => {
@@ -21,6 +22,7 @@ const FormField: React.FC<Props> = ({ children, label, className, name, rules, d
     name,
     rules,
   });
+
   return (
     <div className={twMerge("flex flex-col", className)}>
       <div className="flex flex-col gap-4">

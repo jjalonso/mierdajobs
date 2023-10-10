@@ -65,10 +65,10 @@ const Select = <T,>({ children, value, disabled, placeholder, by = "id", onChang
       </Listbox.Button>
       <Transition
         as={Fragment}
-        enter="transition-opacity duration-300"
+        enter="transition-opacity duration-200"
         enterFrom="opacity-0"
         enterTo="opacity-100"
-        leave="transition ease-in duration-300"
+        leave="transition ease-in duration-200"
         leaveFrom="opacity-100"
         leaveTo="opacity-0"
       >

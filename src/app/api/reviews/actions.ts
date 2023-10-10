@@ -1,3 +1,5 @@
+"use server";
+
 import { ReviewsRequest } from "./types";
 import { bodyObjectReview } from "./utils";
 

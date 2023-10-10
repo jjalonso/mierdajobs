@@ -4,8 +4,9 @@ import { FormProvider } from "react-hook-form";
 import composeHooks from "react-hooks-compose"
 
 import { UseReviewForm, UseReviewFormReturn } from "./hooks/use-review-form";
+import Thanks from "./thanks";
 import { ContractFraudEnum } from "./types";
-import { workingHoursPeriodValues, MIN_NUMBER_RULE, MAX_NUMBER_RULE, REQUIRED_RULE } from "./values"
+import { workingHoursPeriodValues, MIN_NUMBER_RULE, MAX_NUMBER_RULE, REQUIRED_RULE, MAX_LENGTH_RULE } from "./values"
 
 import { Autocomplete, AutocompleteOption } from "@/components/autocomplete";
 import { Button } from "@/components/button";
@@ -16,18 +17,19 @@ import { Radio, RadioGroup } from "@/components/radio";
 import { Select, SelectOption } from "@/components/select";
 import { TextArea } from "@/components/textarea";
 
-interface Props extends UseReviewFormReturn { }
+interface Props extends UseReviewFormReturn {
+  searchParams: Record<string, string>
+}
 
 const ReviewForm = ({
   form,
   onFormSubmit,
-  businessField
-}: Props) =>
-  <div className="flex max-w-screen-md grow flex-col">
-
+  businessField,
+  searchParams
+}: Props) => searchParams.sent ? <Thanks place={searchParams.sent} /> :
     <FormProvider {...form}>
       <form
-        className="flex flex-col gap-6 rounded-md bg-white px-8 py-10 shadow-md md:gap-8 md:p-14"
+        className="flex flex-col gap-6"
         onSubmit={onFormSubmit}
         autoComplete="off"
         noValidate
@@ -40,7 +42,7 @@ const ReviewForm = ({
           Enviar Reseña
         </Heading>
 
-        <div className="flex w-full flex-col md:w-[400px]">
+        <div className="flex w-full flex-col md:w-3/4">
 
           {/* Business */}
 
@@ -55,16 +57,18 @@ const ReviewForm = ({
                 placeholder="Escriba para buscar..."
                 isLoading={businessField.isLoading}
                 onQueryChange={businessField.setQuery}
+                by="gplace_id"
+                displayValue={(v) => v.name}
               >
                 {businessField.data.map((business) =>
                   <AutocompleteOption
-                    key={business.id}
+                    key={business.gplace_id}
                     value={business}
                     noCheckIcon
                   >
                     <div className="flex flex-col gap-1 overflow-hidden p-2">
                       <div className="truncate">{business.name}</div>
-                      <div className="truncate text-sm text-gray">{business.address}</div>
+                      <div className="truncate text-sm text-gray">{`${business.address[0]}, ${business.address[1]} `}</div>
                     </div>
                   </AutocompleteOption>
                 )}
@@ -195,6 +199,7 @@ const ReviewForm = ({
               label="Tu experiencia"
               rules={{
                 ...REQUIRED_RULE,
+                ...MAX_LENGTH_RULE(250)
               }}>
               {({ ref: _ref, ...field }) => <TextArea {...field} />}
             </FormField>
@@ -203,6 +208,7 @@ const ReviewForm = ({
 
         <div className="flex items-end justify-end">
           <Button
+            loading={form.formState.isSubmitting}
             className="w-full md:w-fit"
             type="submit"
           >
@@ -212,7 +218,6 @@ const ReviewForm = ({
 
       </form>
     </FormProvider>
-  </div>
 
 export default composeHooks(() => ({
   useReviewForm: () => UseReviewForm()

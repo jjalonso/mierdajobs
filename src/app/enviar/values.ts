@@ -25,8 +25,15 @@ const MAX_NUMBER_RULE = (v: number) => ({
   }
 })
 
+const MAX_LENGTH_RULE = (v: number) => ({
+  maxLength: {
+    value: v,
+    message: `Máximo ${v} caracteres`
+  }
+})
+
 const REQUIRED_RULE = {
   required: "Campo requerido"
 }
 
-export { workingHoursPeriodValues, REQUIRED_RULE, MIN_NUMBER_RULE, MAX_NUMBER_RULE };
+export { workingHoursPeriodValues, REQUIRED_RULE, MIN_NUMBER_RULE, MAX_NUMBER_RULE, MAX_LENGTH_RULE };

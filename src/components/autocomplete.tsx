@@ -1,8 +1,9 @@
 import { Combobox, Transition } from "@headlessui/react"
 import { ArrowPathIcon, CheckIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { Children, Fragment } from "react";
+import { InputProps } from "react-html-props";
 
-interface AutocompleteProps<T> {
+interface AutocompleteProps<T> extends Omit<InputProps, "value" | "onChange"> {
   children: React.ReactNode
   placeholder?: string
   disabled?: boolean
@@ -31,6 +32,7 @@ const Autocomplete = <T,>({
   onQueryChange,
   displayValue = (v) => String(v),
   by = "id",
+  ...props
 }: AutocompleteProps<T>) => {
   return (
     <Combobox
@@ -56,29 +58,31 @@ const Autocomplete = <T,>({
             overflow-hidden 
             rounded-md 
             border 
-            border-gray-light 
-            bg-white
+            border-gray-light
+            bg-white 
             text-left
             focus:outline-none 
             ${disabled && "border-gray-tint"}
           `}>
             <Combobox.Input
+              {...props}
               autoComplete={"off"}
               className="
                 h-full 
                 w-full 
                 truncate 
-                border-none 
+                border-none
+                bg-transparent 
                 py-2 
                 pl-12
-                placeholder:text-gray-dark 
+                placeholder:text-gray 
                 focus:outline-none 
                 disabled:cursor-not-allowed
                 disabled:bg-gray-tint
                 disabled:text-gray"
               placeholder={placeholder}
               displayValue={displayValue}
-              onFocus={(e) => e.currentTarget.setSelectionRange(e.currentTarget.value.length, e.currentTarget.value.length)}
+              // onFocus={(e) => e.currentTarget.setSelectionRange(e.currentTarget.value.length, e.currentTarget.value.length)}
               onChange={(e) => onQueryChange?.(e.currentTarget.value)}
             />
           </div>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import useSWR from "swr";
 import { useDebounce } from "usehooks-ts";
 
@@ -9,20 +9,24 @@ interface UseBusinessFieldReturn {
   data: GoogleBusinesses[],
   isLoading: boolean,
   query: string,
+  isTouched: boolean,
+  onFocus: () => void,
   setQuery: (query: string) => void
 }
 
 const useBusinessField = (): UseBusinessFieldReturn => {
+  const [isTouched, setTouched] = useState<boolean>(false);
   const [query, setQuery] = useState<string>("");
   const debouncedQuery = useDebounce<string>(query, 400);
 
-  // TODO: REEMPLACE WITH SOME REUSABLE TYPE  
   const { data = [], isLoading } = useSWR<GoogleBusinesses[], Error>(
     debouncedQuery ? `get-google-business/${debouncedQuery}` : null,
     () => getGoogleBusiness(debouncedQuery) as unknown as Promise<GoogleBusinesses[]>
   );
 
-  return { data, isLoading, query, setQuery }
+  const onFocus = useCallback(() => setTouched(true), []);
+
+  return { data, isLoading, query, setQuery, isTouched, onFocus }
 }
 
 export { useBusinessField };

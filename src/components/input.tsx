@@ -15,7 +15,7 @@ const Input = (props: InputProps) =>
       px-3
       py-2
       text-left
-      placeholder:text-gray-dark
+      placeholder:text-gray
       focus:border-gray-light
       focus:outline-none
       focus:ring-0

@@ -70,8 +70,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           ">
             <a href="/">
               <Image
-                src="/logo.svg"
+                src="/logo.png"
                 width="250"
+                quality={100}
                 height="0"
                 alt="logo"
               />

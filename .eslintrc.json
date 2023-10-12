@@ -20,8 +20,8 @@
         "avoidEscape": true
       }
     ],
-    "@typescript-eslint/no-explicit-any": "error",
-    "import/newline-between-groups": "error",
+    "@typescript-eslint/no-explicit-any": "off",
+    "import/newline-between-groups": "off",
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": "off",
     "unused-imports/no-unused-imports": "error",

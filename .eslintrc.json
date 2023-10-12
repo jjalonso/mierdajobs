@@ -1,8 +1,5 @@
 {
-  "plugins": [
-    "unused-imports",
-    "@typescript-eslint"
-  ],
+  "plugins": ["unused-imports", "@typescript-eslint"],
   "extends": [
     "next/core-web-vitals",
     "plugin:tailwindcss/recommended",
@@ -10,19 +7,16 @@
   ],
   "overrides": [
     {
-      "files": [
-        "*.ts",
-        "*.tsx",
-        "*.js"
-      ],
-      "parser": "@typescript-eslint/parser"
+      "files": ["*.ts", "*.tsx", "*.js"],
+      "parser": "@typescript-eslint/parser",
+      "rules": {
+        "@typescript-eslint/no-explicit-any": "error",
+        "import/newline-between-groups": "error"
+      }
     }
   ],
   "rules": {
-    "jsx-quotes": [
-      "error",
-      "prefer-double"
-    ],
+    "jsx-quotes": ["error", "prefer-double"],
     "quotes": [
       "error",
       "double",
@@ -42,10 +36,7 @@
         "argsIgnorePattern": "^_"
       }
     ],
-    "react/jsx-first-prop-new-line": [
-      "error",
-      "multiprop"
-    ],
+    "react/jsx-first-prop-new-line": ["error", "multiprop"],
     "react/function-component-definition": [
       "error",
       {
@@ -65,13 +56,7 @@
           "order": "asc"
         },
         "newlines-between": "always",
-        "groups": [
-          "builtin",
-          "external",
-          "parent",
-          "sibling",
-          "index"
-        ]
+        "groups": ["builtin", "external", "parent", "sibling", "index"]
       }
     ]
   }

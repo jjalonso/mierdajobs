@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 
 import { insertReview } from "./actions";
-import { insertReview } from "./actions";
 import { schemaReviews } from "./schema";
 
 import { disconnectDB } from "@/app/_server/db/mongodb";

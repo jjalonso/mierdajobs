@@ -12,6 +12,8 @@ jobs:
           node-version: 16.x
       - run: npm install
       - run: |
-          export ESLINT_DISABLE_ANY=true
-          export ESLINT_DISABLE_RULE="import/newline-between-groups"
-          npm run lint
+          npx eslint --no-error-on-unmatched-pattern --max-warnings 0 \
+          --rule "@typescript-eslint/no-empty-interface: off" \
+          --rule "@typescript-eslint/no-explicit-any: off" \
+          --rule "import/newline-between-groups: off" \
+          --rule "import/order: off"

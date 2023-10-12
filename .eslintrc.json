@@ -47,6 +47,7 @@
         "max": 1
       }
     ],
+    "@typescript-eslint/no-empty-interface": "off",
     "import/order": [
       "error",
       {

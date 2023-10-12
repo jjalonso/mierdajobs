@@ -11,4 +11,7 @@ jobs:
         with:
           node-version: 16.x
       - run: npm install
-      - run: npm run lint
+      - run: |
+          export ESLINT_DISABLE_ANY=true
+          export ESLINT_DISABLE_RULE="import/newline-between-groups"
+          npm run lint

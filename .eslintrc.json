@@ -8,11 +8,7 @@
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js"],
-      "parser": "@typescript-eslint/parser",
-      "rules": {
-        "@typescript-eslint/no-explicit-any": "error",
-        "import/newline-between-groups": "error"
-      }
+      "parser": "@typescript-eslint/parser"
     }
   ],
   "rules": {
@@ -24,6 +20,8 @@
         "avoidEscape": true
       }
     ],
+    "@typescript-eslint/no-explicit-any": "error",
+    "import/newline-between-groups": "error",
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": "off",
     "unused-imports/no-unused-imports": "error",

@@ -11,4 +11,4 @@ jobs:
         with:
           node-version: 16.x
       - run: npm install
-      - run: npm run eslint
+      - run: npm run lint

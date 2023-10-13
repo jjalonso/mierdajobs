@@ -9,6 +9,6 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: 16.x
-      - run: npm install
-      - run: npx eslint --no-error-on-unmatched-pattern --max-warnings 0
+          node-version: 1.x
+      - run: yarn install
+      - run: yarn eslint

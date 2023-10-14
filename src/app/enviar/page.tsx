@@ -2,14 +2,12 @@
 
 import { FormProvider } from "react-hook-form";
 import composeHooks from "react-hooks-compose"
-import { Typewriting } from "react-typewriting"
 
 import { UseReviewForm, UseReviewFormReturn } from "./hooks/use-review-form";
 import Thanks from "./thanks";
 import { ContractFraudEnum } from "./types";
 import { workingHoursPeriodValues, MIN_NUMBER_RULE, MAX_NUMBER_RULE, REQUIRED_RULE, MAX_LENGTH_RULE } from "./values"
 
-import { Autocomplete, AutocompleteOption } from "@/components/autocomplete";
 import { Button } from "@/components/button";
 import { FormField } from "@/components/formfield";
 import { Heading } from "@/components/heading";
@@ -25,7 +23,6 @@ interface Props extends UseReviewFormReturn {
 const ReviewForm = ({
   form,
   onFormSubmit,
-  businessField,
   searchParams
 }: Props) => searchParams.sent ? <Thanks place={searchParams.sent} /> :
     <FormProvider {...form}>
@@ -47,50 +44,6 @@ const ReviewForm = ({
 
           {/* Business */}
 
-          <FormField
-            name="business"
-            label="Nombre del negocio"
-            rules={{ ...REQUIRED_RULE }}
-          >
-            {({ ref: _ref, ...field }) =>
-
-              <Typewriting
-                waitBeforeDeleteMs={800}
-                deleteSpeedMs={0}
-                strings={[
-                  "El Buencomer, Barcelona",
-                  "Pepe Alonso, Cadiz",
-                  "Taller Speedy, Sevilla",
-                ]}
-              >
-                {({ currentText }) => (
-                  <Autocomplete
-                    {...field}
-                    onFocus={businessField.onFocus}
-                    placeholder={businessField.isTouched ? "" : currentText}
-                    isLoading={businessField.isLoading}
-                    onQueryChange={businessField.setQuery}
-                    by="gplace_id"
-                    displayValue={(v) => v.name}
-                  >
-                    {businessField.data.map((business) =>
-                      <AutocompleteOption
-                        key={business.gplace_id}
-                        value={business}
-                        noCheckIcon
-                      >
-
-                        <div className="flex flex-col gap-1 overflow-hidden p-2">
-                          <div className="truncate">{business.name}</div>
-                          <div className="truncate text-sm text-gray">{`${business.address[0]}, ${business.address[1]} `}</div>
-                        </div>
-                      </AutocompleteOption>
-                    )}
-                  </Autocomplete>
-                )}
-              </Typewriting>
-            }
-          </FormField >
         </div>
 
         <div className="flex w-full gap-6">

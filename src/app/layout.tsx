@@ -1,12 +1,8 @@
 "use client";
-import { Button } from "@/components/button";
 import "./globals.css";
 
 import { Poppins } from "next/font/google";
 import Image from "next/image";
-import Link from "next/link";
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import { usePathname } from "next/navigation";
 
 const poppins = Poppins({
   weight: "400",
@@ -18,7 +14,7 @@ interface Props {
 }
 
 const Layout: React.FC<Props> = ({ children }) => {
-  const pathname = usePathname();
+  // const pathname = usePathname();
   return (
     <html
       lang="es"

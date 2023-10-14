@@ -1,5 +1,4 @@
 import { getGoogleBusiness } from "../api/get-google-businesses/actions";
-
 import LandingElements from "./LandingElements";
 import { Results } from "./results";
 import { SearchField } from "./search-field";

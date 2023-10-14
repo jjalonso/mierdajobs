@@ -9,7 +9,7 @@ export const parseParams = (url: string) => {
 };
 
 export const serializeIndexed = (data: URLSearchParams) => {
-  let params: Record<string, string> | {} = {};
+  let params: NonNullable<unknown> = {};
   data.forEach((value: string, key: string) => {
     params = { ...params, [key]: value };
   });

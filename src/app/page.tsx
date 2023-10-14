@@ -1,9 +1,7 @@
-import PageProps from "./page.props"
+"use client";
 
-const Page: React.FC<PageProps> = () => {
-  return (
-    <div className="">BUSCADOR</div>
-  )
-}
+import { redirect } from "next/navigation";
+
+const Page = () => redirect("/buscador");
 
 export default Page;

@@ -39,3 +39,6 @@ next-env.d.ts
 .env*.local
 
 .env*.local
+
+# NO NPM, USE YARN!
+package-lock.json

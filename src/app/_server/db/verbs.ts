@@ -28,6 +28,6 @@ export const updateDataInCollection = async (
   const db: any = await connectDB();
   const response = await db
     .collection(collection)
-    [typeInsert](filter, { $set: body });
+  [typeInsert](filter, { $set: body });
   return response;
 };

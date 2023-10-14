@@ -22,7 +22,7 @@ const Select = <T,>({ children, value, disabled, placeholder, by = "id", onChang
     disabled={disabled}
     value={value}
     onChange={onChange}
-    by={by as any}
+    by={by as never}
   >
     <div className="relative">
       <Listbox.Button className="

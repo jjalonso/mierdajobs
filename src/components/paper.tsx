@@ -10,4 +10,4 @@ const Paper = ({ children, className }: Props) =>
     {children}
   </div>
 
-export { Paper };
+export default Paper;

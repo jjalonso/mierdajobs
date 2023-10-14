@@ -1,5 +1,3 @@
-import { GoogleBusinesses } from "../api/get-google-businesses/types"
-
 import { ContractFraudEnum, WorkingHoursPeriodEnum } from "@/app/api/reviews/types"
 import { IndexedName } from "@/app/api/types"
 

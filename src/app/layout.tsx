@@ -80,7 +80,7 @@ const Layout: React.FC<Props> = ({ children }) => {
             {/* ACCOUNT INFORMATION */}
           </div>
         </header>
-        <main className="flex w-full grow max-w-screen-md self-center px-2 justify-center">
+        <main className="flex w-full max-w-screen-md grow justify-center self-center px-2">
           {children}
         </main>
 

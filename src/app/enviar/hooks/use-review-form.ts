@@ -1,11 +1,9 @@
-import { useRouter } from "next/navigation";
 import { UseFormReturn, useForm } from "react-hook-form";
 
 import { ContractFraudEnum, ReviewFormDirtyValues, ReviewFormValidValues, WorkingHoursPeriodEnum } from "../types";
 import { workingHoursPeriodValues } from "../values";
 
 import { insertReview } from "@/app/api/reviews/actions";
-import { GoogleBusinesses } from "@/app/api/get-google-businesses/types";
 
 interface UseReviewFormReturn {
   form: UseFormReturn<ReviewFormDirtyValues, void, ReviewFormValidValues>,
@@ -13,7 +11,6 @@ interface UseReviewFormReturn {
 }
 
 const UseReviewForm = (GPlaceId: string): UseReviewFormReturn => {
-  const router = useRouter()
   const form = useForm<ReviewFormDirtyValues, void, ReviewFormValidValues>({
     mode: "onBlur",
     defaultValues: {

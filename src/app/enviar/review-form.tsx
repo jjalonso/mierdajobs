@@ -1,25 +1,22 @@
 "use client";
 
-import React from 'react';
-import { useBusinessField } from './hooks/use-business-field';
-import { UseReviewForm } from './hooks/use-review-form';
-import { FormProvider } from 'react-hook-form';
-import { Heading } from '@/components/heading';
-import { FormField } from '@/components/formfield';
-import Typewriting from 'react-typewriting';
-import { Autocomplete, AutocompleteOption } from '@/components/autocomplete';
-import { workingHoursPeriodValues, MIN_NUMBER_RULE, MAX_NUMBER_RULE, REQUIRED_RULE, MAX_LENGTH_RULE } from "./values"
-import { Select, SelectOption } from '@/components/select';
-import { Input } from '@/components/input';
-import { RadioGroup } from '@headlessui/react';
-import { Radio } from '@/components/radio';
-import { TextArea } from '@/components/textarea';
-import { Button } from '@/components/button';
+import { RadioGroup } from "@headlessui/react";
+import React from "react";
+import { FormProvider } from "react-hook-form";
+
+import { UseReviewForm } from "./hooks/use-review-form";
+import Thanks from "./thanks";
 import { ContractFraudEnum } from "./types";
-import { BusinessTypingText } from '../values';
-import { GoogleBusinesses } from '../api/get-google-businesses/types';
-import { Paper } from '@/components/paper';
-import Thanks from './thanks';
+import { workingHoursPeriodValues, MIN_NUMBER_RULE, MAX_NUMBER_RULE, REQUIRED_RULE, MAX_LENGTH_RULE } from "./values"
+
+import { Button } from "@/components/button";
+import { FormField } from "@/components/formfield";
+import { Heading } from "@/components/heading";
+import { Input } from "@/components/input";
+import Paper from "@/components/paper";
+import { Radio } from "@/components/radio";
+import { Select, SelectOption } from "@/components/select";
+import { TextArea } from "@/components/textarea";
 
 interface Props {
   id: string // TODO: Must be Business
@@ -33,7 +30,7 @@ const ReviewForm = ({ id }: Props) => {
 
   return form.formState.isSubmitSuccessful ?
     <Thanks /> :
-    <Paper className="mb-10 flex flex-col gap-6 h-fit">
+    <Paper className="mb-10 flex h-fit flex-col gap-6">
 
       <FormProvider {...form}>
         <form

@@ -1,5 +1,6 @@
-import React from 'react';
-import { ContractFraudEnum } from '../enviar/types';
+import React from "react";
+
+import { ContractFraudEnum } from "../enviar/types";
 
 // Temporary interfaces, to be moved
 interface Review {
@@ -20,7 +21,7 @@ interface Props {
 
 const ReviewItem = ({ review }: Props) => {
   return (
-    <div>TODO</div>
+    <div>TODO {JSON.stringify(review)}</div>
   );
 };
 

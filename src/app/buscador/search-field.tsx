@@ -1,8 +1,7 @@
 "use client";
 
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import { useRouter } from "next/navigation";
-import React, { SyntheticEvent } from "react";
+import React from "react";
 import Typewriting from "react-typewriting";
 
 import { BusinessTypingText } from "../values";

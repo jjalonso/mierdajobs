@@ -11,7 +11,6 @@ interface WorkingHoursPeriod extends IndexedName {
 }
 
 interface ReviewFormDirtyValues {
-  business: string,
   monthlySalary: string,
   workingHours: string,
   workingHoursPeriod: IndexedName,
@@ -21,7 +20,6 @@ interface ReviewFormDirtyValues {
 }
 
 interface ReviewFormValidValues {
-  business: GoogleBusinesses,
   monthlySalary: number,
   workingHours: number,
   workingHoursPeriod: IndexedName,

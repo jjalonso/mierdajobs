@@ -1,12 +1,12 @@
 export enum WorkingHoursPeriodEnum {
   PER_WEEK = "PER_WEEK",
-  PER_MONTH = "PER_MONTH"
+  PER_MONTH = "PER_MONTH",
 }
 
 export enum ContractFraudEnum {
   NO_CONTRACT = "NO_CONTRACT",
   HOURS_MISMATCH = "HOURS_MISMATCH",
-  NO_FRAUD = "NO_FRAUD"
+  NO_FRAUD = "NO_FRAUD",
 }
 
 export type ReviewsRequest = {

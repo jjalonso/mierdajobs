@@ -1,40 +1,38 @@
 "use client";
 import "./globals.css";
 
-import { MagnifyingGlassIcon, PencilIcon } from "@heroicons/react/24/outline";
 import { Poppins } from "next/font/google";
 import Image from "next/image";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-
-import LayoutProps from "./layout.props";
-
-import { Button } from "@/components/button";
 
 const poppins = Poppins({
   weight: "400",
   subsets: ["latin"],
 });
 
-const Layout: React.FC<LayoutProps> = ({ children }) => {
-  const pathname = usePathname();
+interface Props {
+  children: React.ReactNode;
+}
+
+const Layout: React.FC<Props> = ({ children }) => {
+  // const pathname = usePathname();
   return (
     <html
       lang="es"
       className="
         h-full
-        scroll-smooth
-        bg-primary 
-        text-sm
+        scroll-smooth 
+        bg-primary
+        text-base
         text-black
+        md:text-sm
       ">
       <body className={`
         ${poppins.className} 
         flex 
-        flex-col 
-        md:gap-y-20
+        min-h-full
+        flex-col
       `}>
-        <header className="flex flex-col-reverse gap-6 p-10 md:flex-row">
+        <header className="flex flex-col-reverse p-10 md:flex-row">
           <nav className="
             flex 
             w-full
@@ -44,29 +42,29 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             md:w-60
           ">
             {/* MENU  */}
-            <Link href="/buscador">
+            {/* <Link href="/buscador">
               <Button
                 className="w-full md:w-fit"
                 active={pathname === "/buscador"}>
                 <MagnifyingGlassIcon className="h-6 w-6" />
-                Buscar reseñas
+                Busca reseñas
               </Button>
-            </Link>
-            <Link href="/enviar">
+            </Link> */}
+            {/* <Link href="/enviar">
               <Button
                 className="w-full md:w-fit"
                 active={pathname === "/enviar"}>
                 <PencilIcon className="h-6 w-6" />
-                Enviar reseña
+                Cuenta tu historia
               </Button>
-            </Link>
+            </Link> */}
           </nav>
           <div className="
             flex
             w-full
             grow
-            justify-center 
-            px-16 
+            justify-center
+            px-10
           ">
             <a href="/">
               <Image
@@ -74,7 +72,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 width="250"
                 quality={100}
                 height="0"
-                alt="logo"
+                alt="MierdaJobs"
               />
             </a>
           </div>
@@ -82,7 +80,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             {/* ACCOUNT INFORMATION */}
           </div>
         </header>
-        <main className="flex justify-center p-2 pb-20">
+        <main className="flex w-full max-w-screen-md grow justify-center self-center px-2">
           {children}
         </main>
 

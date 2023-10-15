@@ -1,5 +1,8 @@
 {
-  "plugins": ["unused-imports", "@typescript-eslint"],
+  "plugins": [
+    "unused-imports",
+    "@typescript-eslint"
+  ],
   "extends": [
     "next/core-web-vitals",
     "plugin:tailwindcss/recommended",
@@ -7,12 +10,19 @@
   ],
   "overrides": [
     {
-      "files": ["*.ts", "*.tsx", "*.js"],
+      "files": [
+        "*.ts",
+        "*.tsx",
+        "*.js"
+      ],
       "parser": "@typescript-eslint/parser"
     }
   ],
   "rules": {
-    "jsx-quotes": ["error", "prefer-double"],
+    "jsx-quotes": [
+      "error",
+      "prefer-double"
+    ],
     "quotes": [
       "error",
       "double",
@@ -20,8 +30,6 @@
         "avoidEscape": true
       }
     ],
-    "@typescript-eslint/no-explicit-any": "off",
-    "import/newline-between-groups": "off",
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": "off",
     "unused-imports/no-unused-imports": "error",
@@ -34,7 +42,10 @@
         "argsIgnorePattern": "^_"
       }
     ],
-    "react/jsx-first-prop-new-line": ["error", "multiprop"],
+    "react/jsx-first-prop-new-line": [
+      "error",
+      "multiprop"
+    ],
     "react/function-component-definition": [
       "error",
       {
@@ -47,14 +58,20 @@
         "max": 1
       }
     ],
-    "@typescript-eslint/no-empty-interface": "off",
     "import/order": [
       "error",
       {
         "alphabetize": {
           "order": "asc"
         },
-        "groups": ["builtin", "external", "parent", "sibling", "index"]
+        "newlines-between": "always",
+        "groups": [
+          "builtin",
+          "external",
+          "parent",
+          "sibling",
+          "index"
+        ]
       }
     ]
   }

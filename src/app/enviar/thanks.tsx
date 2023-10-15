@@ -4,37 +4,33 @@ import React from "react";
 
 import { Button } from "@/components/button";
 import { Heading } from "@/components/heading";
+import Paper from "@/components/paper";
 
-interface Props {
-  place: string;
-};
-
-const Thanks = ({ place }: Props) => {
+const Thanks = () => {
   return (
-    <div>
-      <Heading
-        size="xl"
-        level={1}
-        className="mb-6 md:mb-12"
-      >
-        Tenemos tu reseña
-      </Heading>
-      <div className="flex flex-col md:flex-row-reverse">
-        <div className="relative flex grow justify-center">
-          <Image
-            className="mb-12 md:absolute md:-inset-y-60"
-            src="/group.png" width={250} height={506} alt="Personas saltando con alegria" />
-        </div>
-        <div className="flex w-full flex-col gap-3 md:w-fit">
-          <p>Gracias por luchar contra la precariedad laboral.</p>
-          <p>El mundo es mejor con personas como tú.</p>
-          <Link href={`/reviews/${place}`}>
-            <Button className="mt-6 w-full md:w-fit">Ir a mi reseña</Button>
-          </Link>
-        </div>
-      </div>
 
-    </div >
+    <Paper className="relative mb-10 mt-52 flex h-fit flex-col items-center gap-6 pt-44 text-center md:mt-56 md:pt-56">
+      {/* <div className="relative h-24 flex grow justify-center">
+      </div> */}
+      <Image
+        className="absolute -top-52 md:-top-56"
+        src="/group.png"
+        width={250}
+        height={0}
+        alt="Personas saltando con alegria"
+      />
+      <div className="flex w-full flex-col items-center gap-6">
+        {/* <p>Juntos en la lucha contra la precariedad laboral.</p> */}
+        <Heading level={1}>
+          Tenemos tu reseña
+        </Heading>
+        <p>Tu reseña sera revisada y publicada lo antes posible.</p>
+        <Link
+          className="mt-8 w-full md:w-fit" href="/buscador">
+          <Button className="w-full md:w-fit">Volver</Button>
+        </Link>
+      </div>
+    </Paper>
   );
 };
 

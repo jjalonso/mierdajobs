@@ -13,35 +13,37 @@ const buttonVariants = cva(`
     ${roboto.className} 
     inline-flex
     w-fit 
-    min-w-[180px] 
     items-center 
     justify-center 
     gap-4 
     rounded-md 
-    font-medium 
     uppercase 
     tracking-widest 
     transition
     duration-300 
-    focus-visible:outline-none 
+    focus-visible:outline-none
     disabled:cursor-not-allowed
     disabled:bg-gray
+    md:text-base
   `,
   {
     variants: {
       variant: {
-        default: "bg-primary text-white hover:bg-primary-light",
+        primary: "bg-primary text-white hover:brightness-110 ",
+        secondary: "bg-black text-white hover:brightness-125 ",
       },
       active: {
-        true: "bg-primary-light",
+        // TODO: Active look bad on others that are not primary
+        // This requires research on how to make it with CVA
+        true: "brightness-110",
       },
       size: {
-        default: "h-14 px-4 py-2",
-        icon: "h-11 w-11",
+        default: "min-w-[170px] px-4 py-3",
+        icon: "h-fit w-fit",
       },
     },
     defaultVariants: {
-      variant: "default",
+      variant: "primary",
       size: "default",
     },
   }
@@ -52,6 +54,7 @@ export interface ButtonProps
   VariantProps<typeof buttonVariants> {
   asChild?: boolean
   loading?: boolean
+  className?: string
 }
 
 const Button = ({
@@ -66,7 +69,7 @@ const Button = ({
 }: ButtonProps) =>
   <button
     disabled={disabled || loading}
-    className={twMerge(buttonVariants({ variant, size, className, active }))}
+    className={twMerge(buttonVariants({ variant, size, active }), className)}
     {...props}
   >
     {loading ?

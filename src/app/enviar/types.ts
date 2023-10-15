@@ -1,5 +1,3 @@
-import { GoogleBusinesses } from "../api/get-google-businesses/types"
-
 import { ContractFraudEnum, WorkingHoursPeriodEnum } from "@/app/api/reviews/types"
 import { IndexedName } from "@/app/api/types"
 
@@ -11,7 +9,6 @@ interface WorkingHoursPeriod extends IndexedName {
 }
 
 interface ReviewFormDirtyValues {
-  business: string,
   monthlySalary: string,
   workingHours: string,
   workingHoursPeriod: IndexedName,
@@ -21,7 +18,6 @@ interface ReviewFormDirtyValues {
 }
 
 interface ReviewFormValidValues {
-  business: GoogleBusinesses,
   monthlySalary: number,
   workingHours: number,
   workingHoursPeriod: IndexedName,

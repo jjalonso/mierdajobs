@@ -11,9 +11,9 @@ const roboto = Roboto({
 const headingVariants = cva([`${roboto.className} font-bold`], {
   variants: {
     size: {
-      xs: ["text-xl"],
-      base: ["text-2xl"],
-      xl: ["text-3xl"]
+      xs: ["text-2xl"],
+      base: ["text-2xl md:text-3xl"],
+      xl: ["text-3xl md:text-4xl  md:leading-relaxed"]
     },
   },
   defaultVariants: {

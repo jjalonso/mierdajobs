@@ -1,8 +1,11 @@
-import { disconnectDB } from "@/app/_server/db/mongodb";
 import { NextResponse } from "next/server";
+
 import { parseParams } from "../utils";
+
 import { getReviews } from "./actions";
 import { schemaGetReviews } from "./schema";
+
+import { disconnectDB } from "@/app/_server/db/mongodb";
 
 export const GET = async (request: Request) => {
 	try {

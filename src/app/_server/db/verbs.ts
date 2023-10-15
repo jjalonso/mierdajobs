@@ -3,7 +3,7 @@ import { Db, Document, Filter, OptionalId, WithId } from "mongodb";
 import { connectDB } from "@/app/_server/db/mongodb";
 
 type ParamsProps = Filter<WithId<Document>>;
-type BodyProps = OptionalId<Document> | OptionalId<Document>[];
+export type BodyProps = OptionalId<Document> | OptionalId<Document>[];
 
 export const getCollection = async (
 	collection: string,

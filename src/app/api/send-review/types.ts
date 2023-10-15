@@ -20,5 +20,6 @@ export type SendReviewRequest = {
 };
 
 export type SendReviewDB = SendReviewRequest & {
+	_id: string;
 	created_at: string;
 };

@@ -1,7 +1,9 @@
-import { disconnectDB } from "@/app/_server/db/mongodb";
 import { NextResponse } from "next/server";
+
 import { insertReview } from "./actions";
 import { schemaReviews } from "./schema";
+
+import { disconnectDB } from "@/app/_server/db/mongodb";
 
 export const POST = async (request: Request) => {
 	try {

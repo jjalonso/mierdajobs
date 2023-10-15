@@ -1,33 +1,38 @@
+import { Db, Filter, Document, WithId, OptionalId } from "mongodb";
+
 import { connectDB } from "@/app/_server/db/mongodb";
 
 export const getCollection = async (
   collection: string,
-  param?: Record<string, any>
+  param: Filter<WithId<Document>> = {}
 ) => {
-  const db: any = await connectDB();
+  const db: Db = await connectDB();
+  console.log(typeof db);
   const response = await db.collection(collection).find(param).toArray();
   return response;
 };
 
 export const insertDataInCollection = async (
   collection: string,
-  body: Record<string, any>
+  body: OptionalId<Document> | OptionalId<Document>[]
 ) => {
   const typeInsert = !Array.isArray(body) ? "insertOne" : "insertMany";
-  const db: any = await connectDB();
-  const response = await db.collection(collection)[typeInsert](body);
+  const db: Db = await connectDB();
+  const response = await db
+    .collection(collection)
+    [typeInsert](body as Document[]);
   return response;
 };
 
 export const updateDataInCollection = async (
   collection: string,
-  filter: Record<string, any>,
-  body: Record<string, any>
+  filter: Filter<WithId<Document>> = {},
+  body: Filter<WithId<Document>> = {}
 ) => {
   const typeInsert = !Array.isArray(body) ? "updateOne" : "updateMany";
-  const db: any = await connectDB();
+  const db: Db = await connectDB();
   const response = await db
     .collection(collection)
-  [typeInsert](filter, { $set: body });
+    [typeInsert](filter, { $set: body });
   return response;
 };

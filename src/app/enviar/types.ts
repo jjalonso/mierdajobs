@@ -1,5 +1,8 @@
-import { ContractFraudEnum, WorkingHoursPeriodEnum } from "@/app/api/reviews/types"
-import { IndexedName } from "@/app/api/types"
+import {
+  ContractFraudEnum,
+  WorkingHoursPeriodEnum,
+} from "@/app/api/send-review/types";
+import { IndexedName } from "@/app/api/types";
 
 interface IndexedWorkingHoursPeriod extends IndexedName {
   id: WorkingHoursPeriodEnum

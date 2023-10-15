@@ -1,9 +1,6 @@
 import { BodyProps } from "@/app/_server/db/verbs";
-
 import { getGooglePlaceDetailsBusiness } from "@/app/_server/google-place/verbs";
-
 import { SendReviewDB } from "../send-review/types";
-
 import { ReviewsDTO } from "./types";
 
 export const serializeIndexedGetReviews = async (

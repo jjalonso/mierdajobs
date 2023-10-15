@@ -1,13 +1,15 @@
 import Image from "next/image";
 import React from "react";
 
-import { Review as ReviewType } from "../api/reviews/types";
+// import { Review as ReviewType } from "../api/reviews/types";
+
+import { Review } from "../api/get-reviews/types";
 
 import useReviewAdapter from "./hooks/use-review-adapter";
 import ValueBlock from "./value-block";
 
 interface Props {
-  review: ReviewType;
+  review: Review;
 }
 
 const Review = ({ review }: Props) => {
@@ -32,7 +34,7 @@ const Review = ({ review }: Props) => {
       <div className="flex gap-3 text-sm">
         <ValueBlock
           className="w-1/3"
-          title="Vacaciones" value={`${adaptedReview.annual_leave} dias/año`} />
+          title="Vacaciones" value={`${adaptedReview.annual_leave} dias`} />
         <ValueBlock
           className="w-1/3"
           title="Jornada" value={`${adaptedReview.working_hours_pw} h/semana`} />

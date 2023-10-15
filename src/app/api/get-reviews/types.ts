@@ -1,6 +1,6 @@
 import { SendReviewDB } from "../send-review/types";
 
-type GetReviewsDB = Pick<
+export type Review = Pick<
 	SendReviewDB,
 	| "created_at"
 	| "monthly_salary"
@@ -12,9 +12,10 @@ type GetReviewsDB = Pick<
 	salary_ph: number;
 };
 
-export type ReviewsDTO = {
-	name: string; //Google Place Details
-	address: string; //Google Place Details
+export type GetReviewsResponse = {
+	id: string;
+	name: string;
+	address: string;
 	totalReviews: number;
-	reviews: GetReviewsDB[];
+	reviews: Review[];
 };

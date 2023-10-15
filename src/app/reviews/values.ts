@@ -1,4 +1,4 @@
-import { ContractFraudEnum } from "../api/reviews/types";
+import { ContractFraudEnum } from "../api/send-review/types";
 
 export const contractFraudObject = {
   [ContractFraudEnum.NO_CONTRACT]: "No hay contrato",

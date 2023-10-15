@@ -1,6 +1,6 @@
 import { SendReviewDB } from "../send-review/types";
 
-import { ReviewsDTO } from "./types";
+import { GetReviewsResponse } from "./types";
 
 import { BodyProps } from "@/app/_server/db/verbs";
 import { getGooglePlaceDetailsBusiness } from "@/app/_server/google-place/verbs";
@@ -26,5 +26,5 @@ export const serializeIndexedGetReviews = async (
 		address: gettedDetailsBusiness.result.formatted_address,
 		totalReviews: reviews.length,
 		reviews: serializedAllReviews
-	} as ReviewsDTO;
+	} as GetReviewsResponse;
 };

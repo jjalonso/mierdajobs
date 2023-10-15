@@ -1,13 +1,18 @@
 import { UseFormReturn, useForm } from "react-hook-form";
 
-import { ContractFraudEnum, ReviewFormDirtyValues, ReviewFormValidValues, WorkingHoursPeriodEnum } from "../types";
+import {
+  ContractFraudEnum,
+  ReviewFormDirtyValues,
+  ReviewFormValidValues,
+  WorkingHoursPeriodEnum,
+} from "../types";
 import { workingHoursPeriodValues } from "../values";
 
-import { insertReview } from "@/app/api/reviews/actions";
+import { insertReview } from "@/app/api/send-review/actions";
 
 interface UseReviewFormReturn {
-  form: UseFormReturn<ReviewFormDirtyValues, void, ReviewFormValidValues>,
-  onFormSubmit: () => void,
+  form: UseFormReturn<ReviewFormDirtyValues, void, ReviewFormValidValues>;
+  onFormSubmit: () => void;
 }
 
 const UseReviewForm = (GPlaceId: string): UseReviewFormReturn => {
@@ -19,40 +24,43 @@ const UseReviewForm = (GPlaceId: string): UseReviewFormReturn => {
       workingHoursPeriod: workingHoursPeriodValues[0],
       contractFraud: "",
       annualLeave: "",
-      comment: ""
-    }
-  })
+      comment: "",
+    },
+  });
 
-  const onFormSubmit = form.handleSubmit(async values => {
+  const onFormSubmit = form.handleSubmit(async (values) => {
     const {
       monthlySalary,
       workingHours,
       workingHoursPeriod,
       contractFraud,
       annualLeave,
-      comment
-    } = values
+      comment,
+    } = values;
     try {
       await insertReview({
         gplace_id: GPlaceId,
         monthly_salary: Number(monthlySalary),
         working_hours: Number(workingHours),
         working_hours_period: workingHoursPeriod.id as WorkingHoursPeriodEnum,
-        contract_fraud: contractFraud === ContractFraudEnum.NO_FRAUD ? undefined : contractFraud,
+        contract_fraud:
+          contractFraud === ContractFraudEnum.NO_FRAUD
+            ? undefined
+            : contractFraud,
         annual_leave: Number(annualLeave),
-        comment: comment
-      })
+        comment: comment,
+      });
     } catch (error) {
       // TODO: Implement toasts
-      console.error(error)
+      console.error(error);
     }
-  })
+  });
 
   return {
     form,
-    onFormSubmit
-  }
-}
+    onFormSubmit,
+  };
+};
 
 export { UseReviewForm };
-export type { UseReviewFormReturn };  
+export type { UseReviewFormReturn };

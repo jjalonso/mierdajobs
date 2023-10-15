@@ -1,30 +1,38 @@
-import { ContractFraudEnum, WorkingHoursPeriodEnum } from "@/app/api/reviews/types"
-import { IndexedName } from "@/app/api/types"
+import {
+  ContractFraudEnum,
+  WorkingHoursPeriodEnum,
+} from "@/app/api/send-review/types";
+import { IndexedName } from "@/app/api/types";
 
 interface ContractFraud extends IndexedName {
-  id: ContractFraudEnum
+  id: ContractFraudEnum;
 }
 interface WorkingHoursPeriod extends IndexedName {
-  id: WorkingHoursPeriodEnum
+  id: WorkingHoursPeriodEnum;
 }
 
 interface ReviewFormDirtyValues {
-  monthlySalary: string,
-  workingHours: string,
-  workingHoursPeriod: IndexedName,
-  contractFraud?: string,
-  annualLeave: string,
-  comment: string
+  monthlySalary: string;
+  workingHours: string;
+  workingHoursPeriod: IndexedName;
+  contractFraud?: string;
+  annualLeave: string;
+  comment: string;
 }
 
 interface ReviewFormValidValues {
-  monthlySalary: number,
-  workingHours: number,
-  workingHoursPeriod: IndexedName,
-  contractFraud?: ContractFraudEnum,
-  annualLeave: number,
-  comment: string
+  monthlySalary: number;
+  workingHours: number;
+  workingHoursPeriod: IndexedName;
+  contractFraud?: ContractFraudEnum;
+  annualLeave: number;
+  comment: string;
 }
 
-export type { ReviewFormDirtyValues, ReviewFormValidValues, ContractFraud, WorkingHoursPeriod }
-export { WorkingHoursPeriodEnum, ContractFraudEnum }
+export type {
+  ReviewFormDirtyValues,
+  ReviewFormValidValues,
+  ContractFraud,
+  WorkingHoursPeriod,
+};
+export { WorkingHoursPeriodEnum, ContractFraudEnum };

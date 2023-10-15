@@ -9,5 +9,5 @@ export const schemaReviews = Joi.object({
     .valid("NO_CONTRACT", "HOURS_MISMATCH")
     .optional(),
   annual_leave: Joi.number().min(0).max(365).required(),
-  comment: Joi.string().required(),
+  comment: Joi.string().max(250).required(),
 });

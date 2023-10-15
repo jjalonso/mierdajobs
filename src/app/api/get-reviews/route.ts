@@ -1,8 +1,6 @@
 import { NextResponse } from "next/server";
-
 import { insertReview } from "./actions";
 import { schemaReviews } from "./schema";
-
 import { disconnectDB } from "@/app/_server/db/mongodb";
 
 export const POST = async (request: Request) => {
@@ -17,9 +15,9 @@ export const POST = async (request: Request) => {
 
     await insertReview(value);
 
-    return NextResponse.json("Reseña insertada correctamente", { status: 201 });
+    return NextResponse.json(undefined, { status: 201 });
   } catch (error) {
-    return NextResponse.json(error, { status: 500 });
+    return console.error(error);
   } finally {
     await disconnectDB();
   }

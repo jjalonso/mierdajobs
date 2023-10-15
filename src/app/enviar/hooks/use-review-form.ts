@@ -1,9 +1,10 @@
 import { UseFormReturn, useForm } from "react-hook-form";
 
-import { ContractFraudEnum, ReviewFormDirtyValues, ReviewFormValidValues, WorkingHoursPeriodEnum } from "../types";
+import { ReviewFormDirtyValues, ReviewFormValidValues } from "../types";
 import { workingHoursPeriodValues } from "../values";
 
 import { insertReview } from "@/app/api/reviews/actions";
+import { WorkingHoursPeriodEnum } from "@/app/api/reviews/types";
 
 interface UseReviewFormReturn {
   form: UseFormReturn<ReviewFormDirtyValues, void, ReviewFormValidValues>,
@@ -38,7 +39,7 @@ const UseReviewForm = (GPlaceId: string): UseReviewFormReturn => {
         monthly_salary: Number(monthlySalary),
         working_hours: Number(workingHours),
         working_hours_period: workingHoursPeriod.id as WorkingHoursPeriodEnum,
-        contract_fraud: contractFraud === ContractFraudEnum.NO_FRAUD ? undefined : contractFraud,
+        contract_fraud: contractFraud,
         annual_leave: Number(annualLeave),
         comment: comment
       })

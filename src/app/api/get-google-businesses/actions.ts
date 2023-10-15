@@ -1,4 +1,4 @@
-"use server"
+"use server";
 import { serializeIndexedGoogleBusinessess } from "./utils";
 
 import { getGooglePlaceBusinesses } from "@/app/_server/google-place/verbs";

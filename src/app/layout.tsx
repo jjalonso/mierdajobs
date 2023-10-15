@@ -18,13 +18,16 @@ const Layout: React.FC<Props> = ({ children }) => {
   return (
     <html
       lang="es"
+      // Testing absolute and position on the long run
       className="
+        absolute
+        top-0
         h-full
+        w-full
         scroll-smooth 
         bg-primary
-        text-base
+        text-sm
         text-black
-        md:text-sm
       ">
       <body className={`
         ${poppins.className} 

@@ -4,9 +4,10 @@ import { RadioGroup } from "@headlessui/react";
 import React from "react";
 import { FormProvider } from "react-hook-form";
 
+import { contractFraudObject } from "../reviews/values";
+
 import { UseReviewForm } from "./hooks/use-review-form";
 import Thanks from "./thanks";
-import { ContractFraudEnum } from "./types";
 import { workingHoursPeriodValues, MIN_NUMBER_RULE, MAX_NUMBER_RULE, REQUIRED_RULE, MAX_LENGTH_RULE } from "./values"
 
 import { Button } from "@/components/button";
@@ -46,56 +47,6 @@ const ReviewForm = ({ id }: Props) => {
           >
             Enviar Reseña
           </Heading>
-
-          <div className="flex w-full flex-col md:w-3/4">
-
-            {/* Business */}
-
-            {/* <p>{business.name}</p> */}
-            {/* <FormField
-            name="business"
-            label="Nombre del negocio"
-            rules={{ ...REQUIRED_RULE }}
-            >
-            {({ ref: _ref, ...field }) =>
-
-            <Typewriting
-                waitBeforeDeleteMs={800}
-                deleteSpeedMs={0}
-                strings={BusinessTypingText}
-              >
-              {({ currentText }) => (
-                  <Autocomplete
-                  {...field}
-                  enterKeyHint="search"
-                  onFocus={businessField.onFocus}
-                  placeholder={businessField.isTouched ? "" : currentText}
-                  isLoading={businessField.isLoading}
-                  onQueryChange={businessField.setQuery}
-                  by="gplace_id"
-                  displayValue={(v) => v.name}
-                  >
-                  {businessField.data.map((business) =>
-                    <AutocompleteOption
-                        key={business.gplace_id}
-                        value={business}
-                        noCheckIcon
-                        >
-                        
-                        <div className="flex flex-col gap-1 overflow-hidden p-2">
-                          <div className="truncate">{business.name}</div>
-                          <div className="truncate text-sm text-gray">
-                            {business.address.join(', ')}
-                          </div>
-                          </div>
-                          </AutocompleteOption>
-                          )}
-                  </Autocomplete>
-                  )}
-                  </Typewriting>
-                }
-          </FormField > */}
-          </div>
 
           <div className="flex w-full gap-6">
             <div className="w-1/2 md:w-1/4">
@@ -191,19 +142,14 @@ const ReviewForm = ({ id }: Props) => {
               }}>
               {({ ref: _ref, ...field }) =>
                 <RadioGroup>
-                  <Radio
-                    {...field}
-                    label="El contrato parece correcto"
-                    value={ContractFraudEnum.NO_FRAUD}
-                  />
-                  <Radio
-                    {...field}
-                    label="Las horas de trabajo no coinciden"
-                    value={ContractFraudEnum.HOURS_MISMATCH} />
-                  <Radio
-                    {...field}
-                    label="No hay contrato"
-                    value={ContractFraudEnum.NO_CONTRACT} />
+                  {Object.entries(contractFraudObject).map(([key, value]) =>
+                    <Radio
+                      {...field}
+                      key={key}
+                      label={value}
+                      value={key}
+                    />
+                  )}
                 </RadioGroup>
               }
             </FormField>

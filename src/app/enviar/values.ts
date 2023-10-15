@@ -1,4 +1,6 @@
-import { WorkingHoursPeriod, WorkingHoursPeriodEnum } from "./types";
+import { WorkingHoursPeriodEnum } from "../api/reviews/types";
+
+import { WorkingHoursPeriod } from "./types";
 
 const workingHoursPeriodValues: WorkingHoursPeriod[] = [
   {

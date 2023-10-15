@@ -1,10 +1,13 @@
 "use server";
 
-import { ReviewsRequest } from "./types";
-import { bodyObjectReview } from "./utils";
+import { getCollection } from "@/app/_server/db/verbs";
+import { serializeIndexedReviews } from "./utils";
 
-import { insertDataInCollection } from "@/app/_server/db/verbs";
+export const getReviews = async (gplace_id: string) => {
+	const response = await getCollection("reviews", { gplace_id });
+	if (response.length <= 0) {
+		return [];
+	}
 
-export const insertReview = async (review: ReviewsRequest) => {
-  await insertDataInCollection("reviews", bodyObjectReview(review));
+	return serializeIndexedReviews(response, gplace_id);
 };

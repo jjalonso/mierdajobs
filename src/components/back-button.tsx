@@ -3,15 +3,20 @@
 import { ArrowLeftIcon } from "@heroicons/react/24/outline"
 import { useRouter } from "next/navigation"
 
-import { Button } from "./button"
+import { Button, ButtonProps } from "./button"
 
-const BackButton = () => {
+interface Props extends ButtonProps {
+  noIcon?: boolean
+}
+
+const BackButton = ({ children, noIcon = false, ...props }: Props) => {
   const router = useRouter();
 
   return (
-    <Button onClick={router.back}>
-      <ArrowLeftIcon className="h-6 w-6" />
-      Volver
+    <Button
+      onClick={router.back} {...props}>
+      {noIcon ? null : <ArrowLeftIcon className="h-6 w-6" />}
+      {children}
     </Button>
   )
 }

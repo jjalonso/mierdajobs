@@ -29,9 +29,8 @@ const Input = ({ icon, className, ...props }: Props) =>
         py-2
         text-left
         placeholder:text-gray
-        focus:border-gray-light
-        focus:outline-none
-        focus:ring-0
+        focus:border-secondary
+        focus:ring-secondary
         disabled:cursor-not-allowed
         disabled:border-none
         disabled:bg-gray-light

@@ -2,8 +2,8 @@ import { ArrowPathIcon } from "@heroicons/react/24/outline";
 import { cva, type VariantProps } from "class-variance-authority";
 import { Roboto } from "next/font/google";
 import React from "react";
+import { ButtonProps as ButtonPropsType } from "react-html-props";
 import { twMerge } from "tailwind-merge";
-
 const roboto = Roboto({
   weight: "400",
   subsets: ["latin"],
@@ -11,7 +11,7 @@ const roboto = Roboto({
 
 const buttonVariants = cva(`
     ${roboto.className} 
-    inline-flex
+    flex
     w-fit 
     items-center 
     justify-center 
@@ -19,8 +19,9 @@ const buttonVariants = cva(`
     rounded-md 
     uppercase 
     tracking-widest 
-    transition
-    duration-300 
+    shadow-sm
+    transition 
+    duration-300
     focus-visible:outline-none
     disabled:cursor-not-allowed
     disabled:bg-gray
@@ -30,7 +31,8 @@ const buttonVariants = cva(`
     variants: {
       variant: {
         primary: "bg-primary text-white hover:brightness-110 ",
-        secondary: "bg-black text-white hover:brightness-125 ",
+        secondary: "bg-secondary text-white hover:brightness-125 ",
+        ghost: "bg-transparent text-white",
       },
       active: {
         // TODO: Active look bad on others that are not primary
@@ -38,7 +40,7 @@ const buttonVariants = cva(`
         true: "brightness-110",
       },
       size: {
-        default: "min-w-[170px] px-4 py-3",
+        default: "min-w-[170px] p-4",
         icon: "h-fit w-fit",
       },
     },
@@ -49,10 +51,9 @@ const buttonVariants = cva(`
   }
 )
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+export interface ButtonProps extends
+  ButtonPropsType,
   VariantProps<typeof buttonVariants> {
-  asChild?: boolean
   loading?: boolean
   className?: string
 }

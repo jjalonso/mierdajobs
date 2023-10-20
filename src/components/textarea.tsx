@@ -1,10 +1,16 @@
 import { TextAreaProps } from "react-html-props";
 import { twMerge } from "tailwind-merge";
 
-const TextArea = ({ className, ...props }: TextAreaProps) =>
-  <textarea
-    {...props}
-    className={twMerge(`
+interface Props extends TextAreaProps {
+  maxLengthCounter?: number
+  value?: string
+}
+
+const TextArea = ({ className, maxLengthCounter = 0, ...props }: Props) =>
+  <div>
+    <textarea
+      {...props}
+      className={twMerge(`
       relative
       h-48
       w-full
@@ -18,15 +24,16 @@ const TextArea = ({ className, ...props }: TextAreaProps) =>
       py-2
       text-left
       placeholder:text-gray
-      focus:border-gray-light
-      focus:outline-none
-      focus:ring-0
+      focus:border-secondary
+      focus:ring-secondary
       disabled:cursor-not-allowed
       disabled:border-gray-tint
       disabled:bg-gray-tint
       disabled:text-gray
       disabled:opacity-50
-    `, className)}
-  />;
+      `, className)}
+    />
+    {maxLengthCounter ? `${props.value?.length}/{maxLength}` : null}
+  </div>
 
 export { TextArea };

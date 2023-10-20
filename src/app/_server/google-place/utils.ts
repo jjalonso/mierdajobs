@@ -1,7 +1,4 @@
-export const fetchGooglePlaceAPI = async (url: string) => {
-	const response = await fetch(url.replace(/ /g, "%20"), {
-		method: "GET"
-	});
-
-	return await response.json();
-};
+export const easyFetch = async (url: string, options: RequestInit = {}) => {
+  const response = await fetch(url, options);
+  return await response.json();
+}

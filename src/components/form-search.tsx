@@ -37,6 +37,7 @@ const FormSearch = ({ className, query = "" }: Props) => {
             autoCorrect="off"
             spellCheck="false"
             enterKeyHint="search"
+            className="focus:border-none focus:ring-0"
           />
         )}
       </Typewriting>

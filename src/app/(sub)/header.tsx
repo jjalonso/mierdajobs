@@ -5,7 +5,7 @@ import BackButton from "@/components/back-button";
 
 const Header = () => {
   return (
-    <header className="flex w-full justify-center py-1.5">
+    <header className="flex w-full items-center py-1.5">
       <nav className="flex-1">
         <BackButton
           variant="ghost" className="min-w-fit md:hidden" />

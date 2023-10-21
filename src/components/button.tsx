@@ -19,7 +19,6 @@ const buttonVariants = cva(`
     rounded-md 
     uppercase 
     tracking-widest 
-    shadow-sm
     transition 
     duration-300
     focus-visible:outline-none
@@ -30,8 +29,8 @@ const buttonVariants = cva(`
   {
     variants: {
       variant: {
-        primary: "bg-primary text-white hover:brightness-110 ",
-        secondary: "bg-secondary text-white hover:brightness-125 ",
+        primary: "bg-primary text-white shadow-sm hover:brightness-110",
+        secondary: "bg-secondary text-white shadow-sm hover:brightness-125",
         ghost: "bg-transparent text-white",
       },
       active: {
@@ -40,7 +39,7 @@ const buttonVariants = cva(`
         true: "brightness-110",
       },
       size: {
-        default: "min-w-[170px] p-4",
+        default: "min-w-[170px] px-4 py-3",
         icon: "h-fit w-fit",
       },
     },

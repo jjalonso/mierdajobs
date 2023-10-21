@@ -5,9 +5,10 @@ import { twMerge } from "tailwind-merge";
 
 interface Props extends InputProps {
   icon?: React.ReactNode;
+  suffix?: React.ReactNode;
 };
 
-const Input = ({ icon, className, ...props }: Props) =>
+const Input = ({ icon, className, suffix, ...props }: Props) =>
   <div className="relative flex w-full">
     {icon && <div className="pointer-events-none absolute inset-y-0 z-10 flex items-center pl-4 text-primary">
       <div className="h-7 w-7">
@@ -16,7 +17,8 @@ const Input = ({ icon, className, ...props }: Props) =>
     </div>}
     <input
       {...props}
-      className={twMerge(clsx(`
+      // BUG: NOT WORKING, NOT REMOVING CLASSES FROM CLASSNAME
+      className={twMerge(` 
         relative
         h-14
         w-full
@@ -37,9 +39,12 @@ const Input = ({ icon, className, ...props }: Props) =>
         disabled:text-gray
         disabled:opacity-50
         `,
-        { "pl-14": icon }),
+        clsx({ "pl-14": icon, "rounded-r-none": suffix }),
         className
       )} />
+    {suffix ? <div className="-mr-px flex">
+      <span className="flex items-center rounded rounded-l-none border border-l-0 border-gray-light bg-gray-tint px-3 text-gray">{suffix}</span>
+    </div> : null}
 
   </div>
 

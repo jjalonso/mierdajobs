@@ -7,7 +7,7 @@ import { contractFraudValues } from "../reviews/values";
 
 import { UseReviewForm } from "./hooks/use-review-form";
 import Thanks from "./thanks";
-import { workingHoursPeriodValues, MIN_NUMBER_RULE, MAX_NUMBER_RULE, REQUIRED_RULE, MIN_LENGTH_RULE, MAX_LENGTH_RULE } from "./values"
+import { workingHoursPeriodValues, MIN_NUMBER_RULE, MAX_NUMBER_RULE, REQUIRED_RULE, MIN_LENGTH_RULE, MAX_LENGTH_RULE, ONLY_NUMBER_RULE } from "./values"
 
 import BackButton from "@/components/back-button";
 import { Button } from "@/components/button";
@@ -19,7 +19,6 @@ import { Input } from "@/components/input";
 import Paper from "@/components/paper";
 import { RadioGroup, RadioGroupOption } from "@/components/radio-button";
 import { Select, SelectOption } from "@/components/select";
-import StyledLink from "@/components/styled-link";
 import { TextArea } from "@/components/textarea";
 
 interface Props {
@@ -50,7 +49,7 @@ const ReviewForm = ({ id }: Props) => {
             noValidate
           >
             <Heading
-              className="my-6"
+              className="mb-6"
               size="xl"
               level={1}
             >
@@ -67,12 +66,14 @@ const ReviewForm = ({ id }: Props) => {
                   label="Horas de trabajo"
                   rules={{
                     ...REQUIRED_RULE,
-                    ...MIN_NUMBER_RULE(1)
+                    ...MIN_NUMBER_RULE(1),
+                    ...ONLY_NUMBER_RULE,
                   }}>
                   {({ ref: _ref, ...field }) =>
                     <Input
                       {...field}
-                      type="number" />}
+                      inputMode="numeric"
+                    />}
                 </FormField>
               </div>
               <div className="w-1/2 md:w-1/4">
@@ -109,12 +110,15 @@ const ReviewForm = ({ id }: Props) => {
                   rules={{
                     ...REQUIRED_RULE,
                     ...MIN_NUMBER_RULE(0),
-                    ...MAX_NUMBER_RULE(365)
+                    ...MAX_NUMBER_RULE(365),
+                    ...ONLY_NUMBER_RULE,
                   }}>
                   {({ ref: _ref, ...field }) =>
                     <Input
                       {...field}
-                      type="number"
+                      inputMode="numeric"
+                      suffix="Dias"
+
                     />}
                 </FormField>
               </div>
@@ -127,12 +131,14 @@ const ReviewForm = ({ id }: Props) => {
                   label="Salario mensual"
                   rules={{
                     ...REQUIRED_RULE,
-                    ...MIN_NUMBER_RULE(1)
+                    ...MIN_NUMBER_RULE(1),
+                    ...ONLY_NUMBER_RULE,
                   }}>
                   {({ ref: _ref, ...field }) =>
                     <Input
                       {...field}
-                      type="number"
+                      suffix="EUR"
+                      inputMode="numeric"
                     />}
                 </FormField>
               </div>
@@ -179,7 +185,8 @@ const ReviewForm = ({ id }: Props) => {
                   rules={{
                     ...REQUIRED_RULE,
                     ...MIN_LENGTH_RULE(30),
-                    ...MAX_LENGTH_RULE(250)
+                    ...MAX_LENGTH_RULE(250),
+                    ...ONLY_NUMBER_RULE,
                   }}>
                   {({ ref: _ref, ...field }) =>
                     <>
@@ -209,7 +216,9 @@ const ReviewForm = ({ id }: Props) => {
                   rules={{ ...REQUIRED_RULE }}
                 >
                   {
-                    ({ ref: _ref, ...field }) => <Checkbox {...field}>Acepto los <StyledLink href="/terms">terminos y condiciones</StyledLink> del servicio</Checkbox>
+                    ({ ref: _ref, ...field }) => <Checkbox {...field}>Acepto y entiendo los <a
+                      className="text-primary underline"
+                      target="_blank" href="/condiciones_mierdajobs.pdf" rel="noopener noreferrer">terminos y condiciones</a></Checkbox>
                   }
                 </FormField>
               </div>

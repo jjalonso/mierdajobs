@@ -26,7 +26,6 @@ const Reviews = async ({ searchParams }: Props) => {
 
   return (
     <div className="flex w-full flex-col">
-
       <div className="mb-12 ml-2 mt-16 space-y-2">
         <Heading
           level={1}
@@ -35,7 +34,9 @@ const Reviews = async ({ searchParams }: Props) => {
         >
           {reviews.name}
         </Heading>
-        <div className="text-white">{reviews.totalReviews} Reseñas</div>
+        <div className="text-white">
+          {`${reviews.totalReviews} ${reviews.totalReviews === 1 ? "Reseña" : "Reseñas"}`}
+        </div>
       </div>
 
       <div className="space-y-4">
@@ -57,7 +58,7 @@ const Reviews = async ({ searchParams }: Props) => {
         {_.isEmpty(reviews.reviews) ?
           <Paper className="flex flex-col items-center gap-4 text-center text-gray-dark">
             <FaceFrownIcon className="h-12 w-12 text-gray-light" />
-            Este sitio aun no tiene reseñas
+            Este sitio aún no tiene reseñas
           </Paper>
           :
           <ul className="flex flex-col gap-3">

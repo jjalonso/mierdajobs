@@ -21,7 +21,7 @@ const Page = async ({ searchParams }: Props) => {
         className="mb-8"
       />
 
-      <p className="my-2 text-white">{results.length} negocios encontrados</p>
+      <p className="my-2 text-white">{results.length} {results.length === 1 ? "negocio encontrado" : "negocios encontrados"}</p>
       <Paper className="divide-y divide-gray-light">
         {_.isEmpty(results) ?
           <div className="w-full p-2 text-center">No se encontraron resultados</div>

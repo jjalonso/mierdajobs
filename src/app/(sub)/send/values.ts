@@ -41,8 +41,15 @@ const MIN_LENGTH_RULE = (v: number) => ({
   }
 })
 
+const ONLY_NUMBER_RULE = {
+  pattern: {
+    value: /^[0-9]*$/,
+    message: "Solo números"
+  }
+}
+
 const REQUIRED_RULE = {
   required: "Campo requerido"
 }
 
-export { workingHoursPeriodValues, REQUIRED_RULE, MIN_NUMBER_RULE, MAX_NUMBER_RULE, MIN_LENGTH_RULE, MAX_LENGTH_RULE };
+export { workingHoursPeriodValues, REQUIRED_RULE, MIN_NUMBER_RULE, MAX_NUMBER_RULE, MIN_LENGTH_RULE, MAX_LENGTH_RULE, ONLY_NUMBER_RULE };

@@ -1,19 +1,31 @@
-import { GooglePlaceAutocomplete } from "./types";
+import querystring from "querystring";
 
-const GOOGLE_QUERY = {
-  url_google: "https://maps.googleapis.com/maps/api/place/autocomplete/json?",
-  language: "es",
-  components: "country:es",
-  types: "establishment",
-};
+import { GPlaceAutocompleteResponse, GPlaceDetailsResponse } from "./types";
+import { easyFetch } from "./utils";
 
-export const getGooglePlaceBusinesses = async (
-  q: string
-): Promise<GooglePlaceAutocomplete> => {
-  const url = `${GOOGLE_QUERY.url_google}input=${q}&language=${GOOGLE_QUERY.language}&components=${GOOGLE_QUERY.components}&types=${GOOGLE_QUERY.types}&key=${process.env.GOOGLE_API_KEY}`;
-  const response = await fetch(url.replace(/ /g, "%20"), {
-    method: "GET",
-  });
+export const fetchGPlaceBusinesses = (q: string)
+	: Promise<GPlaceAutocompleteResponse> => {
+	const baseUrl = "https://maps.googleapis.com/maps/api/place/autocomplete/json?";
+	const queryParams = querystring.stringify({
+		language: "es",
+		components: "country:es",
+		types: "establishment",
+		input: q,
+		key: process.env.GOOGLE_API_KEY
+	});
 
-  return await response.json();
+	return easyFetch(baseUrl + queryParams);
+}
+
+export const fetchGPlaceDetails = async (
+	gplace_id: string
+): Promise<GPlaceDetailsResponse> => {
+	const baseUrl = "https://maps.googleapis.com/maps/api/place/details/json?";
+	const queryParams = querystring.stringify({
+		fields: "name,formatted_address",
+		place_id: gplace_id,
+		key: process.env.GOOGLE_API_KEY
+	});
+
+	return easyFetch(baseUrl + queryParams);
 };

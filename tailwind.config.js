@@ -12,16 +12,20 @@ module.exports = {
       black: "#343434",
       white: "#FFF",
       primary: {
-        tint: "#F2EEFF",
-        light: "#9374F3",
-        DEFAULT: "#6F50D0",
-        dark: "#7052CE"
+        light: "#FFAED8",
+        DEFAULT: "#cc5994",
+        dark: "#780C43"
+      },
+      secondary: {
+        light: "#BEA0E7",
+        DEFAULT: "#732fd3",
+        dark: "#400692"
       },
       gray: {
         tint: "#F3F3F3",
-        light: "#E4E4E7",
+        light: "#DDDDE0",
         DEFAULT: "#909090",
-        dark: "#5A42A6"
+        dark: "#616161"
       },
       error: {
         DEFAULT: "#F50057"

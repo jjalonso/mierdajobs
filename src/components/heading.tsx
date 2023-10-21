@@ -4,16 +4,16 @@ import React, { createElement } from "react";
 import { twMerge } from "tailwind-merge";
 
 const roboto = Roboto({
-  weight: "300",
+  weight: ["300", "400", "700"],
   subsets: ["latin"],
 });
 
-const headingVariants = cva([`${roboto.className} font-bold`], {
+const headingVariants = cva([`${roboto.className} font-normal`], {
   variants: {
     size: {
-      xs: ["text-2xl"],
-      base: ["text-2xl md:text-3xl"],
-      xl: ["text-3xl md:text-4xl  md:leading-relaxed"]
+      xs: ["text-xl "],
+      base: ["text-2xl"],
+      xl: ["text-3xl md:leading-relaxed"]
     },
   },
   defaultVariants: {

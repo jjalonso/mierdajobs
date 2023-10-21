@@ -18,15 +18,14 @@ const TextArea = ({ className, ...props }: TextAreaProps) =>
       py-2
       text-left
       placeholder:text-gray
-      focus:border-gray-light
-      focus:outline-none
-      focus:ring-0
+      focus:border-secondary
+      focus:ring-secondary
       disabled:cursor-not-allowed
       disabled:border-gray-tint
       disabled:bg-gray-tint
       disabled:text-gray
       disabled:opacity-50
-    `, className)}
-  />;
+      `, className)}
+  />
 
 export { TextArea };

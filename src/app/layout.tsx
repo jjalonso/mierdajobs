@@ -23,7 +23,7 @@ const Layout: React.FC<Props> = ({ children }) => {
       w-full
       justify-center
       bg-gradient-to-b
-      from-[#5b21b6] 
+      from-[#5a40c4] 
       via-[#6b21a8] 
       to-[#be185d] 
       text-sm

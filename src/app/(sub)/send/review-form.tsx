@@ -186,7 +186,6 @@ const ReviewForm = ({ id }: Props) => {
                     ...REQUIRED_RULE,
                     ...MIN_LENGTH_RULE(30),
                     ...MAX_LENGTH_RULE(250),
-                    ...ONLY_NUMBER_RULE,
                   }}>
                   {({ ref: _ref, ...field }) =>
                     <>

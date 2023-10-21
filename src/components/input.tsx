@@ -45,7 +45,6 @@ const Input = ({ icon, className, suffix, ...props }: Props) =>
     {suffix ? <div className="-mr-px flex">
       <span className="flex items-center rounded rounded-l-none border border-l-0 border-gray-light bg-gray-tint px-3 text-gray">{suffix}</span>
     </div> : null}
-
   </div>
 
 export { Input };

@@ -17,7 +17,6 @@ const Input = ({ icon, className, suffix, ...props }: Props) =>
     </div>}
     <input
       {...props}
-      // BUG: NOT WORKING, NOT REMOVING CLASSES FROM CLASSNAME
       className={twMerge(` 
         relative
         h-14

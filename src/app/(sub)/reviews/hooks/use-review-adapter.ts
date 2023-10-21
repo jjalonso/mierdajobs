@@ -19,7 +19,7 @@ const useReviewAdapter = (review: Review): AdaptedReview => {
     return {
       ...review,
       created_at: moment(review.created_at).format("MMMM YYYY"),
-      avatar: `/avatar-${_.random(1, 4)}.png`,
+      avatar: `/avatars/avatar-${_.random(1, 12)}.png`,
       contract_fraud: contractFraudValues[review.contract_fraud]
     }
   }, [review]);

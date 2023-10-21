@@ -36,7 +36,7 @@ const ReviewForm = ({ id }: Props) => {
     <>
       <BackButton
         variant="ghost"
-        className="hidden min-w-fit md:flex">
+        className="mb-4 hidden min-w-fit md:flex">
         Volver
       </BackButton>
       <Paper className="flex h-fit flex-col gap-6">

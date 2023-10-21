@@ -17,12 +17,6 @@ const Layout: React.FC<Props> = ({ children }) => {
   return (
     <html
       lang="es"
-      // NOTE: Testing absolute and top-0 on the long run 
-      // On chrome mobile, sometimes the URL browser is hidden when scrolling, 
-      // this cause a gap at the bottom of the landing page just under the hand.
-      // scroll-smooth bg-gradient-to-b from-[#5a40c4] via-[#b15da0]
-      // absolute
-      // top-0
       className="
       flex
       min-h-full

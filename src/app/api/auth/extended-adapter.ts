@@ -1,6 +1,7 @@
-import { Adapter, AdapterUser } from "@auth/core/adapters";
+import { Adapter } from "@auth/core/adapters";
 import { MongoDBAdapter, MongoDBAdapterOptions } from "@auth/mongodb-adapter"
 import { MongoClient } from "mongodb";
+
 import { UserImageEnum } from "./types";
 
 const ExtendedAdapter = (

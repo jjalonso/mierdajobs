@@ -1,10 +1,10 @@
 "use client";
 
-import { UserImageEnum } from "@/app/api/auth/types";
 import { RadioGroup as HRadioGroup } from "@headlessui/react";
 import { CheckIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 
+import { UserImageEnum } from "@/app/api/auth/types";
 
 interface AvatarPickerProps<T> {
   value: T
@@ -41,21 +41,22 @@ const AvatarPicker = <T,>({ value, onChange }: AvatarPickerProps<T>) =>
   </HRadioGroup>
 
 const AvatarPickerOption = <T,>({ value }: AvatarPickerOptionProps<T>) =>
-  <HRadioGroup.Option value={value} className="        
-    m-2 
-    h-16
-    w-16
-    cursor-pointer 
-    rounded-full 
-    border-[3px] 
-    border-secondary
-    overflow-hidden
-    relative
+  <HRadioGroup.Option
+value={value} className="        
+    relative 
+    m-2
     flex
+    h-16 
+    w-16 
+    cursor-pointer 
+    overflow-hidden
+    rounded-full
+    border-[3px]
+    border-secondary
   ">
     {/* TODO: Create avatar component */}
-    <div className="absolute opacity-80 ui-checked:flex hidden w-full h-full bg-primary justify-center items-center">
-      <CheckIcon className="w-8 h-8 text-white block" />
+    <div className="absolute hidden h-full w-full items-center justify-center bg-primary opacity-80 ui-checked:flex">
+      <CheckIcon className="block h-8 w-8 text-white" />
     </div>
     <Image
       className="bg-secondary"

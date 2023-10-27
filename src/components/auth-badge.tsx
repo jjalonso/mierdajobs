@@ -43,7 +43,7 @@ const AuthBadge = () => {
             leaveTo="transform opacity-0 scale-95"
           >
             <Menu.Items>
-              <Paper className="absolute right-0 w-fit origin-top-right mt-1 p-2 md:p-2 shadow-lg">
+              <Paper className="absolute right-0 mt-1 w-fit origin-top-right p-2 shadow-lg md:p-2">
                 <Menu.Item>
                   {() => (
                     <Link href={`/settings/avatar?callbackUrl=${currentPath}`}>

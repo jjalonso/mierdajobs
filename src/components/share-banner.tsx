@@ -3,8 +3,7 @@
 import Image from "next/image";
 import React from "react";
 
-import { useShare } from "./hooks/use-share";
-
+import { useShare } from "@/app/hooks/use-share";
 import { Button } from "@/components/button";
 
 interface Props {

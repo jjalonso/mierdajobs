@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { AvatarPicker } from '@/components/avatar-picker';
-import { Button } from '@/components/button';
-import { initial } from 'lodash';
-import { useRouter } from 'next/navigation';
-import React, { useCallback } from 'react';
+import { useRouter } from "next/navigation";
+import React, { useCallback } from "react";
+
+import { AvatarPicker } from "@/components/avatar-picker";
+import { Button } from "@/components/button";
 
 interface Props {
   initialValue: string | null | undefined
@@ -18,7 +18,7 @@ const AvatarForm = ({ initialValue, callbackUrl }: Props) => {
   const handleContinue = useCallback(() => {
     // TODO: call saveAvatar(avatar)
     router.push(callbackUrl)
-  }, []);
+  }, [router, callbackUrl]);
 
   return (
     <>
@@ -26,7 +26,7 @@ const AvatarForm = ({ initialValue, callbackUrl }: Props) => {
         value={avatar}
         onChange={setAvatar}
       />
-      <p className='text-sm text-center text-gray-dark'>Tu avatar cambiara en todas tus reviews</p>
+      <p className="text-center text-sm text-gray-dark">Tu avatar cambiara en todas tus reviews</p>
       <Button
         className="w-full"
         onClick={handleContinue}

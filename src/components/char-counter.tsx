@@ -13,7 +13,7 @@ const CharCounter = ({ current = 0, max, className }: Props) => {
 
   return (
     <span className={
-      twMerge(clsx({ "text-error": isExceeded }, "p-2", className))}
+      twMerge(clsx({ "text-error": isExceeded }, "p-2 text-sm", className))}
     >{current}/{max}</span>
   );
 };

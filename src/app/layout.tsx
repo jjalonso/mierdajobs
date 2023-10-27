@@ -1,8 +1,9 @@
-"use client";
-import "./globals.css";
-
 import { Poppins } from "next/font/google";
+import { getServerSession } from "next-auth";
 
+import "./globals.css";
+import authOptions from "./api/auth/auth-options";
+import SessionProvider from "./session-provider";
 const poppins = Poppins({
   weight: ["400", "500", "600"],
   subsets: ["latin"],
@@ -12,8 +13,8 @@ interface Props {
   children: React.ReactNode;
 }
 
-const Layout: React.FC<Props> = ({ children }) => {
-  // const pathname = usePathname();
+const Layout = async ({ children }: Props) => {
+  const session = await getServerSession(authOptions);
   return (
     <html
       lang="es"
@@ -25,7 +26,7 @@ const Layout: React.FC<Props> = ({ children }) => {
       bg-gradient-to-b
       from-[#5b21b6] 
       via-[#6b21a8] 
-      to-[#be185d] 
+      to-secondary
       text-sm
       text-black
     ">
@@ -36,10 +37,14 @@ const Layout: React.FC<Props> = ({ children }) => {
         w-full
         flex-col
         px-4
+        pb-8
+        md:px-6
       `}>
-        {children}
-      </body >
-    </html >
+        <SessionProvider session={session}>
+          {children}
+        </SessionProvider>
+      </body>
+    </html>
   );
 };
 

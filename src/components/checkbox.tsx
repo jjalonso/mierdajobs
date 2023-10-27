@@ -17,7 +17,7 @@ const Checkbox = ({ children, ...props }: Props) =>
       border 
       border-gray-light
       bg-white
-      text-secondary
+      text-primary
       focus:outline-offset-1
       focus:outline-white
       focus:ring-0

@@ -9,7 +9,6 @@ import { GetReviewsResponse } from "../../api/_reviews/get-reviews/types";
 
 import Review from "./review";
 
-import BackButton from "@/components/back-button";
 import { Button } from "@/components/button";
 import { Heading } from "@/components/heading";
 import Paper from "@/components/paper";
@@ -40,16 +39,11 @@ const Reviews = async ({ searchParams }: Props) => {
       </div>
 
       <div className="space-y-4">
-        <div className="flex justify-between">
-          <BackButton
-            variant="ghost"
-            className="hidden min-w-fit md:flex">
-            Volver
-          </BackButton>
+        <div className="flex justify-end">
           <Link
             href={`/send?id=${id}`} className="w-full md:w-fit">
             <Button
-              className="w-full md:w-fit" variant="primary">
+              className="w-full md:w-fit" variant="secondary">
               <PlusIcon className="h-6 w-6" />
               Añadir una reseña
             </Button>

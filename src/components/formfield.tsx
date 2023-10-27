@@ -4,6 +4,8 @@ import { ControllerRenderProps, RegisterOptions, useController } from "react-hoo
 import { DivProps } from "react-html-props";
 import { twMerge } from "tailwind-merge";
 
+import ErrorMessage from "./error-message";
+
 export interface Props extends Omit<DivProps, "children"> {
   label?: string;
   name: string;
@@ -31,9 +33,9 @@ const FormField: React.FC<Props> = ({ children, label, className, name, rules, d
         </label>
         {children({ id: name, ...field })}
       </div>
-      <div className="flex h-9 w-fit items-center text-sm text-error">
+      <ErrorMessage>
         {fieldError && fieldError.message}
-      </div>
+      </ErrorMessage>
     </div>
 
   )

@@ -32,7 +32,7 @@ const FormSearch = ({ className, query = "" }: Props) => {
             defaultValue={query}
             onFocus={searchField.onFocus}
             placeholder={searchField.isTouched ? "" : currentText}
-            icon={<MagnifyingGlassIcon />}
+            icon={<MagnifyingGlassIcon className="text-secondary" />}
             autoComplete="off"
             autoCorrect="off"
             spellCheck="false"

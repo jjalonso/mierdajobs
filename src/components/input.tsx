@@ -30,8 +30,8 @@ const Input = ({ icon, className, suffix, ...props }: Props) =>
         py-2
         text-left
         placeholder:text-gray
-        focus:border-secondary
-        focus:ring-secondary
+        focus:border-primary
+        focus:ring-primary
         disabled:cursor-not-allowed
         disabled:border-none
         disabled:bg-gray-light

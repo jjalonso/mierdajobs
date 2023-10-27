@@ -6,7 +6,7 @@ interface Props {
 }
 
 const Paper = ({ children, className }: Props) =>
-  <div className={twMerge("rounded-md bg-white w-full p-6 shadow-sm p-6 md:p-14", className)}>
+  <div className={twMerge("rounded-xl bg-white w-full p-6 shadow-sm p-6 md:p-14", className)}>
     {children}
   </div>
 

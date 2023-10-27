@@ -56,7 +56,7 @@ const Select = <T,>({ children, value, disabled, placeholder, by = "id", onChang
             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
 
               <ChevronUpDownIcon
-                className="h-6 w-6 text-secondary group-disabled:text-gray-dark"
+                className="h-6 w-6 text-primary group-disabled:text-gray-dark"
                 aria-hidden="true"
               />
             </span>
@@ -105,8 +105,8 @@ const SelectOption = <T,>({ children, value }: SelectOptionProps<T>) =>
       flex-row 
       px-2
       py-4
-      ui-selected:text-secondary
-      ui-active:text-secondary"
+      ui-selected:text-primary
+      ui-active:text-primary"
   >
     {children}
   </Listbox.Option>

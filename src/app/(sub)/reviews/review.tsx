@@ -4,9 +4,9 @@ import React from "react";
 import { Review } from "../../api/_reviews/get-reviews/types";
 
 import useReviewAdapter from "./hooks/use-review-adapter";
-import ValueBlock from "./value-block";
 
 import Paper from "@/components/paper";
+import ValueBlock from "@/components/value-block";
 
 interface Props {
   review: Review;
@@ -21,24 +21,39 @@ const Review = ({ review }: Props) => {
 
         {/* Desktop avatar */}
         <Image
-          className="hidden h-[100px] w-[100px] md:flex"
           src={adaptedReview.avatar}
           quality={100}
           width={100}
           height={100}
           alt="Avatar"
+          className="
+            hidden 
+            h-[100px] 
+            w-[100px] 
+            rounded-full 
+            border-4 
+            border-secondary 
+            bg-secondary 
+            md:flex"
         />
 
         <div className="flex grow flex-col gap-4">
           <div className="flex grow items-center gap-4">
             {/* Mobile avatar */}
             <Image
-              className="h-[50px] w-[50px] md:hidden"
               src={adaptedReview.avatar}
               quality={100}
               width={50}
               height={50}
               alt="Avatar"
+              className="
+                h-[50px] 
+                w-[50px] 
+                rounded-full 
+                border-[3px] 
+                border-secondary 
+                bg-secondary 
+                md:hidden"
             />
 
             <div className="flex flex-col">

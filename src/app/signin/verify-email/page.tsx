@@ -7,14 +7,13 @@ import Paper from "@/components/paper";
 const Page = () => {
   return (
     <div className="flex grow flex-col items-center">
-      <Header noAuth
-      />
+      <Header noAuth />
 
-      <Paper className="mt-10 flex h-56 flex-col items-center justify-center gap-8 rounded-b-none bg-secondary md:mt-20 md:max-w-lg">
+      <Paper className="mt-12 flex h-56 flex-col items-center justify-center gap-8 rounded-b-none bg-secondary md:mt-20 md:max-w-lg">
         <Image
-          className=""
-          src="/objects/envelope.png"
-          width="150"
+          className="relative bottom-10"
+          src="/objects/paper-plane.png"
+          width="300"
           quality={100}
           height="0"
           alt="MierdaJobs"

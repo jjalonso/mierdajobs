@@ -13,12 +13,11 @@ const roboto = Roboto({
 const buttonVariants = cva(`
     ${roboto.className} 
     flex
-    h-14 
     w-fit
     cursor-pointer 
     items-center 
     justify-center 
-    gap-4 
+    gap-2
     rounded-md 
     uppercase 
     tracking-widest 
@@ -37,13 +36,11 @@ const buttonVariants = cva(`
         ghost: "bg-transparent text-white disabled:bg-transparent disabled:opacity-50",
       },
       active: {
-        // TODO: Active look bad on others that are not primary
-        // This requires research on how to make it with CVA
         true: "brightness-110",
       },
       size: {
-        default: "min-w-[170px] px-4",
-        icon: "h-fit w-fit",
+        default: "min-w-[170px] px-4 py-3",
+        fit: "h-fit w-fit p-1",
       },
     },
     defaultVariants: {

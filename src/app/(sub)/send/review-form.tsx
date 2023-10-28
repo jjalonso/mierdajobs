@@ -21,17 +21,17 @@ import { Select, SelectOption } from "@/components/select";
 import { TextArea } from "@/components/textarea";
 
 interface Props {
-  id: string // TODO: Must be Business
+  gplace: string // TODO: Must be Business
 }
 
-const ReviewForm = ({ id }: Props) => {
+const ReviewForm = ({ gplace }: Props) => {
   const {
     form,
     onFormSubmit,
-  } = UseReviewForm(id);
+  } = UseReviewForm(gplace);
 
   return form.formState.isSubmitSuccessful ?
-    <Thanks backLink={`/reviews?id=${id}`} /> :
+    <Thanks gplace={gplace} /> :
     <Paper className="flex h-fit flex-col gap-6">
 
       <FormProvider {...form}>

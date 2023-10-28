@@ -6,6 +6,7 @@ import "moment/locale/es";
 import { contractFraudValues } from "../values";
 
 import { Review } from "@/app/api/_reviews/get-reviews/types";
+import { AvatarEnum } from "@/app/api/auth/types";
 
 moment.locale("es");
 
@@ -19,7 +20,7 @@ const useReviewAdapter = (review: Review): AdaptedReview => {
     return {
       ...review,
       created_at: moment(review.created_at).format("MMMM YYYY"),
-      avatar: `/avatars/avatar-${_.random(1, 12)}.png`,
+      avatar: `/avatars/${_.sample(Object.values(AvatarEnum))}.png`, // Temp
       contract_fraud: contractFraudValues[review.contract_fraud]
     }
   }, [review]);

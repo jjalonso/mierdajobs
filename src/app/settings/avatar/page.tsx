@@ -22,7 +22,7 @@ const Page = async ({ searchParams }: Props) => {
   return (
     <div className="flex grow flex-col items-center">
       <Header noAuth />
-      <Paper className="mt-10 flex flex-col gap-8 md:mt-20 md:max-w-lg">
+      <Paper className="mt-12 flex flex-col gap-8 md:mt-20 md:max-w-lg">
         <Heading
           level={1}
           size="xl"
@@ -31,7 +31,9 @@ const Page = async ({ searchParams }: Props) => {
           Escoge tu avatar
         </Heading>
         <AvatarForm
-initialValue={session?.user?.image} callbackUrl={callbackUrl} />
+          initialValue={session?.user?.image}
+          callbackUrl={callbackUrl}
+        />
       </Paper>
     </div>
   );

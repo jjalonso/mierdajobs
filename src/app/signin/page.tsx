@@ -12,17 +12,17 @@ interface Props {
 }
 
 const Page = ({ searchParams }: Props) =>
-  <div className="flex grow flex-col items-center">
+  <div className="flex flex-col items-center">
     <Header noAuth />
 
-    <Paper className="relative mt-10 h-56 rounded-b-none bg-secondary bg-center md:mt-20 md:max-w-lg">
+    <Paper className="relative mt-12 h-56 rounded-b-none bg-secondary bg-center md:mt-20 md:max-w-lg">
       <Image
         className="absolute -bottom-20 right-10"
         src="/objects/mic.png"
         width="200"
         quality={100}
         height="0"
-        alt="MierdaJobs"
+        alt="Microfono"
       />
     </Paper>
 

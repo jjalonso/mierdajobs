@@ -4,7 +4,7 @@ import { RadioGroup as HRadioGroup } from "@headlessui/react";
 import { CheckIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 
-import { UserImageEnum } from "@/app/api/auth/types";
+import { AvatarEnum } from "@/app/api/auth/types";
 
 interface AvatarPickerProps<T> {
   value: T
@@ -31,7 +31,7 @@ const AvatarPicker = <T,>({ value, onChange }: AvatarPickerProps<T>) =>
       className="mb-6 rounded-full border-4 border-secondary bg-secondary"
     />
     <div className="flex w-96 flex-wrap items-center justify-center gap-2">
-      {Object.values(UserImageEnum).map(avatarId =>
+      {Object.values(AvatarEnum).map(avatarId =>
         <AvatarPickerOption
           key={avatarId}
           value={avatarId}
@@ -42,7 +42,7 @@ const AvatarPicker = <T,>({ value, onChange }: AvatarPickerProps<T>) =>
 
 const AvatarPickerOption = <T,>({ value }: AvatarPickerOptionProps<T>) =>
   <HRadioGroup.Option
-value={value} className="        
+    value={value} className="        
     relative 
     m-2
     flex

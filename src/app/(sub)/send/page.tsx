@@ -18,8 +18,8 @@ const Page = async ({ searchParams }: Props) => {
   if (!session) redirect(`/signin?callbackUrl=/send?id=${id}`);
 
   return (
-    <div className="flex w-full flex-col">
-      <ReviewForm id={id} />
+    <div className="flex flex-col items-center">
+      <ReviewForm gplace={id} />
     </div>
   )
 }

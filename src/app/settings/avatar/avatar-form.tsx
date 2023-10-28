@@ -31,7 +31,7 @@ const AvatarForm = ({ initialValue, callbackUrl }: Props) => {
         className="w-full"
         onClick={handleContinue}
       >
-        Continuar
+        Guardar
       </Button>
     </>
   )

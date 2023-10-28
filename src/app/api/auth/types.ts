@@ -1,4 +1,4 @@
-enum UserImageEnum {
+enum AvatarEnum {
   AVATAR_1 = "avatar-1",
   AVATAR_2 = "avatar-2",
   AVATAR_3 = "avatar-3",
@@ -13,4 +13,4 @@ enum UserImageEnum {
   AVATAR_12 = "avatar-12"
 }
 
-export { UserImageEnum };
+export { AvatarEnum };

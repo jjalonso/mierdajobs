@@ -55,8 +55,9 @@ const Reviews = async ({ searchParams }: Props) => {
             Este sitio aún no tiene reseñas
           </Paper>
           :
-          <ul className="flex flex-col gap-3">
+          <ul className="flex flex-col gap-5">
             {reviews.reviews.map(review =>
+
               <Review
                 key={review.id}
                 review={review}

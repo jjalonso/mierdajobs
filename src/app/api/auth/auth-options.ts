@@ -16,6 +16,7 @@ const authOptions = {
     // TODO: Implement error page when link is used or similar
     // api/auth/error?error=Verification 
   },
+  debug: true,
   providers: [
     EmailProvider({
       sendVerificationRequest: async (params: SendVerificationRequestParams) => {

@@ -17,7 +17,9 @@ interface RadioGroupOptionProps<T> {
 const RadioGroup = <T,>({ children, value, onChange }: RadioGroupProps<T>) =>
   <HRadioGroup
     className="flex w-fit flex-col gap-4"
-    value={value} onChange={onChange}>
+    value={value}
+    onChange={onChange}
+  >
     {/* <RadioGroup.Label>Plan</RadioGroup.Label> */}
     {children}
   </HRadioGroup>
@@ -34,9 +36,9 @@ const RadioGroupOption = <T,>({ value, children, className }: RadioGroupOptionPr
       border-gray-light 
       p-6 
       gap-x-8
-      ui-checked:bg-secondary 
+      ui-checked:bg-primary
       ui-checked:text-white  
-      ui-checked:border-secondary
+      ui-checked:border-primary
       ui-not-checked:bg-white 
       ui-not-checked:text-black"
       `, className)}
@@ -44,10 +46,11 @@ const RadioGroupOption = <T,>({ value, children, className }: RadioGroupOptionPr
     {children}
 
     <div className="flex w-fit items-center justify-center">
-      <div className="rounded-full bg-primary-light p-2 opacity-0 ui-checked:opacity-100">
-        <CheckIcon className="h-6 w-6 text-secondary-dark" />
+      <div className="rounded-full bg-secondary-light p-2 opacity-0 ui-checked:opacity-100">
+        <CheckIcon className="h-6 w-6 text-primary-dark" />
       </div>
     </div>
-  </HRadioGroup.Option >
+  </HRadioGroup.Option>
 
 export { RadioGroup, RadioGroupOption };
+export type { RadioGroupProps, RadioGroupOptionProps }

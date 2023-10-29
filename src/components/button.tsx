@@ -4,6 +4,7 @@ import { Roboto } from "next/font/google";
 import React from "react";
 import { ButtonProps as ButtonPropsType } from "react-html-props";
 import { twMerge } from "tailwind-merge";
+
 const roboto = Roboto({
   weight: "400",
   subsets: ["latin"],
@@ -12,35 +13,34 @@ const roboto = Roboto({
 const buttonVariants = cva(`
     ${roboto.className} 
     flex
-    w-fit 
+    w-fit
+    cursor-pointer 
     items-center 
     justify-center 
-    gap-4 
+    gap-2
     rounded-md 
     uppercase 
     tracking-widest 
-    transition 
+    transition
     duration-300
     focus-visible:outline-none
     disabled:cursor-not-allowed
-    disabled:bg-gray
+    disabled:hover:brightness-100
     md:text-base
   `,
   {
     variants: {
       variant: {
-        primary: "bg-primary text-white shadow-sm hover:brightness-110",
-        secondary: "bg-secondary text-white shadow-sm hover:brightness-125",
-        ghost: "bg-transparent text-white",
+        primary: "bg-primary text-white hover:brightness-110 disabled:bg-gray",
+        secondary: "bg-secondary text-white hover:brightness-110 disabled:bg-gray",
+        ghost: "bg-transparent text-white disabled:bg-transparent disabled:opacity-50",
       },
       active: {
-        // TODO: Active look bad on others that are not primary
-        // This requires research on how to make it with CVA
         true: "brightness-110",
       },
       size: {
         default: "min-w-[170px] px-4 py-3",
-        icon: "h-fit w-fit",
+        fit: "h-fit w-fit p-1",
       },
     },
     defaultVariants: {

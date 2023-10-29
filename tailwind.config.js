@@ -6,20 +6,26 @@ module.exports = {
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}"
   ],
+
   theme: {
+    extend: {
+      backgroundImage: {
+        "purple-shapes": "url('/backgrounds/purple-shapes.png')",
+      },
+    },
     colors: {
       transparent: "transparent",
       black: "#343434",
       white: "#FFF",
       primary: {
-        light: "#FFAED8",
-        DEFAULT: "#cc5994",
-        dark: "#780C43"
+        light: "#BEA0E7",
+        DEFAULT: "#5b21b6",
+        dark: "#400692"
       },
       secondary: {
-        light: "#BEA0E7",
-        DEFAULT: "#732fd3",
-        dark: "#400692"
+        light: "#FAAEC5",
+        DEFAULT: "#C86B87",
+        dark: "#83344C"
       },
       gray: {
         tint: "#F3F3F3",

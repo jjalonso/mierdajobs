@@ -11,7 +11,7 @@ interface UseReviewFormReturn {
   onFormSubmit: () => void;
 }
 
-const UseReviewForm = (GPlaceId: string): UseReviewFormReturn => {
+const UseReviewForm = (gplace: string): UseReviewFormReturn => {
   const form = useForm<ReviewFormDirtyValues, void, ReviewFormValidValues>({
     mode: "onBlur",
     defaultValues: {
@@ -35,7 +35,7 @@ const UseReviewForm = (GPlaceId: string): UseReviewFormReturn => {
     } = values;
     try {
       await sendReview({
-        gplace_id: GPlaceId,
+        gplace_id: gplace,
         monthly_salary: Number(monthlySalary),
         working_hours: Number(workingHours),
         working_hours_period: workingHoursPeriod.id as WorkingHoursPeriodEnum,

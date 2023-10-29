@@ -18,8 +18,8 @@ const TextArea = ({ className, ...props }: TextAreaProps) =>
       py-2
       text-left
       placeholder:text-gray
-      focus:border-secondary
-      focus:ring-secondary
+      focus:border-primary
+      focus:ring-primary
       disabled:cursor-not-allowed
       disabled:border-gray-tint
       disabled:bg-gray-tint

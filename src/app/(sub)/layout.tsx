@@ -1,14 +1,14 @@
-import Header from "./header";
+import Header from "../../components/header";
 
 interface Props {
   children: React.ReactNode;
 }
 
-const Layout: React.FC<Props> = ({ children }) => {
+const Layout = ({ children }: Props) => {
   return (
     <>
       <Header />
-      <main className="flex w-full max-w-screen-md flex-col self-center pb-4">
+      <main className="flex w-full max-w-screen-md flex-col self-center">
         {children}
       </main>
     </>

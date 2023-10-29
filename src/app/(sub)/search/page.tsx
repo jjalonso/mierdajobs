@@ -21,7 +21,9 @@ const Page = async ({ searchParams }: Props) => {
         className="mb-8"
       />
 
-      <p className="my-2 text-white">{results.length} {results.length === 1 ? "negocio encontrado" : "negocios encontrados"}</p>
+      <p className="my-2 text-white">
+        {results.length} {results.length === 1 ? "negocio encontrado" : "negocios encontrados"}
+      </p>
       <Paper className="divide-y divide-gray-light">
         {_.isEmpty(results) ?
           <div className="w-full p-2 text-center">No se encontraron resultados</div>
@@ -30,7 +32,7 @@ const Page = async ({ searchParams }: Props) => {
             <Link
               href={`/reviews?id=${business.gplace_id}`}
               key={business.gplace_id}
-              className="flex cursor-pointer flex-col gap-1 overflow-hidden px-3 py-6 md:hover:text-secondary"
+              className="flex cursor-pointer flex-col gap-1 overflow-hidden px-3 py-6 md:hover:text-primary"
             >
               <div className="truncate">{business.name}</div>
               <div className="truncate text-sm text-gray">

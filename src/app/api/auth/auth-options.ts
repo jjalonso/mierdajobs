@@ -17,28 +17,25 @@ const authOptions = {
   debug: true,
   providers: [
     EmailProvider({
-      // sendVerificationRequest: async (params: SendVerificationRequestParams) => {
-      //   console.log("sendverificationrequest")
-      //   const { identifier, url, provider } = params
-      //   const { host } = new URL(url)
-      //   // NOTE: You are not required to use `nodemailer`, use whatever you want.
-      //   const transport = nodemailer.createTransport(provider.server)
-      //   console.log("send email")
+      sendVerificationRequest: async () => {
+        console.log("sendverificationrequest")
+        // NOTE: You are not required to use `nodemailer`, use whatever you want.
+        console.log("send email")
 
-      //   const result = await transport.sendMail({
-      //     to: identifier,
-      //     from: provider.from,
-      //     subject: `Sign in to ${host}`,
-      //     text: emailText({ url, host }),
-      //     html: emailHtml({ url, host }),
-      //   })
-      //   console.log("email sent")
+        // const result = await transport.sendMail({
+        //   to: identifier,
+        //   from: provider.from,
+        //   subject: `Sign in to ${host}`,
+        //   text: emailText({ url, host }),
+        //   html: emailHtml({ url, host }),
+        // })
+        console.log("email sent")
 
-      //   const failed = result.rejected.concat(result.pending).filter(Boolean)
-      //   if (failed.length) {
-      //     throw new Error(`Email(s) (${failed.join(", ")}) could not be sent`)
-      //   }
-      // },
+        // const failed = result.rejected.concat(result.pending).filter(Boolean)
+        // if (failed.length) {
+        //   throw new Error(`Email(s) (${failed.join(", ")}) could not be sent`)
+        // }
+      },
       server: {
         host: process.env.EMAIL_SERVER_HOST,
         port: Number(process.env.EMAIL_SERVER_PORT),

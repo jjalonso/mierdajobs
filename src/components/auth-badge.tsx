@@ -4,20 +4,20 @@ import { Menu, Transition } from "@headlessui/react";
 import { UserCircleIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
-import React, { Fragment, useMemo } from "react";
+import React, { Fragment } from "react";
 
 import { Button } from "./button";
 import Paper from "./paper";
 
 const AuthBadge = () => {
   const currentPath = usePathname();
-  const searchParams = useSearchParams();
+  // const searchParams = useSearchParams();
   const { data: session } = useSession();
 
-  const encodedCallbackUrl = encodeURIComponent(searchParams.toString());
-  const callbackUrl = useMemo(() => `${currentPath}?${encodedCallbackUrl}`, [currentPath, encodedCallbackUrl])
+  // const encodedCallbackUrl = encodeURIComponent(searchParams.toString());
+  // const callbackUrl = useMemo(() => `${currentPath}?${encodedCallbackUrl}`, [currentPath, encodedCallbackUrl])
 
   return (
     <div className="flex flex-1 justify-end">

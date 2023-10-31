@@ -81,7 +81,7 @@ const AuthBadge = () => {
       ) : (
         <>
           <Link
-            href={`/signin?callbackUrl=${callbackUrl}`} className="flex justify-end">
+            href={"/signin"} className="flex justify-end">
             <Button className="min-w-fit">
               <div className="">Iniciar sesión</div>
               <UserCircleIcon className="h-8 w-8 text-white md:h-10 md:w-10" />

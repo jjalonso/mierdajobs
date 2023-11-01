@@ -16,7 +16,7 @@ const sendVerificationRequest = async ({
       "References": new Date().getTime().toString()
     },
     body: JSON.stringify({
-      "From": process.env.EMAIL_FROM,
+      "From": process.env.POSTMARK_FROM,
       "To": email,
       "Subject": `Mierdajobs - Tu invitacion para entrar #${_.random(1000, 9999)}`,
       "TextBody": textTemplate(url),

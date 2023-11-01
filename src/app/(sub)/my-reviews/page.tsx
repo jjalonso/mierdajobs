@@ -8,7 +8,7 @@ import Review from "../reviews/review";
 
 import { getReviews } from "@/app/api/_reviews/get-reviews/actions";
 import { GetReviewsResponse } from "@/app/api/_reviews/get-reviews/types";
-import authOptions from "@/app/api/auth/_options/config";
+import authOptions from "@/app/api/auth/_options/options";
 import { Heading } from "@/components/heading";
 import Paper from "@/components/paper";
 

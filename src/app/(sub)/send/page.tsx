@@ -4,7 +4,7 @@ import { getServerSession } from "next-auth";
 
 import ReviewForm from "./review-form";
 
-import authOptions from "@/app/api/auth/_options/config";
+import authOptions from "@/app/api/auth/_options/options";
 
 interface Props {
   searchParams: Record<string, string>

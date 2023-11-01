@@ -17,6 +17,8 @@ const ExtendedAdapter = (
     // Extend the createUser method
     // Assign a default avatar in case the user doesnt select one at signup
     async createUser(user) {
+      console.log("createUser")
+
       user.image = _.sample(Object.values(AvatarEnum));
 
       if (originalAdapter?.createUser) {

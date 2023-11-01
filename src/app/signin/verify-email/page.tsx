@@ -1,10 +1,16 @@
 import Image from "next/image";
+import { redirect } from "next/navigation";
+import { getServerSession } from "next-auth";
 
+import authOptions from "@/app/api/auth/_options/options";
 import Header from "@/components/header";
 import { Heading } from "@/components/heading";
 import Paper from "@/components/paper";
 
-const Page = () => {
+const Page = async () => {
+  const session = await getServerSession(authOptions);
+  if (session) redirect("/");
+
   return (
     <div className="flex grow flex-col items-center">
       <Header noAuth />

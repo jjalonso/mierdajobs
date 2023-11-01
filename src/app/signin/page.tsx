@@ -8,7 +8,10 @@ import { Heading } from "@/components/heading";
 import Paper from "@/components/paper";
 
 interface Props {
-  searchParams: Record<string, string>
+  searchParams: {
+    callbackUrl: string;
+    error: string;
+  }
 }
 
 const Page = ({ searchParams }: Props) =>
@@ -25,8 +28,6 @@ const Page = ({ searchParams }: Props) =>
         alt="Microfono"
       />
     </Paper>
-    {process.env.VERCEL_URL}
-    {process.env.NEXT_PUBLIC_URL}
     <Paper className="flex flex-col gap-8 rounded-t-none md:max-w-lg">
       <Heading
         level={1} size="xl">

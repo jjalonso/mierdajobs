@@ -10,7 +10,9 @@ import { Heading } from "@/components/heading";
 import Paper from "@/components/paper";
 
 interface Props {
-  searchParams: Record<string, string>
+  searchParams: {
+    callbackUrl: string;
+  }
 }
 
 const Page = async ({ searchParams }: Props) => {

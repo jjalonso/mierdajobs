@@ -4,10 +4,10 @@ import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 import React from "react";
 
-import Review from "../reviews/review";
+import Review from "./review";
 
-import { getReviews } from "@/app/api/_reviews/get-reviews/actions";
-import { GetReviewsResponse } from "@/app/api/_reviews/get-reviews/types";
+import getMyReviews from "@/app/api/_reviews/get-my-reviews/actions";
+import { GetMyReviewsResponse } from "@/app/api/_reviews/get-my-reviews/types";
 import authOptions from "@/app/api/auth/_options/options";
 import { Heading } from "@/components/heading";
 import Paper from "@/components/paper";
@@ -17,7 +17,7 @@ const Reviews = async () => {
   if (!session) redirect("/signin?callbackUrl=/my-reviews");
 
   // Temporary till new API
-  const reviews: GetReviewsResponse = await getReviews("ChIJo-UIxefPDQ0RAJLc7b2of74");
+  const reviews: GetMyReviewsResponse = await getMyReviews();
 
   return (
     <div className="flex w-full flex-col">
@@ -45,7 +45,7 @@ const Reviews = async () => {
 
             <Review
               key={review.id}
-              review={review}
+              data={review}
             />
           )}
         </ul>

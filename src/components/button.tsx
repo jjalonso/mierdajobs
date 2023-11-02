@@ -31,16 +31,17 @@ const buttonVariants = cva(`
   {
     variants: {
       variant: {
-        primary: "bg-primary text-white hover:brightness-110 disabled:bg-gray",
-        secondary: "bg-secondary text-white hover:brightness-110 disabled:bg-gray",
+        primary: "bg-primary text-white hover:brightness-90 disabled:bg-gray",
+        secondary: "bg-secondary text-white hover:brightness-90 disabled:bg-gray",
+        neutral: "bg-white text-black hover:brightness-90 disabled:bg-gray",
         ghost: "bg-transparent text-white disabled:bg-transparent disabled:opacity-50",
       },
       active: {
-        true: "brightness-110",
+        true: "brightness-90",
       },
       size: {
         default: "min-w-[170px] px-4 py-3",
-        fit: "h-fit w-fit p-1",
+        fit: "min-w-fit px-4 py-3",
       },
     },
     defaultVariants: {

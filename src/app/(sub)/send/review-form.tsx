@@ -12,6 +12,7 @@ import { workingHoursPeriodValues, MIN_NUMBER_RULE, MAX_NUMBER_RULE, REQUIRED_RU
 import { Button } from "@/components/button";
 import CharCounter from "@/components/char-counter";
 import { Checkbox } from "@/components/checkbox";
+import ErrorMessage from "@/components/error-message";
 import { FormField } from "@/components/formfield";
 import { Heading } from "@/components/heading";
 import { Input } from "@/components/input";
@@ -21,7 +22,7 @@ import { Select, SelectOption } from "@/components/select";
 import { TextArea } from "@/components/textarea";
 
 interface Props {
-  gplace: string // TODO: Must be Business
+  gplace: string
 }
 
 const ReviewForm = ({ gplace }: Props) => {
@@ -217,6 +218,7 @@ const ReviewForm = ({ gplace }: Props) => {
           </div>
 
           <div className="flex items-end justify-end">
+            <ErrorMessage>{JSON.stringify(form.formState.errors)}</ErrorMessage>
             <Button
               loading={form.formState.isSubmitting}
               className="w-full md:w-fit"

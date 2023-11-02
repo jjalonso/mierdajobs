@@ -25,7 +25,7 @@ const Page = () =>
         size="xl"
       >
 
-        Busca y denuncia negocios con condiciones laborales <span className="line-through">precarias</span> ilegales en una plataforma anonima.
+        Busca y publica reseñas de negocios con condiciones laborales <span className="line-through">precarias</span> ilegales en una plataforma anonima.
       </Heading>
     </main>
   </>

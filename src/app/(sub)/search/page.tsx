@@ -1,5 +1,6 @@
 import _ from "lodash";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import React from "react";
 
 import { getGoogleBusiness } from "@/app/api/get-google-businesses/actions";
@@ -12,6 +13,8 @@ interface Props {
 
 const Page = async ({ searchParams }: Props) => {
   const { q } = searchParams;
+  if (!q) redirect("/");
+
   const results = await getGoogleBusiness(q);
 
   return (

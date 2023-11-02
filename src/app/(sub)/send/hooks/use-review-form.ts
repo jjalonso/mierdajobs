@@ -34,6 +34,7 @@ const UseReviewForm = (gplace: string): UseReviewFormReturn => {
       comment,
     } = values;
     try {
+      throw new Error("Not implemented");
       await sendReview({
         gplace_id: gplace,
         monthly_salary: Number(monthlySalary),
@@ -43,9 +44,14 @@ const UseReviewForm = (gplace: string): UseReviewFormReturn => {
         annual_leave: Number(annualLeave),
         comment: comment,
       });
-    } catch (error) {
+    } catch (error: any) {
       // TODO: Implement toasts
       console.error(error);
+      form.setError("root.server", {
+        type: "server",
+        message: error.message,
+      })
+      throw error;
     }
   });
 

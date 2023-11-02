@@ -8,7 +8,7 @@ import { AvatarPicker } from "@/components/avatar-picker";
 import { Button } from "@/components/button";
 
 interface Props {
-  initialValue: string | null | undefined
+  initialValue: string
   callbackUrl: string
 }
 

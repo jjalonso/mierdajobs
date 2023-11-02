@@ -33,7 +33,7 @@ const Page = async ({ searchParams }: Props) => {
           Escoge tu avatar
         </Heading>
         <AvatarForm
-          initialValue={session?.user?.image}
+          initialValue={session?.user?.image || ""}
           callbackUrl={callbackUrl}
         />
       </Paper>

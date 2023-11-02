@@ -16,7 +16,6 @@ const Reviews = async () => {
   const session = await getServerSession(authOptions);
   if (!session) redirect("/signin?callbackUrl=/my-reviews");
 
-  // Temporary till new API
   const reviews: GetMyReviewsResponse = await getMyReviews();
 
   return (

@@ -4,11 +4,12 @@ export type Review = {
 	id: string;
 	salary_ph: number;
 	working_hours_pw: number;
+	avatar: string;
+	contract_fraud: string;
 } & Pick<
 	ReviewDB,
+	| "likes"
 	| "created_at"
-	| "monthly_salary"
-	| "contract_fraud"
 	| "annual_leave"
 	| "comment"
 >;

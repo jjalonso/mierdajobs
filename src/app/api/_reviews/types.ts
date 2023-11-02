@@ -13,6 +13,7 @@ export enum ContractFraudEnum {
 export type ReviewDB = {
   _id?: string;
   gplace_id: string;
+  likes: number;
   monthly_salary: number;
   working_hours: number;
   working_hours_period: WorkingHoursPeriodEnum;

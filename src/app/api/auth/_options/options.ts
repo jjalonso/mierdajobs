@@ -12,7 +12,7 @@ const authOptions = {
   adapter: ExtendedAdapter(clientPromise, { databaseName: process.env.MONGODB_DATABASE }),
   pages: {
     signIn: "/signin",
-    verifyRequest: "/signin/verify-email",
+    verifyRequest: "/signin/verify",
     newUser: "/settings/avatar",
     // TODO: Implement error page when link is used or similar
     // api/auth/error?error=Verification 

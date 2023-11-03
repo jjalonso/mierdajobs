@@ -9,6 +9,7 @@ import { WorkingHoursPeriodEnum } from "@/app/api/_reviews/types";
 interface UseReviewFormReturn {
   form: UseFormReturn<ReviewFormDirtyValues, void, ReviewFormValidValues>;
   onFormSubmit: () => void;
+  isServerError: boolean;
 }
 
 const UseReviewForm = (gplace: string): UseReviewFormReturn => {
@@ -34,7 +35,6 @@ const UseReviewForm = (gplace: string): UseReviewFormReturn => {
       comment,
     } = values;
     try {
-      throw new Error("Not implemented");
       await sendReview({
         gplace_id: gplace,
         monthly_salary: Number(monthlySalary),
@@ -45,19 +45,21 @@ const UseReviewForm = (gplace: string): UseReviewFormReturn => {
         comment: comment,
       });
     } catch (error: any) {
-      // TODO: Implement toasts
       console.error(error);
+      // Hack to notify react-hook-form about an error
       form.setError("root.server", {
         type: "server",
         message: error.message,
       })
-      throw error;
     }
   });
+
+  const isServerError = Boolean(form.formState.errors.root?.server);
 
   return {
     form,
     onFormSubmit,
+    isServerError,
   };
 };
 

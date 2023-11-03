@@ -44,13 +44,15 @@ const UseReviewForm = (gplace: string): UseReviewFormReturn => {
         annual_leave: Number(annualLeave),
         comment: comment,
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(error);
-      // Hack to notify react-hook-form about an error
-      form.setError("root.server", {
-        type: "server",
-        message: error.message,
-      })
+      if (error instanceof Error) {
+        // Hack to notify react-hook-form about an error
+        form.setError("root.server", {
+          type: "server",
+          message: error.message,
+        })
+      }
     }
   });
 

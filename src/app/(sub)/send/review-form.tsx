@@ -29,6 +29,7 @@ const ReviewForm = ({ gplace }: Props) => {
   const {
     form,
     onFormSubmit,
+    isServerError
   } = UseReviewForm(gplace);
 
   return form.formState.isSubmitSuccessful ?
@@ -217,8 +218,8 @@ const ReviewForm = ({ gplace }: Props) => {
             </div>
           </div>
 
-          <div className="flex items-end justify-end">
-            <ErrorMessage>{JSON.stringify(form.formState.errors)}</ErrorMessage>
+          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-end">
+            {isServerError && <ErrorMessage className="self-center text-center">Ha habido un error, intelelo de nuevo</ErrorMessage>}
             <Button
               loading={form.formState.isSubmitting}
               className="w-full md:w-fit"

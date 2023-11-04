@@ -9,7 +9,7 @@ import { disconnectDB } from "@/app/_server/db/mongodb";
 import { insertDataInCollection } from "@/app/_server/db/verbs";
 
 export const sendReview = async (review: SendReviewRequest) => {
-  let customError = undefined;
+  let customError = "Error al enviar la reseña";
 
   try {
     const { error, value } = schemaReviews.validate(review);
@@ -28,7 +28,7 @@ export const sendReview = async (review: SendReviewRequest) => {
 
     await insertDataInCollection("reviews", review);
   } catch (error) {
-    throw new Error(customError ?? "Error al enviar la reseña");
+    throw new Error(customError);
   } finally {
     await disconnectDB();
   }

@@ -60,7 +60,7 @@ const Reviews = async ({ searchParams }: Props) => {
 
               <Review
                 key={review.id}
-                review={review}
+                data={review}
               />
             )}
           </ul>

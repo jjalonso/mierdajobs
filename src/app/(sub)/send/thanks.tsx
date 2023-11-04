@@ -36,27 +36,5 @@ const Thanks = ({ gplace }: Props) =>
       </Link>
     </Paper>
   </div>
-// <Paper className="relative mb-10 mt-52 flex h-fit flex-col items-center gap-6 pt-52 text-center md:mt-56 md:max-w-lg md:pt-52">
-//   <Image
-//     className="absolute -top-48 md:-top-56"
-//     src="/objects/balloons.png"
-//     width={200}
-//     height={0}
-//     alt="Personas saltando con alegria"
-//   />
-//   <div className="flex w-full flex-col items-center gap-6">
-//     {/* <p>Juntos en la lucha contra la precariedad laboral.</p> */}
-//     <Heading level={1}>
-//       Tenemos tu reseña
-//     </Heading>
-//     <p>Tu reseña sera revisada y publicada lo antes posible.</p>
-//     <Link
-//       className="mt-8 w-full" href={backLink}>
-//       <Button className="w-full">
-//         Volver
-//       </Button>
-//     </Link>
-//   </div>
-// </Paper>
 
 export default Thanks;

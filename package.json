@@ -7,6 +7,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "vdev": "vercel dev",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "test": "jest --watch"

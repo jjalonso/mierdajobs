@@ -2,7 +2,7 @@ import { Poppins } from "next/font/google";
 import { getServerSession } from "next-auth";
 
 import "./globals.css";
-import authOptions from "./api/auth/auth-options";
+import authOptions from "./api/auth/_options/options";
 import SessionProvider from "./session-provider";
 const poppins = Poppins({
   weight: ["400", "500", "600"],

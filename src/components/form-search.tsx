@@ -1,7 +1,7 @@
 "use client";
 
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import React from "react";
+import React, { useCallback } from "react";
 import Typewriting from "react-typewriting";
 import { twMerge } from "tailwind-merge";
 
@@ -18,9 +18,21 @@ interface Props {
 const FormSearch = ({ className, query = "" }: Props) => {
   const searchField = useSearchField();
 
+  const handleSubmit = useCallback((event: React.FormEvent<HTMLFormElement>) => {
+    // Prevent form submission if the input is empty
+    const formData = new FormData(event.currentTarget);
+    const inputValue = formData.get("q")?.toString().trim();
+    if (!inputValue) {
+      event.preventDefault();
+    }
+  }, []);
+
   return (
     <form
-      action={"/search"} method="get" className={twMerge("flex w-full self-center md:max-w-lg", className)}>
+      action="/search"
+      method="get"
+      onSubmit={handleSubmit}
+      className={twMerge("flex w-full self-center md:max-w-lg", className)}>
       <Typewriting
         waitBeforeDeleteMs={800}
         deleteSpeedMs={0}

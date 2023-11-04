@@ -9,6 +9,7 @@ import { WorkingHoursPeriodEnum } from "@/app/api/_reviews/types";
 interface UseReviewFormReturn {
   form: UseFormReturn<ReviewFormDirtyValues, void, ReviewFormValidValues>;
   onFormSubmit: () => void;
+  isServerError: boolean;
 }
 
 const UseReviewForm = (gplace: string): UseReviewFormReturn => {
@@ -43,15 +44,24 @@ const UseReviewForm = (gplace: string): UseReviewFormReturn => {
         annual_leave: Number(annualLeave),
         comment: comment,
       });
-    } catch (error) {
-      // TODO: Implement toasts
+    } catch (error: unknown) {
       console.error(error);
+      if (error instanceof Error) {
+        // Hack to notify react-hook-form about an error
+        form.setError("root.server", {
+          type: "server",
+          message: error.message,
+        })
+      }
     }
   });
+
+  const isServerError = Boolean(form.formState.errors.root?.server);
 
   return {
     form,
     onFormSubmit,
+    isServerError,
   };
 };
 

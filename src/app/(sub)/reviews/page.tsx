@@ -1,5 +1,6 @@
 import { FaceFrownIcon, PlusIcon } from "@heroicons/react/24/outline";
 import _ from "lodash";
+import { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import React from "react";
@@ -66,8 +67,19 @@ const Reviews = async ({ searchParams }: Props) => {
           </ul>
         }
       </div>
-    </div >
+    </div>
   );
 };
+
+export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
+  const { id } = searchParams;
+  const reviews: GetReviewsResponse = await getReviews(id);
+  return {
+    title: `Reseñas de ${reviews.name}`,
+    alternates: {
+      canonical: `/reviews?id=${id}`,
+    }
+  }
+}
 
 export default Reviews;

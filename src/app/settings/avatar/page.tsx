@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 import React from "react";
@@ -42,3 +43,6 @@ const Page = async ({ searchParams }: Props) => {
 };
 
 export default Page;
+export const metadata: Metadata = {
+  title: "Ajustes",
+}

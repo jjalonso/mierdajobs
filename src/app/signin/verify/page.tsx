@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
@@ -41,3 +42,6 @@ const Page = async () => {
 };
 
 export default Page;
+export const metadata: Metadata = {
+  title: "Invitación enviada",
+}

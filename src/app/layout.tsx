@@ -1,9 +1,11 @@
+import { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import { getServerSession } from "next-auth";
 
 import "./globals.css";
 import authOptions from "./api/auth/_options/options";
 import SessionProvider from "./session-provider";
+
 const poppins = Poppins({
   weight: ["400", "500", "600"],
   subsets: ["latin"],
@@ -11,6 +13,15 @@ const poppins = Poppins({
 
 interface Props {
   children: React.ReactNode;
+}
+
+export const metadata: Metadata = {
+  metadataBase: new URL("https://mierdajobs.com"),
+  title: {
+    default: "MierdaJobs",
+    template: "%s - MierdaJobs"
+  },
+  description: "Busca y publica reseñas de negocios con condiciones laborales precarias e ilegales en una plataforma anonima."
 }
 
 const Layout = async ({ children }: Props) => {

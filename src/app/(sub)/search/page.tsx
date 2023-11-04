@@ -1,4 +1,5 @@
 import _ from "lodash";
+import { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import React from "react";
@@ -48,5 +49,16 @@ const Page = async ({ searchParams }: Props) => {
     </div>
   );
 };
+
+export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
+  const { q } = searchParams;
+
+  return {
+    title: `Resultados para "${q}"`,
+    alternates: {
+      canonical: `/search?q=${q}`,
+    }
+  }
+}
 
 export default Page;

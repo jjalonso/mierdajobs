@@ -1,5 +1,6 @@
 import { FaceFrownIcon } from "@heroicons/react/24/outline";
 import _ from "lodash";
+import { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 import React from "react";
@@ -54,3 +55,6 @@ const Reviews = async () => {
 };
 
 export default Reviews;
+export const metadata: Metadata = {
+  title: "Mis reseñas",
+}

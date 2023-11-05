@@ -21,5 +21,14 @@ export const sanitizeHtmlInput = (params: SanitizeHtmlInputParams) =>
     ])
   );
 
-export const sanitizeXssInput = (params: Record<string, string>) =>
-  Object.values(params).map((value) => xss(value) === value);
+export const sanitizeXssInput = (params: Record<string, string>) => {
+  let result: boolean = false;
+
+  Object.values(params).forEach((value) => {
+    if (xss(value) === value) {
+      result = true;
+    }
+  });
+
+  return result;
+};

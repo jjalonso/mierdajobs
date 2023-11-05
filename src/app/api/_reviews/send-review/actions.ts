@@ -24,6 +24,7 @@ export const sendReview = async (review: SendReviewRequest) => {
     }
 
     // Sanitization XSS input
+    console.log(sanitizeXssInput(valuesToSanitize));
     if (!sanitizeXssInput(valuesToSanitize)) {
       customError = "Alguno de los valores ingresados es malicioso";
       throw error;

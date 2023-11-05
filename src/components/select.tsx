@@ -9,6 +9,7 @@ interface SelectProps<T> {
   value?: T;
   disabled?: boolean;
   by?: string;
+  name?: string;
   onChange?: (value: T) => void;
 }
 
@@ -17,11 +18,9 @@ interface SelectOptionProps<T> {
   value: T;
 }
 
-const Select = <T,>({ children, value, disabled, placeholder, by = "id", onChange }: SelectProps<T>) =>
+const Select = <T,>({ children, placeholder, by = "id", ...props }: SelectProps<T>) =>
   <Listbox
-    disabled={disabled}
-    value={value}
-    onChange={onChange}
+    {...props}
     by={by as never}
   >
     <div className="relative">

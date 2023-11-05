@@ -1,68 +1,64 @@
-import { UseFormReturn, useForm } from "react-hook-form";
 
-import { ReviewFormDirtyValues, ReviewFormValidValues } from "../types";
-import { workingHoursPeriodValues } from "../values";
+import { useCallback, useState } from "react";
 
 import { sendReview } from "@/app/api/_reviews/send-review/actions";
-import { WorkingHoursPeriodEnum } from "@/app/api/_reviews/types";
+import { HTTPValidationError, HTTPValidationErrorData } from "@/lib/errors";
 
 interface UseReviewFormReturn {
-  form: UseFormReturn<ReviewFormDirtyValues, void, ReviewFormValidValues>;
-  onFormSubmit: () => void;
-  isServerError: boolean;
+  onFormSubmit: (formData: FormData) => void;
+  errors: any;
 }
 
-const UseReviewForm = (gplace: string): UseReviewFormReturn => {
-  const form = useForm<ReviewFormDirtyValues, void, ReviewFormValidValues>({
-    mode: "onBlur",
-    defaultValues: {
-      monthlySalary: "",
-      workingHours: "",
-      workingHoursPeriod: workingHoursPeriodValues[0],
-      contractFraud: "",
-      annualLeave: "",
-      comment: "",
-    },
-  });
+// try {
+//   const values = _.assign(Object.fromEntries(formData));
 
-  const onFormSubmit = form.handleSubmit(async (values) => {
-    const {
-      monthlySalary,
-      workingHours,
-      workingHoursPeriod,
-      contractFraud,
-      annualLeave,
-      comment,
-    } = values;
+//   await schemaReviews.validateAsync(values, { abortEarly: false });
+//   // TODO: XSS
+
+//   await insertDataInCollection("reviews", values);
+
+// } catch (e: unknown) {
+//   console.error(e)
+
+//   if (e instanceof ValidationError) {
+//     const errorsObject = e.details.reduce((acc: HTTPValidationErrorData, { message, path }) => {
+//       const fieldName = path.join(".");
+//       acc[fieldName] = acc[fieldName] || [];
+//       acc[fieldName].push(message);
+//       return acc;
+//     }, {});
+//     console.log(errorsObject)
+//     throw new HTTPValidationError(errorsObject);
+//   }
+// } finally {
+//   await disconnectDB();
+// }
+
+const UseReviewForm = (): UseReviewFormReturn => {
+  const [errors, setErrors] = useState<HTTPValidationErrorData>({});
+
+  const onFormSubmit = useCallback(async (formData: FormData) => {
+    console.log("called!")
+
     try {
-      throw new Error("Not implemented");
-      await sendReview({
-        gplace_id: gplace,
-        monthly_salary: Number(monthlySalary),
-        working_hours: Number(workingHours),
-        working_hours_period: workingHoursPeriod.id as WorkingHoursPeriodEnum,
-        contract_fraud: contractFraud,
-        annual_leave: Number(annualLeave),
-        comment: comment,
-      });
-    } catch (error: unknown) {
-      console.error(error);
-      if (error instanceof Error) {
-        // Hack to notify react-hook-form about an error
-        form.setError("root.server", {
-          type: "server",
-          message: error.message,
-        })
+      await sendReview(formData)
+
+      //   sendReview(values)
+    }
+    catch (e: unknown) {
+      // console.error(e);
+      // console.log(e.data)
+      console.log("err")
+      if (e instanceof HTTPValidationError) {
+        console.log("invalid")
+        setErrors(e.data)
       }
     }
-  });
-
-  const isServerError = Boolean(form.formState.errors.root?.server);
+  }, []);
 
   return {
-    form,
     onFormSubmit,
-    isServerError,
+    errors
   };
 };
 

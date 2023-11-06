@@ -6,9 +6,9 @@ import { ActionResponse } from "@/app/api/types";
 
 interface UseReviewFormReturn {
   onFormSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
-  errors: Record<string, string>;
   isFormSubmitting: boolean;
   isFormSubmitted: boolean;
+  errors: Record<string, string>;
 
 }
 
@@ -35,9 +35,9 @@ const useReviewForm = (): UseReviewFormReturn => {
 
   return {
     onFormSubmit,
-    errors,
     isFormSubmitting,
-    isFormSubmitted
+    isFormSubmitted,
+    errors
   };
 };
 

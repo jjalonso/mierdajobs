@@ -1,4 +1,5 @@
 
+import { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 
@@ -25,3 +26,7 @@ const Page = async ({ searchParams }: Props) => {
 }
 
 export default Page;
+
+export const metadata: Metadata = {
+  title: "Añadir una reseña",
+}

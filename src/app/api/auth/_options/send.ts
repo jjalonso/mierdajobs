@@ -18,7 +18,7 @@ const sendVerificationRequest = async ({
     body: JSON.stringify({
       "From": "Mierdajobs <hola@mierdajobs.com>",
       "To": email,
-      "Subject": `Mierdajobs - Tu invitacion para entrar #${_.random(1000, 9999)}`,
+      "Subject": `Tu invitacion para entrar #${_.random(1000, 9999)}`,
       "TextBody": textTemplate(url),
       "HtmlBody": htmlTemplate(url),
       "MessageStream": "outbound"

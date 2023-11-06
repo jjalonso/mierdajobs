@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import Image from "next/image";
 
 import { FormSearch } from "../components/form-search";
@@ -24,10 +25,15 @@ const Page = () =>
         level={1}
         size="xl"
       >
-
         Busca y publica reseñas de negocios con condiciones laborales <span className="line-through">precarias</span> ilegales en una plataforma anonima.
       </Heading>
     </main>
   </>
 
 export default Page;
+export const metadata: Metadata = {
+  title: "MierdaJobs",
+  alternates: {
+    canonical: "/",
+  }
+}

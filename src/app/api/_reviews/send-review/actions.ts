@@ -4,6 +4,7 @@ import { ActionResponse } from "../../types";
 import { ValidationErrorToObject, sanitizeFormData } from "../../utils";
 
 import { schemaReviews } from "./schema";
+import { processBody } from "./utils";
 
 import { disconnectDB } from "@/app/_server/db/mongodb";
 import { insertDataInCollection } from "@/app/_server/db/verbs";
@@ -20,7 +21,7 @@ export const sendReview = async (formData: FormData): Promise<ActionResponse> =>
         data: ValidationErrorToObject(validationError)
       }
     } else {
-      await insertDataInCollection("reviews", castedValues);
+      await insertDataInCollection("reviews", processBody(castedValues));
       return {
         code: 201
       }

@@ -25,7 +25,7 @@ module.exports = {
       secondary: {
         light: "#FAAEC5",
         DEFAULT: "#C86B87",
-        dark: "#83344C"
+        dark: "#B15B75"
       },
       gray: {
         tint: "#F3F3F3",

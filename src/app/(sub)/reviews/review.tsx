@@ -64,7 +64,7 @@ const Review = ({ data }: Props) =>
           </div>
         </div>
 
-        <p className="mb-2 break-words">{data.comment}</p>
+        <p className="mb-2 break-all">{data.comment}</p>
 
         <div className="flex grow gap-3 text-sm">
           <ValueBlock

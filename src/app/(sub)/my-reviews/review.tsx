@@ -39,7 +39,7 @@ const SubmittedReview = ({ data }: Props) => {
       </div>
       <div className="space-y-2">
         <p className="font-bold">{data.contract_fraud}</p>
-        <p>{data.comment}</p>
+        <p className="break-all">{data.comment}</p>
       </div>
       <div className="flex grow gap-3 text-sm">
         <ValueBlock

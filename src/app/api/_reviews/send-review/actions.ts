@@ -1,48 +1,37 @@
 "use server";
 
-import { ValidationError } from "joi";
-import _ from "lodash";
+import { ActionResponse } from "../../types";
+import { ValidationErrorToObject, sanitizeFormData } from "../../utils";
 
 import { schemaReviews } from "./schema";
 
 import { disconnectDB } from "@/app/_server/db/mongodb";
 import { insertDataInCollection } from "@/app/_server/db/verbs";
-import { HTTPValidationError, HTTPValidationErrorData } from "@/lib/errors";
 
-export const sendReview = async (formData: FormData) => {
+export const sendReview = async (formData: FormData): Promise<ActionResponse> => {
   try {
-    const values = _.assign(Object.fromEntries(formData));
+    const sanitizedFormData = sanitizeFormData(formData);
+    const values = Object.fromEntries(sanitizedFormData.entries());
 
-    await schemaReviews.validateAsync(values, { abortEarly: false });
-    // TODO: XSS
-
-    await insertDataInCollection("reviews", values);
-
-  } catch (e: unknown) {
-    console.error(e)
-
-    if (e instanceof ValidationError) {
-      const errorsObject = e.details.reduce((acc: HTTPValidationErrorData, { message, path }) => {
-        const fieldName = path.join(".");
-        acc[fieldName] = acc[fieldName] || [];
-        acc[fieldName].push(message);
-        return acc;
-      }, {});
-      console.log(errorsObject)
-      throw new HTTPValidationError(errorsObject);
+    const { error: validationError, value: castedValues } = schemaReviews.validate(values, { abortEarly: false });
+    if (validationError) {
+      return {
+        code: 400,
+        data: ValidationErrorToObject(validationError)
+      }
+    } else {
+      await insertDataInCollection("reviews", castedValues);
+      return {
+        code: 201
+      }
     }
-  } finally {
-    await disconnectDB();
+  } catch (error: unknown) {
+    console.error(error)
   }
+
+  await disconnectDB();
+  return {
+    code: 500,
+    data: { server: "Se produjo un error inesperado, intentelo de nuevo" },
+  };
 };
-
-// debugger;
-// const sanitizedComment = xss(value.comment);
-
-// if (sanitizedComment !== value.comment) {
-//   customError = "El comentario tiene contenido no permitido o malicioso";
-//   throw error;
-// }
-
-// await insertDataInCollection("reviews", review);
-// 

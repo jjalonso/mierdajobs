@@ -4,12 +4,15 @@ import React from "react";
 
 import { contractFraudValues } from "../reviews/values";
 
-import { UseReviewForm } from "./hooks/use-review-form";
+import { useReviewForm } from "./hooks/use-review-form";
+import Thanks from "./thanks";
 import { workingHoursPeriodValues } from "./values"
 
 import { WorkingHoursPeriodEnum } from "@/app/api/_reviews/types";
 import { Button } from "@/components/button";
 import { Checkbox } from "@/components/checkbox";
+import ErrorMessage from "@/components/error-message";
+import { FormField } from "@/components/formfield";
 import { Heading } from "@/components/heading";
 import { Input } from "@/components/input";
 import Paper from "@/components/paper";
@@ -24,22 +27,24 @@ interface Props {
 const ReviewForm = ({ gplace }: Props) => {
   const {
     onFormSubmit,
+    isFormSubmitting,
+    isFormSubmitted,
     errors
-  } = UseReviewForm();
+  } = useReviewForm();
 
-  return (
-
-    // <Thanks gplace={gplace} /> :
+  return isFormSubmitted ?
+    <Thanks gplace={gplace} /> :
     <Paper className="flex h-fit flex-col gap-6">
-      {JSON.stringify(errors)}
       <form
+        onSubmit={onFormSubmit}
         className="flex flex-col gap-6"
-        action={onFormSubmit}
         autoComplete="off"
         noValidate
       >
         <input
-          hidden name="gplace_id" value={gplace} />
+          hidden name="gplace_id"
+          defaultValue={gplace}
+        />
         <Heading
           className="mb-6"
           size="xl"
@@ -52,22 +57,31 @@ const ReviewForm = ({ gplace }: Props) => {
           <div className="w-1/2 md:w-1/4">
 
             {/* Working Hours */}
-            <Input
-              name="working_hours"
-              inputMode="numeric"
-            />
+            <FormField
+              label="Horas de trabajo" error={errors.working_hours}>
+
+              <Input
+                name="working_hours"
+                inputMode="numeric"
+              />
+            </FormField>
           </div>
-          <div className="w-1/2 md:w-1/4">
+          <div className="mt-8 w-1/2 pt-1 md:w-1/4">
 
             {/* Working Hours Period */}
+
             <Select
+              displayValue={(v) => {
+                const item = workingHoursPeriodValues.find(item => item.id === v);
+                return item ? item.name : "";
+              }}
               name="working_hours_period"
               defaultValue={WorkingHoursPeriodEnum.PER_WEEK}
             >
               {workingHoursPeriodValues.map(period =>
                 <SelectOption
                   key={period.id}
-                  value={period}>
+                  value={period.id}>
                   {period.name}
                 </SelectOption>
               )}
@@ -80,27 +94,29 @@ const ReviewForm = ({ gplace }: Props) => {
           <div className="w-full md:w-1/4">
 
             {/* Annual Leave */}
-            <label>
+            <FormField error={errors.annual_leave}>
               Vacaciones anuales
               <Input
                 name="annual_leave"
                 inputMode="numeric"
                 suffix="Dias"
               />
-            </label>
+            </FormField>
           </div>
           <div className="w-full md:w-1/4">
 
             {/* Monthly Salary */}
 
-            <label>
-              Salario mensual
+            <FormField
+              label="Salario mensual"
+              error={errors.monthly_salary}
+            >
               <Input
                 name="monthly_salary"
                 suffix="EUR"
                 inputMode="numeric"
               />
-            </label>
+            </FormField>
           </div>
         </div>
 
@@ -108,8 +124,10 @@ const ReviewForm = ({ gplace }: Props) => {
 
           {/* Checkbox */}
 
-          <label>
-            Contrato
+          <FormField
+            label="Contrato"
+            error={errors.contract_fraud}
+          >
             <RadioGroup name="contract_fraud">
               {Object.entries(contractFraudValues).map(([key, { title, description }]) =>
                 <RadioGroupOption
@@ -123,7 +141,7 @@ const ReviewForm = ({ gplace }: Props) => {
                 </RadioGroupOption>
               )}
             </RadioGroup>
-          </label>
+          </FormField>
         </div>
 
         <div className="flex w-full flex-col gap-6 md:flex-row">
@@ -131,8 +149,10 @@ const ReviewForm = ({ gplace }: Props) => {
 
             {/* Comment */}
 
-            <label>
-              Cuenta tu experiencia
+            <FormField
+              label="Cuenta tu experiencia"
+              error={errors.comment}
+            >
               <TextArea
                 name="comment"
                 placeholder="Cuéntanos como fue trabajar aquí"
@@ -142,7 +162,7 @@ const ReviewForm = ({ gplace }: Props) => {
                   current={field.value.length}
                   max={250}
                 /> */}
-            </label>
+            </FormField>
           </div>
         </div>
 
@@ -150,19 +170,21 @@ const ReviewForm = ({ gplace }: Props) => {
           <div className="w-full">
 
             {/* Comment */}
-
-            <Checkbox
-              className="text-sm" name="legal">Acepto y entiendo los <a
-                className="text-secondary underline"
-                target="_blank" href="/condiciones_mierdajobs.pdf" rel="noopener noreferrer">terminos y condiciones</a>.
-            </Checkbox>
+            <FormField
+              error={errors.legal} className="w-fit">
+              <Checkbox
+                className="text-sm" name="legal">Acepto y entiendo los <a
+                  className="text-secondary underline"
+                  target="_blank" href="/condiciones_mierdajobs.pdf" rel="noopener noreferrer">terminos y condiciones</a>.
+              </Checkbox>
+            </FormField>
           </div>
         </div>
 
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-end">
-          {/* {isServerError && <ErrorMessage className="self-center text-center">Ha habido un error, intelelo de nuevo</ErrorMessage>} */}
+          {errors.global && <ErrorMessage className="self-center text-center">{errors.global}</ErrorMessage>}
           <Button
-            // loading={isSubmitting}
+            loading={isFormSubmitting}
             className="w-full md:w-fit"
             type="submit"
           >
@@ -172,7 +194,6 @@ const ReviewForm = ({ gplace }: Props) => {
 
       </form>
     </Paper>
-  )
 };
 
 export default ReviewForm;

@@ -2,13 +2,13 @@ import { Listbox, Transition } from "@headlessui/react";
 import { ChevronUpDownIcon } from "@heroicons/react/24/outline";
 import { Fragment } from "react";
 
-interface SelectProps<T> {
+interface SelectProps<T = string> {
+  displayValue: string | ((value: T) => string)
   children: React.ReactNode;
   placeholder?: string;
   defaultValue?: T;
   value?: T;
   disabled?: boolean;
-  by?: string;
   name?: string;
   onChange?: (value: T) => void;
 }
@@ -18,10 +18,9 @@ interface SelectOptionProps<T> {
   value: T;
 }
 
-const Select = <T,>({ children, placeholder, by = "id", ...props }: SelectProps<T>) =>
-  <Listbox
-    {...props}
-    by={by as never}
+const Select = <T,>({ children, placeholder, displayValue, ...props }: SelectProps<T>) =>
+  <Listbox {...props}
+  // by={by as never}
   >
     <div className="relative">
       <Listbox.Button className="
@@ -47,7 +46,7 @@ const Select = <T,>({ children, placeholder, by = "id", ...props }: SelectProps<
           <>
             <span className="block truncate">
               {value ?
-                <span>{value.name}</span>
+                <span>{typeof displayValue === "function" ? displayValue(value) : displayValue}</span>
                 :
                 <span className="text-gray-dark">{placeholder}</span>
               }

@@ -9,22 +9,4 @@ interface IndexedContractFraud extends IndexedName {
   id: ContractFraudEnum
 }
 
-interface ReviewFormDirtyValues {
-  monthlySalary: string,
-  workingHours: string,
-  workingHoursPeriod: IndexedWorkingHoursPeriod,
-  contractFraud: string,
-  annualLeave: string,
-  comment: string
-}
-
-interface ReviewFormValidValues {
-  monthlySalary: number,
-  workingHours: number,
-  workingHoursPeriod: IndexedWorkingHoursPeriod,
-  contractFraud: ContractFraudEnum,
-  annualLeave: number,
-  comment: string
-}
-
-export type { ReviewFormDirtyValues, ReviewFormValidValues, IndexedContractFraud, IndexedWorkingHoursPeriod }
+export type { IndexedContractFraud, IndexedWorkingHoursPeriod }

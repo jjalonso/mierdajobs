@@ -1,10 +1,37 @@
 "use server";
 
-import { SendReviewRequest } from "./types";
-import { processBody } from "./utils";
+import { ActionResponse } from "../../types";
+import { ValidationErrorToObject, sanitizeFormData } from "../../utils";
 
+import { schemaReviews } from "./schema";
+
+import { disconnectDB } from "@/app/_server/db/mongodb";
 import { insertDataInCollection } from "@/app/_server/db/verbs";
 
-export const sendReview = async (review: SendReviewRequest) => {
-	await insertDataInCollection("reviews", processBody(review));
-}
+export const sendReview = async (formData: FormData): Promise<ActionResponse> => {
+  try {
+    const sanitizedFormData = sanitizeFormData(formData);
+    const values = Object.fromEntries(sanitizedFormData.entries());
+
+    const { error: validationError, value: castedValues } = schemaReviews.validate(values, { abortEarly: false });
+    if (validationError) {
+      return {
+        code: 400,
+        data: ValidationErrorToObject(validationError)
+      }
+    } else {
+      await insertDataInCollection("reviews", castedValues);
+      return {
+        code: 201
+      }
+    }
+  } catch (error: unknown) {
+    console.error(error)
+  }
+
+  await disconnectDB();
+  return {
+    code: 500,
+    data: { global: "Se produjo un error inesperado, intentelo de nuevo" },
+  };
+};

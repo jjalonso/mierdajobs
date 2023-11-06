@@ -1,69 +1,44 @@
-import { UseFormReturn, useForm } from "react-hook-form";
 
-import { ReviewFormDirtyValues, ReviewFormValidValues } from "../types";
-import { workingHoursPeriodValues } from "../values";
+import React, { useState } from "react";
 
 import { sendReview } from "@/app/api/_reviews/send-review/actions";
-import { WorkingHoursPeriodEnum } from "@/app/api/_reviews/types";
+import { ActionResponse } from "@/app/api/types";
 
 interface UseReviewFormReturn {
-  form: UseFormReturn<ReviewFormDirtyValues, void, ReviewFormValidValues>;
-  onFormSubmit: () => void;
-  isServerError: boolean;
+  onFormSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+  isFormSubmitting: boolean;
+  isFormSubmitted: boolean;
+  errors: Record<string, string>;
+
 }
 
-const UseReviewForm = (gplace: string): UseReviewFormReturn => {
-  const form = useForm<ReviewFormDirtyValues, void, ReviewFormValidValues>({
-    mode: "onBlur",
-    defaultValues: {
-      monthlySalary: "",
-      workingHours: "",
-      workingHoursPeriod: workingHoursPeriodValues[0],
-      contractFraud: "",
-      annualLeave: "",
-      comment: "",
-    },
-  });
+const useReviewForm = (): UseReviewFormReturn => {
+  const [errors, setErrors] = useState({});
+  const [isFormSubmitting, setFormSubmitting] = useState(false);
+  const [isFormSubmitted, setFormSubmitted] = useState(false);
 
-  const onFormSubmit = form.handleSubmit(async (values) => {
-    const {
-      monthlySalary,
-      workingHours,
-      workingHoursPeriod,
-      contractFraud,
-      annualLeave,
-      comment,
-    } = values;
-    try {
-      await sendReview({
-        gplace_id: gplace,
-        monthly_salary: Number(monthlySalary),
-        working_hours: Number(workingHours),
-        working_hours_period: workingHoursPeriod.id as WorkingHoursPeriodEnum,
-        contract_fraud: contractFraud,
-        annual_leave: Number(annualLeave),
-        comment: comment,
-      });
-    } catch (error: unknown) {
-      console.error(error);
-      if (error instanceof Error) {
-        // Hack to notify react-hook-form about an error
-        form.setError("root.server", {
-          type: "server",
-          message: error.message,
-        })
-      }
+  const onFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    setErrors({});
+    setFormSubmitting(true);
+    const formData = new FormData(event.currentTarget);
+    const response = await sendReview(formData)
+
+    if (response.code !== 201) {
+      setErrors(response.data as ActionResponse)
+      setFormSubmitting(false);
+    } else {
+      setFormSubmitted(true)
     }
-  });
-
-  const isServerError = Boolean(form.formState.errors.root?.server);
+  }
 
   return {
-    form,
     onFormSubmit,
-    isServerError,
+    isFormSubmitting,
+    isFormSubmitted,
+    errors
   };
 };
 
-export { UseReviewForm };
-export type { UseReviewFormReturn };
+export { useReviewForm }

@@ -3,9 +3,10 @@ import { CheckIcon } from "@heroicons/react/24/outline";
 import { twMerge } from "tailwind-merge";
 
 interface RadioGroupProps<T> {
+  name?: string
   children: React.ReactNode
-  value: T
-  onChange: (value: T) => void
+  value?: T
+  onChange?: (value: T) => void
 }
 
 interface RadioGroupOptionProps<T> {
@@ -14,13 +15,11 @@ interface RadioGroupOptionProps<T> {
   className?: string
 }
 
-const RadioGroup = <T,>({ children, value, onChange }: RadioGroupProps<T>) =>
+const RadioGroup = <T,>({ children, ...props }: RadioGroupProps<T>) =>
   <HRadioGroup
     className="flex w-fit flex-col gap-4"
-    value={value}
-    onChange={onChange}
+    {...props}
   >
-    {/* <RadioGroup.Label>Plan</RadioGroup.Label> */}
     {children}
   </HRadioGroup>
 

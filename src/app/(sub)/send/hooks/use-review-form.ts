@@ -19,23 +19,18 @@ const useReviewForm = (): UseReviewFormReturn => {
 
   const onFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
     setErrors({});
     setFormSubmitting(true);
-    try {
-      const formData = new FormData(event.currentTarget);
-      const response = await sendReview(formData)
-      console.log("response", response)
-      if (response.code !== 201) {
-        setErrors(response.data as ActionResponse)
-      } else {
-        setFormSubmitted(true)
-      }
+    const formData = new FormData(event.currentTarget);
+    const response = await sendReview(formData)
+
+    if (response.code !== 201) {
+      setErrors(response.data as ActionResponse)
+      setFormSubmitting(false);
+    } else {
+      setFormSubmitted(true)
     }
-    catch (e: unknown) {
-      console.error(e);
-      setErrors({ global: "Tuvimos un problema... intentalo de nuevo" })
-    }
-    setFormSubmitting(false);
   }
 
   return {

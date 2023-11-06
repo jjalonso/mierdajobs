@@ -32,6 +32,6 @@ export const sendReview = async (formData: FormData): Promise<ActionResponse> =>
   await disconnectDB();
   return {
     code: 500,
-    data: { server: "Se produjo un error inesperado, intentelo de nuevo" },
+    data: { global: "Se produjo un error inesperado, intentelo de nuevo" },
   };
 };

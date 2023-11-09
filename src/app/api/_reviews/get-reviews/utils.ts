@@ -7,13 +7,10 @@ import { GetReviewsResponse } from "./types";
 
 import { contractFraudValues } from "@/app/(sub)/reviews/values";
 import { BodyProps } from "@/app/_server/db/verbs";
-import { fetchGPlaceDetails } from "@/app/_server/google-place/verbs";
 
 export const serializeIndexedGetReviews = async (
 	reviews: BodyProps,
-	gplace_id: string
 ): Promise<GetReviewsResponse> => {
-	const gettedDetailsBusiness = await fetchGPlaceDetails(gplace_id);
 	const serializedAllReviews = reviews.map((item: ReviewDB) => ({
 		id: item._id,
 		created_at: moment(item.created_at).format("MMMM YYYY"),
@@ -27,8 +24,6 @@ export const serializeIndexedGetReviews = async (
 	}));
 
 	return {
-		name: gettedDetailsBusiness.result.name,
-		address: gettedDetailsBusiness.result.formatted_address,
 		totalReviews: reviews.length,
 		reviews: serializedAllReviews
 	};

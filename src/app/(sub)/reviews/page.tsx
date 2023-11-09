@@ -15,24 +15,27 @@ import { Heading } from "@/components/heading";
 import Paper from "@/components/paper";
 
 interface Props {
-  searchParams: Record<string, string>
+  searchParams: {
+    id: string
+    name: string
+  }
 }
 
 const Reviews = async ({ searchParams }: Props) => {
-  const { id } = searchParams;
-  if (!id) redirect("/");
+  const { id, name } = searchParams;
+  if (!id || !name) redirect("/");
 
   const reviews: GetReviewsResponse = await getReviews(id);
 
   return (
     <div className="flex w-full flex-col">
-      <div className="mb-12 ml-2 mt-16 space-y-2">
+      <div className="mb-0 ml-2 mt-16 space-y-2">
         <Heading
           level={1}
           size="xl"
           className="truncate text-white"
         >
-          {reviews.name}
+          {decodeURIComponent(name)}
         </Heading>
         <div className="text-white">
           {`${reviews.totalReviews} ${reviews.totalReviews === 1 ? "Reseña" : "Reseñas"}`}
@@ -72,10 +75,9 @@ const Reviews = async ({ searchParams }: Props) => {
 };
 
 export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
-  const { id } = searchParams;
-  const reviews: GetReviewsResponse = await getReviews(id);
+  const { id, name } = searchParams;
   return {
-    title: `Reseñas de ${reviews.name}`,
+    title: `Reseñas de ${decodeURIComponent(name)}`,
     alternates: {
       canonical: `/reviews?id=${id}`,
     }

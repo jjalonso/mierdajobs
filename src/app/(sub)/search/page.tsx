@@ -9,7 +9,9 @@ import { FormSearch } from "@/components/form-search";
 import Paper from "@/components/paper";
 
 interface Props {
-  searchParams: Record<string, string>;
+  searchParams: {
+    q: string
+  }
 }
 
 const Page = async ({ searchParams }: Props) => {
@@ -34,7 +36,7 @@ const Page = async ({ searchParams }: Props) => {
           :
           results.map((business) =>
             <Link
-              href={`/reviews?id=${business.gplace_id}`}
+              href={`/reviews?id=${business.gplace_id}&name=${encodeURIComponent(business.name)}`}
               key={business.gplace_id}
               className="flex cursor-pointer flex-col gap-1 overflow-hidden px-3 py-6 md:hover:text-primary"
             >

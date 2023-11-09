@@ -32,7 +32,7 @@ const AuthBadge = () => {
             as="div" className="relative inline-block text-left">
             <Menu.Button className="inline-flex w-fit">
               <Image
-                className="h-12 w-12 rounded-full border-[3px] border-secondary bg-secondary md:h-16 md:w-16"
+                className="h-12 w-12 rounded-full border-[3px] border-secondary bg-secondary md:h-14 md:w-14"
                 src={`/avatars/${session?.user?.image}.png`}
                 width="56"
                 height="56"

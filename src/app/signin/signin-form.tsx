@@ -16,7 +16,7 @@ const SignInForm = ({ error, callbackUrl }: Props) => {
   const { email, setEmail, handleSignIn, isLoading } = useSignInForm(callbackUrl);
 
   return (
-    <>
+    <div className="flex flex-col gap-4">
       <div>
         <Input
           name="email"
@@ -37,7 +37,7 @@ const SignInForm = ({ error, callbackUrl }: Props) => {
       >
         Enviar invitacion
       </Button>
-    </>
+    </div>
   );
 };
 

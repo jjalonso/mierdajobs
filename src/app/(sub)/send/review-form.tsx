@@ -175,7 +175,7 @@ const ReviewForm = ({ gplace }: Props) => {
               <Checkbox
                 className="text-sm" name="legal">Acepto y entiendo los <a
                   className="text-secondary underline"
-                  target="_blank" href="/condiciones_mierdajobs.pdf" rel="noopener noreferrer">terminos y condiciones</a>.
+                  target="_blank" href="https://blog.mierdajobs.com/terminos-y-condiciones" rel="noopener noreferrer">terminos y condiciones</a>.
               </Checkbox>
             </FormField>
           </div>

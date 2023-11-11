@@ -3,7 +3,7 @@ import { Metadata } from "next";
 import { getServerSession } from "next-auth";
 
 import "./globals.css";
-import authOptions from "./api/auth/_options/options";
+import authOptions from "./(auth)/api/auth/_options/options";
 import SessionProvider from "./session-provider";
 
 interface Props {

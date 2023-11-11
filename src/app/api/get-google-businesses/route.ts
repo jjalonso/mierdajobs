@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 import { parseParams, serializeIndexed } from "../utils";
 
-import { getGoogleBusiness } from "./actions";
+import { getGooglebusinesses } from "./actions";
 import { schemaGoogleBusinesses } from "./schema";
 
 export const GET = async (request: Request) => {
@@ -16,7 +16,7 @@ export const GET = async (request: Request) => {
   }
 
   try {
-    const response = await getGoogleBusiness(value.q);
+    const response = await getGooglebusinesses(value.q);
     return NextResponse.json(response);
   } catch (error) {
     return NextResponse.json(error, { status: 500 });

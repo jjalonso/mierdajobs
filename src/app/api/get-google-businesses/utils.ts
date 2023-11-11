@@ -9,6 +9,5 @@ export const serializeIndexedGoogleBusinessess = (
     name: input.terms[0].value,
     address: input.terms.slice(1).map((term) => term.value),
     gplace_id: input.place_id,
-
   }))
 };

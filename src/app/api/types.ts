@@ -3,8 +3,3 @@ export type IndexedName = {
   name: string;
 };
 
-export interface ActionResponse<T = unknown> {
-  code: number;
-  data?: T
-}
-

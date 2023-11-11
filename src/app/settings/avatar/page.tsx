@@ -5,7 +5,7 @@ import React from "react";
 
 import AvatarForm from "./avatar-form";
 
-import authOptions from "@/app/api/auth/_options/options";
+import authOptions from "@/app/(auth)/api/auth/_options/options";
 import Header from "@/components/header";
 import { Heading } from "@/components/heading";
 import Paper from "@/components/paper";

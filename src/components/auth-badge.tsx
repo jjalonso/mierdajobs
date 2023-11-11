@@ -71,10 +71,10 @@ const AuthBadge = () => {
                         variant="ghost"
                         onClick={() => signOut()}
                         className="
-                        text-black 
-                        hover:bg-secondary 
-                        hover:text-white"
-                      >
+                          text-black 
+                          hover:bg-secondary 
+                          hover:text-white
+                      ">
                         Cerrar sesion
                       </Button>
                     )}
@@ -90,7 +90,7 @@ const AuthBadge = () => {
             href={`/signin?callbackUrl=${callbackUrl}`} className="flex justify-end">
             <Button size="fit">
               <div className="">Iniciar sesión</div>
-              <UserCircleIcon className="h-8 w-8 text-white md:h-10 md:w-10" />
+              <UserCircleIcon className="h-8 w-8 text-white" />
             </Button>
           </Link>
         </>

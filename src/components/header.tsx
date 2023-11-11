@@ -17,6 +17,7 @@ const Header = async ({ noLogo = false, noAuth = false }: Props) =>
       !noLogo && <a
         href="/" className="flex-none">
         <Image
+          priority
           className="w-36 md:w-60"
           src="/logo.png"
           width="250"

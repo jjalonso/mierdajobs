@@ -4,7 +4,7 @@ import { RadioGroup as HRadioGroup } from "@headlessui/react";
 import { CheckIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 
-import { AvatarEnum } from "@/app/api/auth/types";
+import { AvatarEnum } from "@/app/(auth)/api/auth/types";
 
 interface AvatarPickerProps<T> {
   value: T

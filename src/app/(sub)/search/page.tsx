@@ -4,7 +4,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import React from "react";
 
-import { getGoogleBusiness } from "@/app/api/get-google-businesses/actions";
+import { getGooglebusinesses } from "@/app/api/get-google-businesses/actions";
 import { FormSearch } from "@/components/form-search";
 import Paper from "@/components/paper";
 
@@ -18,8 +18,7 @@ const Page = async ({ searchParams }: Props) => {
   const { q } = searchParams;
   if (!q) redirect("/");
 
-  const results = await getGoogleBusiness(q);
-
+  const results = await getGooglebusinesses(q);
   return (
     <div className="flex w-full flex-col">
       <FormSearch
@@ -34,9 +33,18 @@ const Page = async ({ searchParams }: Props) => {
         {_.isEmpty(results) ?
           <div className="w-full p-2 text-center">No se encontraron resultados</div>
           :
-          results.map((business) =>
-            <Link
-              href={`/reviews?id=${business.gplace_id}&name=${encodeURIComponent(business.name)}`}
+          results.map((business) => {
+
+            console.log(encodeURIComponent(business.name))
+
+            return <Link
+              href={{
+                pathname: "/reviews",
+                query: {
+                  id: business.gplace_id,
+                  name: encodeURIComponent(business.name)
+                }
+              }}
               key={business.gplace_id}
               className="flex cursor-pointer flex-col gap-1 overflow-hidden px-3 py-6 md:hover:text-primary"
             >
@@ -45,6 +53,7 @@ const Page = async ({ searchParams }: Props) => {
                 {business.address.join(", ")}
               </div>
             </Link>
+          }
           )
         }
       </Paper >

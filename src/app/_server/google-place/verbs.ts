@@ -26,6 +26,6 @@ export const fetchGPlaceDetails = async (
 		place_id: gplace_id,
 		key: process.env.GOOGLE_API_KEY
 	});
-
+	console.log(baseUrl + queryParams)
 	return easyFetch(baseUrl + queryParams);
 };

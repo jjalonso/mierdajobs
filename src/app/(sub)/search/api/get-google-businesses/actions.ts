@@ -1,7 +1,7 @@
 "use server";
 import { serializeIndexedGoogleBusinessess } from "./utils";
 
-import { fetchGPlaceBusinesses } from "@/app/_server/google-place/verbs";
+import { fetchGPlaceBusinesses } from "@/lib/google-place/api";
 
 export const getGooglebusinesses = async (q: string) => {
   const response = await fetchGPlaceBusinesses(q);

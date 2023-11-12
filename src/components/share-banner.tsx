@@ -3,8 +3,8 @@
 import Image from "next/image";
 import React from "react";
 
-import { useShare } from "@/app/hooks/use-share";
 import { Button } from "@/components/button";
+import { useShare } from "@/hooks/use-share";
 
 interface Props {
   shareData: ShareData;

@@ -5,8 +5,8 @@ import React, { useCallback } from "react";
 import Typewriting from "react-typewriting";
 import { twMerge } from "tailwind-merge";
 
-import { useSearchField } from "../app/hooks/use-search-field";
 import { BusinessTypingText } from "../app/values";
+import { useSearchField } from "../hooks/use-search-field";
 
 import { Input } from "@/components/input";
 

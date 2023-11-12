@@ -1,6 +1,6 @@
 import { GoogleBusinesses } from "./types";
 
-import { GPlaceAutocompleteResponse } from "@/app/_server/google-place/types";
+import { GPlaceAutocompleteResponse } from "@/lib/google-place/types";
 
 export const serializeIndexedGoogleBusinessess = (
   response: GPlaceAutocompleteResponse

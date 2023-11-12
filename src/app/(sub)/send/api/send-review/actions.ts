@@ -5,13 +5,13 @@ import { getServerSession } from "next-auth";
 import authOptions from "../../../../(auth)/api/auth/_options/options";
 import { ValidationErrorToObject, sanitizeFormData } from "../../../search/api/utils";
 
-import { schemaReviews } from "./schema";
+import schema from "./schema";
 import { buildReview } from "./utils";
 
 import { disconnectDB } from "@/app/_server/db/mongodb";
 import { insertDataInCollection } from "@/app/_server/db/verbs";
-import { fetchGPlaceDetails } from "@/app/_server/google-place/verbs";
 import { ActionResponse } from "@/app/types";
+import { fetchGPlaceDetails } from "@/lib/google-place/api";
 
 export const sendReview = async (formData: FormData): Promise<ActionResponse> => {
   const session = await getServerSession(authOptions);
@@ -24,7 +24,7 @@ export const sendReview = async (formData: FormData): Promise<ActionResponse> =>
   const {
     error: validationError,
     value: castedValues
-  } = schemaReviews.validate(values, { abortEarly: false });
+  } = schema.validate(values, { abortEarly: false });
   if (validationError) {
     return {
       code: 400,

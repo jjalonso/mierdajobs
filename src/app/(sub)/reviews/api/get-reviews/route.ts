@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import { parseParams } from "../../../search/api/utils";
 
 import { getReviews } from "./actions";
-import { schemaGetReviews } from "./schema";
+import schema from "./schema";
 
 import { disconnectDB } from "@/app/_server/db/mongodb";
 
@@ -12,7 +12,7 @@ export const GET = async (request: Request) => {
 		const params = parseParams(request.url);
 		const place_id = params.get("id");
 
-		const { error, value } = schemaGetReviews.validate({
+		const { error, value } = schema.validate({
 			place_id
 		});
 

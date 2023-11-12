@@ -1,6 +1,6 @@
 import { Db, MongoClient, ServerApiVersion } from "mongodb";
 
-// Remove, use other client UTILS
+// TODO: REMOVE, use other client, check get-reviews
 const client = new MongoClient(process.env.MONGODB_URI ?? "", {
   serverApi: {
     version: ServerApiVersion.v1,
@@ -10,8 +10,7 @@ const client = new MongoClient(process.env.MONGODB_URI ?? "", {
   connectTimeoutMS: 15000,
 });
 
-// change to getDB(client: MongoClient): DB 
-// UTILS!
+// TODO: REMOVE, use other client, check get-reviews
 export const connectDB = async () => {
   await client.connect();
   const db: Db = client.db(process.env.MONGODB_DATABASE);

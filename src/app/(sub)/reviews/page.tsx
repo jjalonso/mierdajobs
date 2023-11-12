@@ -7,7 +7,6 @@ import React from "react";
 
 import { getReviews } from "./api/get-reviews/actions";
 import { GetReviewsResponse } from "./api/get-reviews/types";
-
 import Review from "./review";
 
 import { Button } from "@/components/button";

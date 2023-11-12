@@ -6,6 +6,7 @@ import React from "react";
 import AvatarForm from "./avatar-form";
 
 import authOptions from "@/app/(auth)/api/auth/_options/options";
+import { AvatarEnum } from "@/app/(auth)/api/auth/types";
 import Header from "@/components/header";
 import { Heading } from "@/components/heading";
 import Paper from "@/components/paper";
@@ -34,7 +35,7 @@ const Page = async ({ searchParams }: Props) => {
           Escoge tu avatar
         </Heading>
         <AvatarForm
-          initialValue={session?.user?.image || ""}
+          initialValue={session?.user?.image as AvatarEnum}
           callbackUrl={callbackUrl}
         />
       </Paper>

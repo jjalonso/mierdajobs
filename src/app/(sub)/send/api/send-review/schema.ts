@@ -4,7 +4,7 @@ import { customValidationMessages } from "../../../search/api/utils";
 
 import { ContractFraudEnum, WorkingHoursPeriodEnum } from "@/app/(sub)/types";
 
-export const schemaReviews = Joi.object({
+const schema = Joi.object({
 	place_id: Joi.string().required(),
 	monthly_salary: Joi.number().min(1).required(),
 	working_hours: Joi.number().min(1).required(),
@@ -14,3 +14,5 @@ export const schemaReviews = Joi.object({
 	comment: Joi.string().min(10).max(250).required(),
 	termsAcceptance: Joi.string().valid("on").required()
 }).messages(customValidationMessages);
+
+export default schema;

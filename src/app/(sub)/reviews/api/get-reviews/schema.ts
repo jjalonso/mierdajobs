@@ -1,5 +1,7 @@
 import Joi from "joi";
 
-export const schemaGetReviews = Joi.object({
+const schema = Joi.object({
 	place_id: Joi.string().required()
 });
+
+export default schema;

@@ -4,11 +4,12 @@ import React from "react";
 
 import { useAvatarForm } from "./use-avatar-form";
 
+import { AvatarEnum } from "@/app/(auth)/api/auth/types";
 import { AvatarPicker } from "@/components/avatar-picker";
 import { Button } from "@/components/button";
 
 interface Props {
-  initialValue: string
+  initialValue: AvatarEnum
   callbackUrl: string
 }
 

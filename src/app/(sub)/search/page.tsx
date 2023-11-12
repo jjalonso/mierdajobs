@@ -18,6 +18,8 @@ const Page = async ({ searchParams }: Props) => {
   const { q } = searchParams;
   if (!q) redirect("/");
 
+  throw Error("ERROR TEST");
+
   const results = await getGooglebusinesses(q);
   return (
     <div className="flex w-full flex-col">

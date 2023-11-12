@@ -9,6 +9,8 @@ import { ReviewDB } from "@/app/(sub)/types";
 import { users, reviews } from "@/lib/mongodb/collections";
 
 export const getReviews = async (place_id: string) => {
+	// No risk on place_id if maliciusly invoked, it will just return the find
+
 	// Get collections
 	const cReviews = await reviews()
 	const cUsers = await users()

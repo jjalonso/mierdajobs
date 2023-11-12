@@ -33,7 +33,7 @@ export const sendReview = async (formData: FormData): Promise<ActionResponse> =>
 
   } else {
     // Is a google business? (GMaps return 200 even if contains errors)
-    const { error_message, result } = await fetchGPlaceDetails("ChIJOQoVM7YoQg0RXy8u76GvbmE");
+    const { error_message, result } = await fetchGPlaceDetails("xxx");
     if (!result) throw Error(error_message);
 
     // Save data in DB and return backUrl

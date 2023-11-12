@@ -26,6 +26,7 @@ const sendVerificationRequest = async ({
   })
   const data = await response.json()
   if (data.ErrorCode !== 0) {
+    console.error("Email could not be sent", JSON.stringify(data))
     throw new Error("Email could not be sent")
   }
 }

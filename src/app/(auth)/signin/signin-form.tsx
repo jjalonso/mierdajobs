@@ -1,7 +1,7 @@
 "use client"
 import React from "react";
 
-import { useSignInForm } from "./hooks/use-signin-form";
+import { useSignInForm } from "./use-signin-form";
 
 import { Button } from "@/components/button";
 import ErrorMessage from "@/components/error-message";

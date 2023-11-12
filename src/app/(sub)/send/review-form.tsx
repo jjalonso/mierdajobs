@@ -4,8 +4,8 @@ import React from "react";
 
 import { contractFraudValues } from "../reviews/values";
 
-import { useReviewForm } from "./hooks/use-review-form";
 import Thanks from "./thanks";
+import { useReviewForm } from "./use-review-form";
 import { workingHoursPeriodValues } from "./values"
 
 import { WorkingHoursPeriodEnum } from "@/app/(sub)/types";

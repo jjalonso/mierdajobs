@@ -4,7 +4,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import React from "react";
 
-import { getGooglebusinesses } from "@/app/api/get-google-businesses/actions";
+import { getGooglebusinesses } from "@/app/(sub)/search/api/get-google-businesses/actions";
 import { FormSearch } from "@/components/form-search";
 import Paper from "@/components/paper";
 
@@ -34,18 +34,15 @@ const Page = async ({ searchParams }: Props) => {
           <div className="w-full p-2 text-center">No se encontraron resultados</div>
           :
           results.map((business) => {
-
-            console.log(encodeURIComponent(business.name))
-
             return <Link
               href={{
                 pathname: "/reviews",
                 query: {
-                  id: business.gplace_id,
+                  id: business.place_id,
                   name: encodeURIComponent(business.name)
                 }
               }}
-              key={business.gplace_id}
+              key={business.place_id}
               className="flex cursor-pointer flex-col gap-1 overflow-hidden px-3 py-6 md:hover:text-primary"
             >
               <div className="truncate">{business.name}</div>

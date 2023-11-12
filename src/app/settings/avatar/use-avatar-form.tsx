@@ -3,12 +3,14 @@ import { useCallback, useState } from "react";
 
 import { saveAvatar } from "./actions";
 
-export const useAvatarForm = (initialValue: string, callbackUrl: string) => {
-  const [avatar, setAvatar] = useState(initialValue)
+import { AvatarEnum } from "@/app/(auth)/api/auth/types";
+
+export const useAvatarForm = (initialValue: AvatarEnum, callbackUrl: string) => {
+  const [avatar, setAvatar] = useState<AvatarEnum>(initialValue)
   const router = useRouter()
 
   const handleSubmit = useCallback(async () => {
-    await saveAvatar(avatar);
+    await saveAvatar(avatar)
     router.push(callbackUrl)
   }, [avatar, router, callbackUrl]);
 

@@ -18,14 +18,13 @@ export const fetchGPlaceBusinesses = (q: string)
 }
 
 export const fetchGPlaceDetails = async (
-	gplace_id: string
+	place_id: string
 ): Promise<GPlaceDetailsResponse> => {
 	const baseUrl = "https://maps.googleapis.com/maps/api/place/details/json?";
 	const queryParams = querystring.stringify({
 		fields: "name,formatted_address",
-		place_id: gplace_id,
+		place_id: place_id,
 		key: process.env.GOOGLE_API_KEY
 	});
-	console.log(baseUrl + queryParams)
 	return easyFetch(baseUrl + queryParams);
 };

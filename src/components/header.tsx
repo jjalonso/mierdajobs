@@ -3,8 +3,6 @@ import Image from "next/image";
 import React from "react";
 import { twMerge } from "tailwind-merge";
 
-import AuthBadge from "@/components/auth-badge";
-
 interface Props {
   noLogo?: boolean
   noAuth?: boolean
@@ -30,7 +28,7 @@ const Header = async ({ noLogo = false, noAuth = false }: Props) =>
     {
       !noAuth && <div className="flex-1">
         {/* ACCOUNT INFORMATION */}
-        <AuthBadge />
+        {/* <AuthBadge /> */}
       </div>
     }
   </header >

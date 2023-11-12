@@ -12,9 +12,10 @@ export type GPlaceAutocompleteResponse = {
 };
 
 export type GPlaceDetailsResponse = {
-	result: {
+	result?: {
 		formatted_address: string;
 		name: string;
 	};
-	status: string;
+	error_message?: string;
 };
+

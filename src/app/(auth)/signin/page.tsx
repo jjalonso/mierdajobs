@@ -24,7 +24,6 @@ const Page = async ({ searchParams }: Props) => {
   if (session) redirect("/");
 
   return (
-
     <div className="flex flex-col items-center" >
       <Header noAuth />
 

@@ -9,9 +9,9 @@ import schema from "./schema";
 
 import { WorkingHoursPeriodEnum } from "@/app/(sub)/types";
 import { disconnectDB } from "@/app/_server/db/mongodb";
-import { insertDataInCollection } from "@/app/_server/db/verbs";
 import { ActionResponse } from "@/app/types";
 import { fetchGPlaceDetails } from "@/lib/google-place/api";
+import { insertInCollection } from "@/lib/mongodb/insert";
 import { sanitizeFormData } from "@/lib/sanitization";
 import { ValidationErrorToObject } from "@/lib/validation";
 
@@ -50,7 +50,8 @@ export const sendReview = async (formData: FormData): Promise<ActionResponse> =>
     }
 
     // Save data in DB and return the modified business
-    await insertDataInCollection("reviews", reviewDocument);
+
+    await insertInCollection("reviews", reviewDocument);
     await disconnectDB();
     revalidatePath("/reviews");
     return {

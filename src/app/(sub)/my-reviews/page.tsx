@@ -9,15 +9,14 @@ import Review from "./review";
 
 import authOptions from "@/app/(auth)/api/auth/_options/options";
 import getMyReviews from "@/app/(sub)/my-reviews/data/actions";
-import { GetMyReviewsResponse } from "@/app/(sub)/my-reviews/data/types";
 import { Heading } from "@/components/heading";
 import Paper from "@/components/paper";
 
-const Reviews = async () => {
+const MyReviews = async () => {
   const session = await getServerSession(authOptions);
   if (!session) redirect("/signin?callbackUrl=/my-reviews");
 
-  const reviews: GetMyReviewsResponse = await getMyReviews();
+  const myreviews = await getMyReviews();
 
   return (
     <div className="flex w-full flex-col">
@@ -30,18 +29,18 @@ const Reviews = async () => {
           Mis reseñas
         </Heading>
         <div className="text-white">
-          {`${reviews.totalReviews} ${reviews.totalReviews === 1 ? "Reseña" : "Reseñas"}`}
+          {`${myreviews.totalReviews} ${myreviews.totalReviews === 1 ? "Reseña" : "Reseñas"}`}
         </div>
       </div>
 
-      {_.isEmpty(reviews.reviews) ?
+      {_.isEmpty(myreviews.reviews) ?
         <Paper className="flex flex-col items-center gap-4 text-center text-gray-dark">
           <FaceFrownIcon className="h-12 w-12 text-gray-light" />
           Este sitio aún no tiene reseñas
         </Paper>
         :
         <ul className="flex flex-col gap-5">
-          {reviews.reviews.map(review =>
+          {myreviews.reviews.map(review =>
 
             <Review
               key={review.id}
@@ -54,7 +53,7 @@ const Reviews = async () => {
   );
 };
 
-export default Reviews;
+export default MyReviews;
 export const metadata: Metadata = {
   title: "Mis reseñas",
 }

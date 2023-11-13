@@ -8,8 +8,7 @@ import { Heading } from "@/components/heading";
 
 const Page = () =>
   <>
-    <Header noLogo
-    />
+    <Header noLogo />
     <main className="flex flex-col items-center px-8 pt-[10vh]">
       <Image
         className="mb-10 w-60"
@@ -25,7 +24,7 @@ const Page = () =>
         level={1}
         size="xl"
       >
-        Busca y publica reseñas de negocios con condiciones laborales <span className="line-through">precarias</span> ilegales en una plataforma anonima.
+        Comparte experiencias laborales precarias de forma anónima y lee reseñas de otros trabajadores.
       </Heading>
     </main>
   </>

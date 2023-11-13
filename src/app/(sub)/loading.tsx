@@ -5,7 +5,7 @@ import Paper from "@/components/paper";
 
 const Loading = () =>
   <div className="animate-pulse">
-    <div className="mb-5 mt-16 flex items-end justify-between py-6">
+    <div className="mb-6 mt-16 flex items-end justify-between py-6">
       <div className="flex w-1/2 flex-col gap-y-4 ">
         <div className="mb-2 flex h-6 w-52 rounded-full bg-gray-light"></div>
         <div className="h-2 w-28 rounded-full bg-gray-light"></div>

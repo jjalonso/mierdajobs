@@ -7,10 +7,10 @@ import { Heading } from "@/components/heading";
 import Paper from "@/components/paper";
 
 interface Props {
-  gplace: string;
+  backUrl: string;
 }
 
-const Thanks = ({ gplace }: Props) =>
+const Thanks = ({ backUrl }: Props) =>
   <div className="flex w-full grow flex-col items-center">
     <Paper className="relative mt-12 h-56 w-full rounded-b-none bg-secondary bg-center md:mt-20 md:max-w-lg">
       <Image
@@ -29,7 +29,9 @@ const Thanks = ({ gplace }: Props) =>
       </Heading>
       <p>Tu reseña sera revisada y publicada lo antes posible.</p>
       <Link
-        className="mt-8 w-full" href={`/reviews?id=${gplace}`}>
+        className="mt-8 w-full"
+        href={backUrl}
+      >
         <Button className="w-full">
           Volver
         </Button>

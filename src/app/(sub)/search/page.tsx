@@ -4,19 +4,21 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import React from "react";
 
-import { getGoogleBusiness } from "@/app/api/get-google-businesses/actions";
+import { getBusinesses } from "@/app/(sub)/search/data/actions";
 import { FormSearch } from "@/components/form-search";
 import Paper from "@/components/paper";
 
 interface Props {
-  searchParams: Record<string, string>;
+  searchParams: {
+    q: string
+  }
 }
 
 const Page = async ({ searchParams }: Props) => {
   const { q } = searchParams;
   if (!q) redirect("/");
 
-  const results = await getGoogleBusiness(q);
+  const results = await getBusinesses(q);
 
   return (
     <div className="flex w-full flex-col">
@@ -32,10 +34,16 @@ const Page = async ({ searchParams }: Props) => {
         {_.isEmpty(results) ?
           <div className="w-full p-2 text-center">No se encontraron resultados</div>
           :
-          results.map((business) =>
-            <Link
-              href={`/reviews?id=${business.gplace_id}`}
-              key={business.gplace_id}
+          results.map((business) => {
+            return <Link
+              href={{
+                pathname: "/reviews",
+                query: {
+                  id: business.place_id,
+                  name: encodeURIComponent(business.name)
+                }
+              }}
+              key={business.place_id}
               className="flex cursor-pointer flex-col gap-1 overflow-hidden px-3 py-6 md:hover:text-primary"
             >
               <div className="truncate">{business.name}</div>
@@ -43,6 +51,7 @@ const Page = async ({ searchParams }: Props) => {
                 {business.address.join(", ")}
               </div>
             </Link>
+          }
           )
         }
       </Paper >

@@ -1,15 +1,10 @@
+import { GeistSans } from "geist/font/sans";
 import { Metadata } from "next";
-import { Poppins } from "next/font/google";
 import { getServerSession } from "next-auth";
 
 import "./globals.css";
-import authOptions from "./api/auth/_options/options";
+import authOptions from "./(auth)/api/auth/_options/options";
 import SessionProvider from "./session-provider";
-
-const poppins = Poppins({
-  weight: ["400", "500", "600"],
-  subsets: ["latin"],
-});
 
 interface Props {
   children: React.ReactNode;
@@ -42,7 +37,7 @@ const Layout = async ({ children }: Props) => {
       text-black
     ">
       <body className={`
-        ${poppins.className} 
+       ${GeistSans.className}
         flex
         min-h-full
         w-full

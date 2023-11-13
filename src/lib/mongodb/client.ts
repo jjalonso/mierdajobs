@@ -1,33 +1,45 @@
-import { MongoClient } from "mongodb"
+import { MongoClient, Db } from "mongodb";
 
 if (!process.env.MONGODB_URI) {
-  throw new Error('Invalid/Missing environment variable: "MONGODB_URI"')
+  throw new Error('Invalid/Missing environment variable: "MONGODB_URI"');
 }
 
-const uri = process.env.MONGODB_URI
-const options = {}
+const uri = process.env.MONGODB_URI;
+const options = {};
 
-let client
-let clientPromise: Promise<MongoClient>
+let client: MongoClient;
+let clientPromise: Promise<MongoClient>;
+let dbPromise: Promise<Db>;
+
+// Extend the global type with a _mongoClientPromise property for development hot-reloading
+type CustomNodeJSGlobal = typeof globalThis & {
+  _mongoClientPromise?: Promise<MongoClient>;
+  _dbPromise?: Promise<Db>;
+};
 
 if (process.env.NODE_ENV === "development") {
-  // In development mode, use a global variable so that the value
-  // is preserved across module reloads caused by HMR (Hot Module Replacement).
-  const globalWithMongo = global as typeof globalThis & {
-    _mongoClientPromise?: Promise<MongoClient>
+  const globalWithMongo = global as CustomNodeJSGlobal;
+
+  // Only create a new MongoClient if one hasn't been created yet
+  if (!globalWithMongo._mongoClientPromise) {
+    client = new MongoClient(uri, options);
+    globalWithMongo._mongoClientPromise = client.connect();
   }
 
-  if (!globalWithMongo._mongoClientPromise) {
-    client = new MongoClient(uri, options)
-    globalWithMongo._mongoClientPromise = client.connect()
+  // Use the existing client promise or create a new db promise if necessary
+  clientPromise = globalWithMongo._mongoClientPromise;
+  dbPromise = globalWithMongo._dbPromise ?? clientPromise.then(c => c.db(process.env.MONGODB_DATABASE));
+
+  // Store the dbPromise back in the global object if it was just created
+  if (!globalWithMongo._dbPromise) {
+    globalWithMongo._dbPromise = dbPromise;
   }
-  clientPromise = globalWithMongo._mongoClientPromise
 } else {
   // In production mode, it's best to not use a global variable.
-  client = new MongoClient(uri, options)
-  clientPromise = client.connect()
+  client = new MongoClient(uri, options);
+  clientPromise = client.connect();
+  dbPromise = clientPromise.then(c => c.db(process.env.MONGODB_DATABASE));
 }
 
-// Export a module-scoped MongoClient promise. By doing this in a
-// separate module, the client can be shared across functions.
-export default clientPromise
+// Export both the MongoClient promise and the Db promise
+export { clientPromise, dbPromise };

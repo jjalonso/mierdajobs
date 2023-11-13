@@ -31,13 +31,16 @@ const AuthBadge = () => {
           <Menu
             as="div" className="relative inline-block text-left">
             <Menu.Button className="inline-flex w-fit">
-              <Image
-                className="h-12 w-12 rounded-full border-[3px] border-secondary bg-secondary md:h-16 md:w-16"
-                src={`/avatars/${session?.user?.image}.png`}
-                width="56"
-                height="56"
-                alt="Avatar"
-              />
+              <>
+
+                <Image
+                  className="h-12 w-12 rounded-full border-[3px] border-secondary bg-secondary md:h-14 md:w-14"
+                  src={`/avatars/${session?.user?.image}.png`}
+                  width="56"
+                  height="56"
+                  alt="Avatar"
+                />
+              </>
             </Menu.Button>
             <Transition
               as={Fragment}
@@ -71,10 +74,10 @@ const AuthBadge = () => {
                         variant="ghost"
                         onClick={() => signOut()}
                         className="
-                        text-black 
-                        hover:bg-secondary 
-                        hover:text-white"
-                      >
+                          text-black 
+                          hover:bg-secondary 
+                          hover:text-white
+                      ">
                         Cerrar sesion
                       </Button>
                     )}
@@ -90,7 +93,7 @@ const AuthBadge = () => {
             href={`/signin?callbackUrl=${callbackUrl}`} className="flex justify-end">
             <Button size="fit">
               <div className="">Iniciar sesión</div>
-              <UserCircleIcon className="h-8 w-8 text-white md:h-10 md:w-10" />
+              <UserCircleIcon className="h-8 w-8 text-white" />
             </Button>
           </Link>
         </>

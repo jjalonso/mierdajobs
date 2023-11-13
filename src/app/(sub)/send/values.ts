@@ -1,4 +1,4 @@
-import { WorkingHoursPeriodEnum } from "../../api/_reviews/types";
+import { WorkingHoursPeriodEnum } from "../types";
 
 import { IndexedWorkingHoursPeriod } from "./types";
 

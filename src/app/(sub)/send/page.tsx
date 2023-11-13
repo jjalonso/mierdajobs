@@ -3,12 +3,14 @@ import { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 
-import ReviewForm from "./review-form";
+import SendForm from "./send-form";
 
-import authOptions from "@/app/api/auth/_options/options";
+import authOptions from "@/app/(auth)/api/auth/_options/options";
 
 interface Props {
-  searchParams: Record<string, string>
+  searchParams: {
+    id: string
+  }
 }
 
 const Page = async ({ searchParams }: Props) => {
@@ -20,7 +22,7 @@ const Page = async ({ searchParams }: Props) => {
 
   return (
     <div className="flex flex-col items-center">
-      <ReviewForm gplace={id} />
+      <SendForm gplace={id} />
     </div>
   )
 }

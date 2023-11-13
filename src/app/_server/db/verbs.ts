@@ -2,9 +2,11 @@ import { Db, Document, Filter, OptionalId, WithId } from "mongodb";
 
 import { connectDB } from "@/app/_server/db/mongodb";
 
+// REMOVE, types done wrongly, must use proper types using generics, check get-reviews
 type ParamsProps = Filter<WithId<Document>>;
 export type BodyProps = OptionalId<Document> | OptionalId<Document>[];
 
+// TODO: REMOVE, use use collection getters, check get-reviews
 export const getCollection = async (
 	collection: string,
 	params: ParamsProps
@@ -14,6 +16,7 @@ export const getCollection = async (
 	return response;
 };
 
+// TODO: REMOVE, use collection getters, check get-reviews
 export const insertDataInCollection = async (
 	collection: string,
 	body: BodyProps

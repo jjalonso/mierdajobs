@@ -1,17 +1,11 @@
 import { VariantProps, cva } from "class-variance-authority";
-import { Roboto } from "next/font/google";
 import React, { createElement } from "react";
 import { twMerge } from "tailwind-merge";
 
-const roboto = Roboto({
-  weight: ["300", "400", "700"],
-  subsets: ["latin"],
-});
-
-const headingVariants = cva([`${roboto.className} font-normal`], {
+const headingVariants = cva(["font-thin text-[#000]"], {
   variants: {
     size: {
-      xs: ["text-xl "],
+      xs: ["text-xl"],
       base: ["text-2xl"],
       xl: ["text-3xl md:leading-relaxed"]
     },

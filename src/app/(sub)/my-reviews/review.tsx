@@ -1,6 +1,6 @@
 import { TrashIcon } from "@heroicons/react/24/outline";
 
-import { MyReview } from "@/app/api/_reviews/get-my-reviews/types";
+import { MyReview } from "@/app/(sub)/my-reviews/data/types";
 import { Button } from "@/components/button";
 import { Heading } from "@/components/heading";
 import Paper from "@/components/paper";

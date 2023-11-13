@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 
-import { Review } from "../../api/_reviews/get-reviews/types";
+import { Review } from "./data/types";
 
 import LikeButton from "@/components/like-button";
 import Paper from "@/components/paper";
@@ -23,8 +23,9 @@ const Review = ({ data }: Props) =>
         alt="Avatar"
         className="
             hidden 
-            h-[100px] 
+            h-[100px]
             w-[100px] 
+            shrink-0
             rounded-full 
             border-4 
             border-secondary 
@@ -35,7 +36,6 @@ const Review = ({ data }: Props) =>
       <div className="flex grow flex-col gap-4">
         <div className="flex grow items-end gap-4 md:items-center">
           {/* Mobile avatar */}
-
           <Image
             src={data.avatar}
             quality={100}
@@ -43,13 +43,14 @@ const Review = ({ data }: Props) =>
             height={50}
             alt="Avatar"
             className="
-                h-[50px] 
-                w-[50px] 
-                rounded-full 
-                border-[3px] 
-                border-secondary 
-                bg-secondary 
-                md:hidden"
+              h-[50px]
+              w-[50px]
+              shrink-0
+              rounded-full 
+              border-[3px] 
+              border-secondary 
+              bg-secondary 
+              md:hidden"
           />
 
           <div className="flex w-full flex-col md:flex-row-reverse md:justify-between">

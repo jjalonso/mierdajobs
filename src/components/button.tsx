@@ -1,17 +1,10 @@
 import { ArrowPathIcon } from "@heroicons/react/24/outline";
 import { cva, type VariantProps } from "class-variance-authority";
-import { Roboto } from "next/font/google";
 import React from "react";
 import { ButtonProps as ButtonPropsType } from "react-html-props";
 import { twMerge } from "tailwind-merge";
 
-const roboto = Roboto({
-  weight: "400",
-  subsets: ["latin"],
-});
-
 const buttonVariants = cva(`
-    ${roboto.className} 
     flex
     w-fit
     cursor-pointer 
@@ -19,8 +12,9 @@ const buttonVariants = cva(`
     justify-center 
     gap-2
     rounded-md 
-    uppercase 
-    tracking-widest 
+    font-light 
+    uppercase
+    tracking-wider
     transition
     duration-300
     focus-visible:outline-none

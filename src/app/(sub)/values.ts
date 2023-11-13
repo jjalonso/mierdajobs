@@ -1,4 +1,4 @@
-import { ContractFraudEnum } from "../types";
+import { ContractFraudEnum } from "./types";
 
 export const contractFraudValues = {
   [ContractFraudEnum.NO_CONTRACT]: {

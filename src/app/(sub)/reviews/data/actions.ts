@@ -9,7 +9,8 @@ import { ReviewDB } from "@/app/(sub)/types";
 import { users, reviews } from "@/lib/mongodb/collections";
 
 export const getReviews = async (place_id: string) => {
-	// No risk on place_id if maliciusly invoked, it will just return the find
+	// query params are always string or undefined, so no need to validate
+	// No risk on place_id if maliciusly invoked, it will just return an empty find
 
 	// Get collections
 	const cReviews = await reviews()
@@ -35,7 +36,7 @@ export const getReviews = async (place_id: string) => {
 	}));
 
 	return {
-		totalReviews: reviews.length,
+		totalReviews: allReviews.length,
 		reviews: responseReviews
 	};
 };

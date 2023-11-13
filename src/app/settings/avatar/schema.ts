@@ -2,6 +2,8 @@ import Joi from "joi";
 
 import { AvatarEnum } from "@/app/(auth)/api/auth/types";
 
-export const schemaReviews = Joi.object({
+const schema = Joi.object({
   avatar: Joi.string().valid(...Object.values(AvatarEnum)).required(),
 })
+
+export default schema;

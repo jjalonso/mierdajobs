@@ -1,5 +1,9 @@
-import { IndexedName } from "@/app/(sub)/search/api/types";
 import { ContractFraudEnum, WorkingHoursPeriodEnum } from "@/app/(sub)/types";
+
+export type IndexedName = {
+  id: string;
+  name: string;
+};
 
 interface IndexedWorkingHoursPeriod extends IndexedName {
   id: WorkingHoursPeriodEnum

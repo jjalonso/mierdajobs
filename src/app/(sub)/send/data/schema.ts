@@ -1,8 +1,7 @@
 import Joi from "joi";
 
-import { customValidationMessages } from "../../../search/api/utils";
-
 import { ContractFraudEnum, WorkingHoursPeriodEnum } from "@/app/(sub)/types";
+import { customValidationMessages } from "@/lib/validation";
 
 const schema = Joi.object({
 	place_id: Joi.string().required(),

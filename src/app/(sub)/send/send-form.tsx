@@ -2,16 +2,15 @@
 
 import React from "react";
 
-import { contractFraudValues } from "../reviews/values";
+import { contractFraudValues } from "../values";
 
 import Thanks from "./thanks";
-import { useReviewForm } from "./use-review-form";
+import { useSendForm } from "./use-send-form";
 import { workingHoursPeriodValues } from "./values"
 
 import { WorkingHoursPeriodEnum } from "@/app/(sub)/types";
 import { Button } from "@/components/button";
 import { Checkbox } from "@/components/checkbox";
-import ErrorMessage from "@/components/error-message";
 import { FormField } from "@/components/formfield";
 import { Heading } from "@/components/heading";
 import { Input } from "@/components/input";
@@ -24,21 +23,21 @@ interface Props {
   gplace: string
 }
 
-const ReviewForm = ({ gplace }: Props) => {
+const SendForm = ({ gplace }: Props) => {
   const {
     onFormSubmit,
-    isFormSubmitting,
+    isPending,
     isFormSubmitted,
     errors,
     backUrl
-  } = useReviewForm();
+  } = useSendForm();
 
   return isFormSubmitted ?
     <Thanks backUrl={backUrl} /> :
     <Paper className="flex h-fit flex-col gap-6">
       <form
         onSubmit={onFormSubmit}
-        className="flex flex-col gap-2 md:gap-6"
+        className="flex flex-col gap-6"
         autoComplete="off"
         noValidate
       >
@@ -159,6 +158,7 @@ const ReviewForm = ({ gplace }: Props) => {
                 name="comment"
                 placeholder="Cuéntanos como fue trabajar aquí"
               />
+              {/* Temporarily disabled */}
               {/* <CharCounter
                   className="absolute bottom-0 right-0"
                   current={field.value.length}
@@ -171,7 +171,8 @@ const ReviewForm = ({ gplace }: Props) => {
         <div className="flex w-full flex-col gap-6 md:flex-row">
           <div className="w-full">
 
-            {/* Comment */}
+            {/* termsAcceptance */}
+
             <FormField
               error={errors.termsAcceptance} className="w-fit">
               <Checkbox
@@ -183,10 +184,9 @@ const ReviewForm = ({ gplace }: Props) => {
           </div>
         </div>
 
-        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-end">
-          {errors.global && <ErrorMessage className="self-center text-center">{errors.global}</ErrorMessage>}
+        <div className="mt-8 flex md:justify-end">
           <Button
-            loading={isFormSubmitting}
+            loading={isPending}
             className="w-full md:w-fit"
             type="submit"
           >
@@ -198,4 +198,4 @@ const ReviewForm = ({ gplace }: Props) => {
     </Paper>
 };
 
-export default ReviewForm;
+export default SendForm;

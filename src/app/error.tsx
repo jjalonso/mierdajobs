@@ -1,4 +1,6 @@
 "use client"
+import Image from "next/image"
+import Link from "next/link"
 import { useEffect } from "react"
 
 import { Button } from "@/components/button"
@@ -16,12 +18,35 @@ const Error = ({
   }, [error])
 
   return (
-    <div>
-      <Heading level={1}>Parece que tuvimos un error...</Heading>
-      <Button onClick={() => reset()}>
-        Inténtalo de nuevo
-      </Button>
-    </div>
+    <div className="flex h-full flex-col items-center justify-center">
+      <Image
+        className="mb-8"
+        src="/objects/plunger.png"
+        alt="Desatascador"
+        width={150}
+        height={0}
+        quality={100}
+      />
+      <Heading
+        level={1} size="xl" className="mb-4 text-white">
+        Parece que hubo un problema.
+      </Heading>
+      <p className="mb-12 text-white">Es posible que el problema sea momentáneo y no vuelva a ocurrir</p>
+      <div className="flex w-full flex-col justify-center gap-4 md:flex-row">
+        <Button
+          className="w-full md:w-fit"
+          variant="primary" onClick={() => reset()}>
+          Reintentar
+        </Button>
+        <Link href="/">
+          <Button
+            className="w-full md:w-fit"
+            variant="secondary">
+            Volver al inicio
+          </Button>
+        </Link>
+      </div>
+    </div >
   )
 }
 export default Error;

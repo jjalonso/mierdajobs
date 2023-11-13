@@ -1,9 +1,8 @@
 import querystring from "querystring";
 
 import { GPlaceAutocompleteResponse, GPlaceDetailsResponse } from "./types";
-import { easyFetch } from "./utils";
 
-export const fetchGPlaceBusinesses = (q: string)
+export const fetchGPlaceBusinesses = async (q: string)
 	: Promise<GPlaceAutocompleteResponse> => {
 	const baseUrl = "https://maps.googleapis.com/maps/api/place/autocomplete/json?";
 	const queryParams = querystring.stringify({
@@ -14,7 +13,8 @@ export const fetchGPlaceBusinesses = (q: string)
 		key: process.env.GOOGLE_API_KEY
 	});
 
-	return easyFetch(baseUrl + queryParams);
+	const response = await fetch(baseUrl + queryParams);
+	return await response.json();
 }
 
 export const fetchGPlaceDetails = async (
@@ -26,5 +26,6 @@ export const fetchGPlaceDetails = async (
 		place_id: place_id,
 		key: process.env.GOOGLE_API_KEY
 	});
-	return easyFetch(baseUrl + queryParams);
+	const response = await fetch(baseUrl + queryParams);
+	return await response.json();
 };

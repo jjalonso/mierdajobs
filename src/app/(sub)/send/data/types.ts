@@ -1,4 +1,4 @@
-import { ReviewDB } from "../../../types";
+import { ReviewDB } from "../../types";
 
 export type SendReviewRequest = Pick<ReviewDB,
 	| "place_id"

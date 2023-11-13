@@ -1,4 +1,4 @@
-import { ReviewDB } from "../../../types";
+import { ReviewDB } from "../../types";
 
 export type Review = {
 	id: string;

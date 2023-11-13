@@ -8,8 +8,8 @@ import React from "react";
 import Review from "./review";
 
 import authOptions from "@/app/(auth)/api/auth/_options/options";
-import getMyReviews from "@/app/(sub)/my-reviews/api/get-my-reviews/actions";
-import { GetMyReviewsResponse } from "@/app/(sub)/my-reviews/api/get-my-reviews/types";
+import getMyReviews from "@/app/(sub)/my-reviews/data/actions";
+import { GetMyReviewsResponse } from "@/app/(sub)/my-reviews/data/types";
 import { Heading } from "@/components/heading";
 import Paper from "@/components/paper";
 

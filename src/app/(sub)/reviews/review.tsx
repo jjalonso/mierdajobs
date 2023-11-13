@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 
-import { Review } from "./api/get-reviews/types";
+import { Review } from "./data/types";
 
 import LikeButton from "@/components/like-button";
 import Paper from "@/components/paper";

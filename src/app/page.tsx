@@ -8,8 +8,7 @@ import { Heading } from "@/components/heading";
 
 const Page = () =>
   <>
-    <Header noLogo
-    />
+    <Header noLogo />
     <main className="flex flex-col items-center px-8 pt-[10vh]">
       <Image
         className="mb-10 w-60"

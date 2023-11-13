@@ -5,8 +5,8 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import React from "react";
 
-import { getReviews } from "./api/get-reviews/actions";
-import { GetReviewsResponse } from "./api/get-reviews/types";
+import { getReviews } from "./data/actions";
+import { GetReviewsResponse } from "./data/types";
 import Review from "./review";
 
 import { Button } from "@/components/button";

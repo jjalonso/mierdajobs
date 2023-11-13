@@ -4,7 +4,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import React from "react";
 
-import { getGooglebusinesses } from "@/app/(sub)/search/api/get-google-businesses/actions";
+import { getBusinesses } from "@/app/(sub)/search/data/actions";
 import { FormSearch } from "@/components/form-search";
 import Paper from "@/components/paper";
 
@@ -18,9 +18,8 @@ const Page = async ({ searchParams }: Props) => {
   const { q } = searchParams;
   if (!q) redirect("/");
 
-  throw Error("ERROR TEST");
+  const results = await getBusinesses(q);
 
-  const results = await getGooglebusinesses(q);
   return (
     <div className="flex w-full flex-col">
       <FormSearch

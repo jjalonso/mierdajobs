@@ -37,7 +37,7 @@ const SendForm = ({ gplace }: Props) => {
     <Paper className="flex h-fit flex-col gap-6">
       <form
         onSubmit={onFormSubmit}
-        className="flex flex-col gap-6"
+        className="flex flex-col gap-2 md:gap-6"
         autoComplete="off"
         noValidate
       >

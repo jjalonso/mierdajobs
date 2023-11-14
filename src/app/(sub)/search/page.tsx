@@ -36,6 +36,8 @@ const Page = async ({ searchParams }: Props) => {
           :
           results.map((business) => {
             return <Link
+              key={business.place_id}
+              className="flex cursor-pointer flex-col gap-1 overflow-hidden px-3 py-6 md:hover:text-primary"
               href={{
                 pathname: "/reviews",
                 query: {
@@ -43,8 +45,6 @@ const Page = async ({ searchParams }: Props) => {
                   name: encodeURIComponent(business.name)
                 }
               }}
-              key={business.place_id}
-              className="flex cursor-pointer flex-col gap-1 overflow-hidden px-3 py-6 md:hover:text-primary"
             >
               <div className="truncate">{business.name}</div>
               <div className="truncate text-sm text-gray">

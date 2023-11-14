@@ -6,12 +6,12 @@ import { contractFraudValues } from "../../values";
 
 import { GetMyReviewsResponse } from "./types"
 
+import authOptions from "@/app/(auth)/api/auth/_options/options";
 import { fetchGPlaceDetails } from "@/lib/google-place/api";
 import { reviews } from "@/lib/mongodb/collections";
 
 const getMyReviews = async (): Promise<GetMyReviewsResponse> => {
-  const session = await getServerSession();
-  console.log("session", session)
+  const session = await getServerSession(authOptions);
   if (!session) throw new Error("Session required");
 
   const cReviews = await reviews()

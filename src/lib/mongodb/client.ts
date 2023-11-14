@@ -1,45 +1,38 @@
-import { MongoClient, Db } from "mongodb";
+"server only";
+
+import { MongoClient } from "mongodb";
 
 if (!process.env.MONGODB_URI) {
   throw new Error('Invalid/Missing environment variable: "MONGODB_URI"');
 }
 
-const uri = process.env.MONGODB_URI;
+const uri: string = process.env.MONGODB_URI;
 const options = {};
 
 let client: MongoClient;
 let clientPromise: Promise<MongoClient>;
-let dbPromise: Promise<Db>;
 
-// Extend the global type with a _mongoClientPromise property for development hot-reloading
 type CustomNodeJSGlobal = typeof globalThis & {
-  _mongoClientPromise?: Promise<MongoClient>;
-  _dbPromise?: Promise<Db>;
+  _mongoClientPromise: Promise<MongoClient>;
 };
 
 if (process.env.NODE_ENV === "development") {
   const globalWithMongo = global as CustomNodeJSGlobal;
 
-  // Only create a new MongoClient if one hasn't been created yet
+  // In development mode, use a global variable so that the value
+  // is preserved across module reloads caused by HMR (Hot Module Replacement).
   if (!globalWithMongo._mongoClientPromise) {
     client = new MongoClient(uri, options);
     globalWithMongo._mongoClientPromise = client.connect();
   }
-
-  // Use the existing client promise or create a new db promise if necessary
   clientPromise = globalWithMongo._mongoClientPromise;
-  dbPromise = globalWithMongo._dbPromise ?? clientPromise.then(c => c.db(process.env.MONGODB_DATABASE));
-
-  // Store the dbPromise back in the global object if it was just created
-  if (!globalWithMongo._dbPromise) {
-    globalWithMongo._dbPromise = dbPromise;
-  }
+  // dbPromise = globalWithMongo._dbPromise;
 } else {
   // In production mode, it's best to not use a global variable.
   client = new MongoClient(uri, options);
   clientPromise = client.connect();
-  dbPromise = clientPromise.then(c => c.db(process.env.MONGODB_DATABASE));
 }
 
-// Export both the MongoClient promise and the Db promise
-export { clientPromise, dbPromise };
+const dbPromise = clientPromise.then(c => c.db(process.env.MONGODB_DATABASE));
+
+export { clientPromise, dbPromise }

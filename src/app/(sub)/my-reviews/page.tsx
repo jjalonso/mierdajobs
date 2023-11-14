@@ -1,6 +1,7 @@
-import { FaceFrownIcon } from "@heroicons/react/24/outline";
 import _ from "lodash";
 import { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 import React from "react";
@@ -9,6 +10,7 @@ import Review from "./review";
 
 import authOptions from "@/app/(auth)/api/auth/_options/options";
 import getMyReviews from "@/app/(sub)/my-reviews/data/actions";
+import { Button } from "@/components/button";
 import { Heading } from "@/components/heading";
 import Paper from "@/components/paper";
 
@@ -35,8 +37,24 @@ const MyReviews = async () => {
 
       {_.isEmpty(myreviews.reviews) ?
         <Paper className="flex flex-col items-center gap-4 text-center text-gray-dark">
-          <FaceFrownIcon className="h-12 w-12 text-gray-light" />
-          Este sitio aún no tiene reseñas
+          <Image
+            className=""
+            src="/objects/roll.png"
+            width="100"
+            height="0"
+            alt="Silla vacia"
+          />
+          <div className="mt-4 space-y-2">
+            <p>Aún no tienes reseñas</p>
+            <p>Estamos esperando que compartas tus experiencias</p>
+          </div>
+
+          <Link href="/">
+            <Button
+              className="mt-6 w-full md:w-fit" variant="primary">
+              Empieza a buscar negocios
+            </Button>
+          </Link>
         </Paper>
         :
         <ul className="flex flex-col gap-5">

@@ -10,3 +10,4 @@ export const insertInCollection = async (
     : await db.collection(collectionName).insertMany(body);
   return response;
 };
+

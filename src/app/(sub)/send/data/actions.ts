@@ -8,7 +8,6 @@ import authOptions from "../../../(auth)/api/auth/_options/options";
 import schema from "./schema";
 
 import { WorkingHoursPeriodEnum } from "@/app/(sub)/types";
-import { disconnectDB } from "@/app/_server/db/mongodb";
 import { ActionResponse } from "@/app/types";
 import { fetchGPlaceDetails } from "@/lib/google-place/api";
 import { insertInCollection } from "@/lib/mongodb/insert";
@@ -50,9 +49,8 @@ export const sendReview = async (formData: FormData): Promise<ActionResponse> =>
     }
 
     // Save data in DB and return the modified business
-
     await insertInCollection("reviews", reviewDocument);
-    await disconnectDB();
+
     revalidatePath("/reviews");
     return {
       code: 201,

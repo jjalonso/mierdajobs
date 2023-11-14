@@ -3,10 +3,10 @@
 import moment from "moment";
 import { ObjectId } from "mongodb";
 
+import { ReviewDB } from "../../types";
 import { contractFraudValues } from "../../values";
 
-import { ReviewDB } from "@/app/(sub)/types";
-import { users, reviews } from "@/lib/mongodb/collections";
+import { reviews, users } from "@/lib/mongodb/collections";
 
 export const getReviews = async (place_id: string) => {
 	// query params are always string or undefined, so no need to validate

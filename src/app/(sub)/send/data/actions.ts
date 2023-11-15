@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { getServerSession } from "next-auth";
 
 import authOptions from "../../../(auth)/api/auth/_options/options";
@@ -47,6 +48,9 @@ export const sendReview = async (formData: FormData): Promise<ActionResponse> =>
       termsAcceptanceSignature: `${new Date().toISOString()}/${session.user.id}/${session.user.email}`,
       likes: 0
     }
+
+    // Purge memoized data
+    revalidatePath(`/api/reviews/${castedValues.place_id}`)
 
     // Save data in DB and return the modified business
     await insertInCollection("reviews", reviewDocument);

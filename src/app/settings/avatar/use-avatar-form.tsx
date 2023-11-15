@@ -18,6 +18,7 @@ export const useAvatarForm = (initialValue: AvatarEnum, callbackUrl: string) => 
 
       await saveAvatar(avatar)
       updateSession();
+      fetch(callbackUrl)
       router.push(callbackUrl)
 
     })

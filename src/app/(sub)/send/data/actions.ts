@@ -1,6 +1,5 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
 import { getServerSession } from "next-auth";
 
 import authOptions from "../../../(auth)/api/auth/_options/options";
@@ -45,13 +44,12 @@ export const sendReview = async (formData: FormData): Promise<ActionResponse> =>
       working_hours: isPerWeek ? working_hours * 4 : working_hours,
       created_at: new Date().toISOString(),
       user: session.user.id,
-      termsAcceptanceSignature: `${new Date().toISOString()}/${session.user.id}/${session.user.email}`
+      termsAcceptanceSignature: `${new Date().toISOString()}/${session.user.id}/${session.user.email}`,
+      likes: 0
     }
 
     // Save data in DB and return the modified business
     await insertInCollection("reviews", reviewDocument);
-
-    revalidatePath("/reviews");
     return {
       code: 201,
       data: {

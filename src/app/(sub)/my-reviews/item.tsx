@@ -1,4 +1,7 @@
+"use client";
+
 import { TrashIcon } from "@heroicons/react/24/outline";
+import { useMemo } from "react";
 
 import { MyReview } from "@/app/(sub)/my-reviews/data/types";
 import { Button } from "@/components/button";
@@ -8,17 +11,30 @@ import ValueBlock from "@/components/value-block";
 
 interface Props {
   data: MyReview
+  onDelete: () => void
 }
 
-const deleteButton = (
-  <Button
-    variant="neutral" className="text-black">
-    <TrashIcon className="h-6 w-6" />
-    Eliminar reseña
-  </Button>
-)
+const Item = ({ data, onDelete }: Props) => {
 
-const SubmittedReview = ({ data }: Props) => {
+  const deleteButton = useMemo(() =>
+    // <form action={deleteMyReview}>
+    <>
+      <input
+        type="hidden"
+        name="id"
+        value={data._id}
+      />
+      <Button
+        className="text-black"
+        onClick={onDelete}
+        variant="neutral"
+      >
+        <TrashIcon className="h-6 w-6" />
+        Eliminar reseña
+      </Button>
+    </>
+    // </form>
+    , [data._id, onDelete])
 
   return (
     <Paper className="flex w-full flex-col gap-8">
@@ -59,4 +75,4 @@ const SubmittedReview = ({ data }: Props) => {
   )
 }
 
-export default SubmittedReview
+export default Item;

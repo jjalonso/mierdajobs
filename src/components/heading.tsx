@@ -2,7 +2,7 @@ import { VariantProps, cva } from "class-variance-authority";
 import React, { createElement } from "react";
 import { twMerge } from "tailwind-merge";
 
-const headingVariants = cva(["font-thin text-[#000]"], {
+const headingVariants = cva(["font-extralight text-[#000]"], {
   variants: {
     size: {
       xs: ["text-xl"],

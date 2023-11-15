@@ -17,13 +17,13 @@ export const getReviews = async (place_id: string) => {
 	const cUsers = await users()
 
 	// Get business reviews and get user avatar
-	const allReviews = await cReviews.find({ place_id }).toArray();
+	const allReviews = await cReviews.find({ place_id, disabled: { $ne: true } }).toArray();
 	const responseReviews = await Promise.all(allReviews.map(async (item: ReviewDB) => {
 		const result = await cUsers.findOne({ _id: new ObjectId(item.user) })
 
 		// build review
 		return {
-			id: item._id,
+			_id: item._id.toString(),
 			created_at: moment(item.created_at).format("MMMM YYYY"),
 			working_hours_pw: (item.working_hours / 4).toFixed(2).replace(/[.,]00$/, ""),
 			salary_ph: (item.monthly_salary / item.working_hours).toFixed(2),

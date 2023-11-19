@@ -34,13 +34,13 @@ const Error = ({
       <p className="mb-12 text-white">Es posible que el problema sea momentáneo y no vuelva a ocurrir</p>
       <div className="flex w-full flex-col justify-center gap-4 md:flex-row">
         <Button
-          className="w-full md:w-fit"
+          className="w-full"
           variant="primary" onClick={() => reset()}>
           Reintentar
         </Button>
         <Link href="/">
           <Button
-            className="w-full md:w-fit"
+            className="w-full"
             variant="secondary">
             Volver al inicio
           </Button>

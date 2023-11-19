@@ -15,14 +15,14 @@ export const useAvatarForm = (initialValue: AvatarEnum, callbackUrl: string) => 
 
   const handleSubmit = useCallback(async () => {
     startTransition(async () => {
-
-      await saveAvatar(avatar)
-      updateSession();
-      fetch(callbackUrl)
+      if (avatar !== initialValue) {
+        await saveAvatar(avatar)
+        await updateSession();
+      };
+      // fetch(callbackUrl)
       router.push(callbackUrl)
-
     })
-  }, [avatar, updateSession, router, callbackUrl]);
+  }, [avatar, initialValue, callbackUrl, router, updateSession]);
 
   return {
     avatar,

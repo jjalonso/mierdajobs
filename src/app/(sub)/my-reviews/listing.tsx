@@ -1,7 +1,7 @@
 
 "use client";
 
-import React, { useState, useTransition } from "react";
+import React, { Fragment, useState, useTransition } from "react";
 
 import { deleteMyReview } from "./data/actions";
 import { MyReview } from "./data/types";
@@ -35,17 +35,30 @@ const Listing = ({ items }: Props) => {
   return (
     <>
       <Dialog
+        isOpen={isConfirmationOpen}
         onClose={() => setIsConfirmationOpen(false)}
-        isOpen={isConfirmationOpen} title="Confirmación">
+        title="Confirmación">
         <p>
           ¿Estás seguro que quieres eliminar esta reseña?
         </p>
-        <Button
-          loading={isPending}
-          onClick={() => handleConfirmDelete()}
-          className="mt-6 w-full md:w-fit" variant="primary">
-          Eliminar
-        </Button>
+        <div className="mt-12 flex w-full flex-col justify-end gap-3 md:flex-row">
+          <Button
+            loading={isPending}
+            onClick={() => setIsConfirmationOpen(false)}
+            className="w-full md:w-fit"
+            variant="neutral"
+          >
+            Cancelar
+          </Button>
+          <Button
+            loading={isPending}
+            onClick={() => handleConfirmDelete()}
+            className="w-full md:w-fit"
+            variant="primary"
+          >
+            Eliminar
+          </Button>
+        </div>
       </Dialog>
       <ul className="flex flex-col gap-5">
         {items.map(item =>

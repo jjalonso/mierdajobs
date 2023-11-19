@@ -16,7 +16,7 @@ const LikeButton = ({ totalLikes = 0, liked = false }: Props) => {
   return (
     <Button
       className="self-end text-black md:self-start"
-      variant="neutral" size="fit">
+      variant="neutral">
       {totalLikes}
       {icon}
     </Button>

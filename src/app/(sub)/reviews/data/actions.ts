@@ -6,9 +6,11 @@ import { ObjectId } from "mongodb";
 import { ReviewDB } from "../../types";
 import { contractFraudValues } from "../../values";
 
+import { GetReviewsResponse } from "./types";
+
 import { reviews, users } from "@/lib/mongodb/collections";
 
-export const getReviews = async (place_id: string) => {
+export const getReviews = async (place_id: string): Promise<GetReviewsResponse> => {
 	// query params are always string or undefined, so no need to validate
 	// No risk on place_id if maliciusly invoked, it will just return an empty find
 

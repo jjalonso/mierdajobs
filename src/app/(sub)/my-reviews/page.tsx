@@ -50,7 +50,7 @@ const MyReviews = async () => {
 
           <Link href="/">
             <Button
-              className="mt-6 w-full md:w-fit" variant="primary">
+              className="mt-6 w-full" variant="primary">
               Buscar negocios
             </Button>
           </Link>

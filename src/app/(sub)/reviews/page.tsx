@@ -66,7 +66,7 @@ const Reviews = async ({ searchParams }: Props) => {
           <ul className="flex flex-col gap-5">
             {reviews.reviews.map(review =>
               <Review
-                key={review.id}
+                key={review._id}
                 data={review}
               />
             )}

@@ -11,8 +11,9 @@ const buttonVariants = cva(`
     items-center 
     justify-center 
     gap-2
+    whitespace-nowrap 
     rounded-md 
-    font-light 
+    font-light
     uppercase
     tracking-wider
     transition
@@ -34,8 +35,7 @@ const buttonVariants = cva(`
         true: "brightness-90",
       },
       size: {
-        default: "min-w-[170px] px-4 py-3",
-        fit: "min-w-fit px-4 py-3",
+        default: "px-4 py-3",
       },
     },
     defaultVariants: {

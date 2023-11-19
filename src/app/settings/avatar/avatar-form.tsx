@@ -14,7 +14,12 @@ interface Props {
 }
 
 const AvatarForm = ({ initialValue, callbackUrl }: Props) => {
-  const { avatar, setAvatar, handleSubmit } = useAvatarForm(initialValue, callbackUrl);
+  const {
+    avatar,
+    setAvatar,
+    handleSubmit,
+    isPending
+  } = useAvatarForm(initialValue, callbackUrl);
 
   return (
     <>
@@ -26,6 +31,7 @@ const AvatarForm = ({ initialValue, callbackUrl }: Props) => {
       <Button
         className="w-full"
         onClick={handleSubmit}
+        loading={isPending}
       >
         Guardar
       </Button>

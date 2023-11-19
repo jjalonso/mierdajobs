@@ -95,6 +95,7 @@ const SendForm = ({ gplace }: Props) => {
           <div className="w-full md:w-1/4">
 
             {/* Annual Leave */}
+
             <FormField error={errors.annual_leave}>
               Vacaciones anuales
               <Input

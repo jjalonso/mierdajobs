@@ -1,6 +1,5 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
 import { getServerSession } from "next-auth";
 
 import authOptions from "../../../(auth)/api/auth/_options/options";
@@ -8,10 +7,9 @@ import authOptions from "../../../(auth)/api/auth/_options/options";
 import schema from "./schema";
 
 import { WorkingHoursPeriodEnum } from "@/app/(sub)/types";
-import { disconnectDB } from "@/app/_server/db/mongodb";
-import { insertDataInCollection } from "@/app/_server/db/verbs";
 import { ActionResponse } from "@/app/types";
 import { fetchGPlaceDetails } from "@/lib/google-place/api";
+import { insertInCollection } from "@/lib/mongodb/insert";
 import { sanitizeFormData } from "@/lib/sanitization";
 import { ValidationErrorToObject } from "@/lib/validation";
 
@@ -46,13 +44,12 @@ export const sendReview = async (formData: FormData): Promise<ActionResponse> =>
       working_hours: isPerWeek ? working_hours * 4 : working_hours,
       created_at: new Date().toISOString(),
       user: session.user.id,
-      termsAcceptanceSignature: `${new Date().toISOString()}/${session.user.id}/${session.user.email}`
+      termsAcceptanceSignature: `${new Date().toISOString()}/${session.user.id}/${session.user.email}`,
+      likes: 0
     }
 
     // Save data in DB and return the modified business
-    await insertDataInCollection("reviews", reviewDocument);
-    await disconnectDB();
-    revalidatePath("/reviews");
+    await insertInCollection("reviews", reviewDocument);
     return {
       code: 201,
       data: {

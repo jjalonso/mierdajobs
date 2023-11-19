@@ -4,7 +4,8 @@ import querystring from "querystring";
 import { useTransition } from "react";
 import React, { useState } from "react";
 
-import { sendReview } from "@/app/(sub)/send/data/actions";
+import { sendReview } from "./data/actions";
+
 import { ActionResponse } from "@/app/types";
 
 interface UseSendFormReturn {

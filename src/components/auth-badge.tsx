@@ -24,7 +24,7 @@ const AuthBadge = () => {
       {session ? (
         <>
           <a href="/my-reviews">
-            <Button size="fit">
+            <Button>
               Mis Reseñas
             </Button>
           </a>
@@ -91,8 +91,8 @@ const AuthBadge = () => {
         <>
           <Link
             href={`/signin?callbackUrl=${callbackUrl}`} className="flex justify-end">
-            <Button size="fit">
-              <div className="">Iniciar sesión</div>
+            <Button>
+              Iniciar sesión
               <UserCircleIcon className="h-8 w-8 text-white" />
             </Button>
           </Link>

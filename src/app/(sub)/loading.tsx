@@ -16,7 +16,7 @@ const Loading = () =>
       </div>
     </div>
 
-    <Paper className="flex flex-col items-center gap-4">
+    <Paper className="flex flex-col items-center gap-4 bg-white">
       <span className="sr-only">Loading...</span>
       <div
         role="status"

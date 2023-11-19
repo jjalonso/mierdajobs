@@ -19,11 +19,9 @@ const ExtendedAdapter = (
     async createUser(user) {
       user.image = _.sample(Object.values(AvatarEnum));
 
-      if (originalAdapter?.createUser) {
-        return originalAdapter.createUser(user);
-      } else {
-        throw new Error("createUser method not found in original adapter");
-      }
+      if (originalAdapter?.createUser) return originalAdapter.createUser(user);
+
+      throw new Error("createUser method not found in original adapter");
     },
 
   };

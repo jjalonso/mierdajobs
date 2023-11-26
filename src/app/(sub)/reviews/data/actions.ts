@@ -2,17 +2,22 @@
 
 import moment from "moment";
 import { ObjectId } from "mongodb";
+import { getServerSession } from "next-auth";
 
 import { ReviewDB } from "../../types";
 import { contractFraudValues } from "../../values";
 
 import { GetReviewsResponse } from "./types";
 
+import authOptions from "@/app/(auth)/api/auth/_options/options";
 import { reviews, users } from "@/lib/mongodb/collections";
 
 export const getReviews = async (place_id: string): Promise<GetReviewsResponse> => {
 	// query params are always string or undefined, so no need to validate
 	// No risk on place_id if maliciusly invoked, it will just return an empty find
+
+	const session = await getServerSession(authOptions);
+	let isSubmittedAllowed = true;
 
 	// Get collections
 	const cReviews = await reviews()
@@ -22,6 +27,8 @@ export const getReviews = async (place_id: string): Promise<GetReviewsResponse> 
 	const allReviews = await cReviews.find({ place_id, disabled: { $ne: true } }).toArray();
 	const responseReviews = await Promise.all(allReviews.map(async (item: ReviewDB) => {
 		const result = await cUsers.findOne({ _id: new ObjectId(item.user) })
+
+		isSubmittedAllowed = !(session?.user?.id === item.user);
 
 		// build review
 		return {
@@ -36,8 +43,8 @@ export const getReviews = async (place_id: string): Promise<GetReviewsResponse> 
 			likes: item.likes,
 		};
 	}));
-
 	return {
+		isSubmittedAllowed,
 		totalReviews: allReviews.length,
 		reviews: responseReviews
 	};

@@ -9,6 +9,7 @@ import schema from "./schema";
 import { WorkingHoursPeriodEnum } from "@/app/(sub)/types";
 import { ActionResponse } from "@/app/types";
 import { fetchGPlaceDetails } from "@/lib/google-place/api";
+import { reviews } from "@/lib/mongodb/collections";
 import { insertInCollection } from "@/lib/mongodb/insert";
 import { sanitizeFormData } from "@/lib/sanitization";
 import { ValidationErrorToObject } from "@/lib/validation";
@@ -31,7 +32,18 @@ export const sendReview = async (formData: FormData): Promise<ActionResponse> =>
       data: ValidationErrorToObject(validationError)
     }
 
+    // check if exist a review document in DB that contains a review with .user.id as session.user.id
+
   } else {
+    // Check if user already submitted a review for this business
+    const cReviews = await reviews();
+    const existingReview = await cReviews.findOne({
+      user: session.user.id,
+      place_id: formData.get("place_id")?.toString(),
+      disabled: { $ne: true }
+    });
+    if (existingReview) throw new Error("User already submitted a review for this business");
+
     // Is a google business? (GMaps return 200 even if contains errors)
     const { error_message, result } = await fetchGPlaceDetails(castedValues.place_id);
     if (!result) throw Error(error_message);

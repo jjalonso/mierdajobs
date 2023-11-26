@@ -43,19 +43,23 @@ const Reviews = async ({ searchParams }: Props) => {
 
       <div className="space-y-4">
         <div className="flex justify-end">
-          <Link
-            className="w-full md:w-fit"
-            href={{
-              pathname: "/send",
-              query: { id, }
-            }}
-          >
-            <Button
-              className="w-full md:w-fit" variant="secondary">
-              <PlusIcon className="h-6 w-6" />
-              Añadir una reseña
-            </Button>
-          </Link>
+          {
+            reviews.isSubmittedAllowed ?
+              <Link
+                className="w-full md:w-fit"
+                href={{
+                  pathname: "/send",
+                  query: { id, }
+                }}
+              >
+                <Button
+                  className="w-full md:w-fit" variant="secondary">
+                  <PlusIcon className="h-6 w-6" />
+                  Añadir una reseña
+                </Button>
+              </Link>
+              : <div className="text-white">Ya enviastes una review a este negocio</div>
+          }
         </div>
         {_.isEmpty(reviews.reviews) ?
           <Paper className="flex flex-col items-center gap-4 text-center text-gray-dark">

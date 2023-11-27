@@ -4,7 +4,7 @@ export type Review = {
 	salary_ph: string;
 	working_hours_pw: string;
 	avatar: string;
-	contract_fraud: string; // TODO: test if could be just picked
+	contract_fraud: string;
 } & Pick<
 	ReviewDB,
 	| "_id"
@@ -15,6 +15,7 @@ export type Review = {
 >;
 
 export type GetReviewsResponse = {
+	isSubmittedAllowed: boolean;
 	totalReviews: number;
 	reviews: Review[];
 };

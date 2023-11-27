@@ -1,7 +1,7 @@
 
 "use client";
 
-import React, { Fragment, useState, useTransition } from "react";
+import React, { useState, useTransition } from "react";
 
 import { deleteMyReview } from "./data/actions";
 import { MyReview } from "./data/types";
@@ -43,7 +43,6 @@ const Listing = ({ items }: Props) => {
         </p>
         <div className="mt-12 flex w-full flex-col justify-end gap-3 md:flex-row">
           <Button
-            loading={isPending}
             onClick={() => setIsConfirmationOpen(false)}
             className="w-full md:w-fit"
             variant="neutral"

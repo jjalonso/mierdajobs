@@ -1,5 +1,6 @@
 import { GeistSans } from "geist/font/sans";
 import { Metadata } from "next";
+import Script from "next/script";
 import { getServerSession } from "next-auth";
 
 import "./globals.css";
@@ -36,6 +37,11 @@ const Layout = async ({ children }: Props) => {
       text-sm
       text-black
     ">
+      <Script
+        defer
+        src="https://plausible.io/js/script.js"
+        data-domain="mierdajobs.com"
+      />
       <body className={`
        ${GeistSans.className}
         flex

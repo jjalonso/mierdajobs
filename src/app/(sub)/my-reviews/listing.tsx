@@ -1,11 +1,7 @@
 
 "use client";
 
-<<<<<<< HEAD
 import React, { useState, useTransition } from "react";
-=======
-import React, { Fragment, useState, useTransition } from "react";
->>>>>>> 21544b3a1fbd53862cebc472959ae29622835521
 
 import { deleteMyReview } from "./data/actions";
 import { MyReview } from "./data/types";

@@ -3,6 +3,7 @@
 import moment from "moment";
 import { ObjectId } from "mongodb";
 import { revalidatePath } from "next/cache";
+import { headers } from "next/headers";
 import { getServerSession } from "next-auth";
 
 import { ReviewDB } from "../../types";
@@ -13,6 +14,7 @@ import { GetMyReviewsResponse } from "./types"
 import authOptions from "@/app/(auth)/api/auth/_options/options";
 import { fetchGPlaceDetails } from "@/lib/google-place/api";
 import { reviews } from "@/lib/mongodb/collections";
+import { recordPlausibleEvent } from "@/lib/plausible";
 
 const getMyReviews = async (): Promise<GetMyReviewsResponse> => {
   const session = await getServerSession(authOptions);
@@ -60,6 +62,14 @@ const deleteMyReview = async (id: string): Promise<void> => {
 
   // Soft delete
   await cReviews.updateOne(filter, operation);
+  await recordPlausibleEvent(
+    "delete-review",
+    { id, user: session.user.email as string },
+    {
+      "X-Forwarded-For": headers().get("x-forwarded-for") || "",
+      "User-Agent": headers().get("user-agent") || ""
+    }
+  )
   revalidatePath("/my-reviews")
 }
 

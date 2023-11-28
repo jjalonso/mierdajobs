@@ -5,6 +5,7 @@ import { useCallback, useState, useTransition } from "react";
 import { saveAvatar } from "./data/actions";
 
 import { AvatarEnum } from "@/app/(auth)/api/auth/types";
+import { recordPlausibleEvent } from "@/lib/plausible";
 
 export const useAvatarForm = (initialValue: AvatarEnum, callbackUrl: string) => {
   const [avatar, setAvatar] = useState<AvatarEnum>(initialValue)
@@ -19,8 +20,8 @@ export const useAvatarForm = (initialValue: AvatarEnum, callbackUrl: string) => 
         await saveAvatar(avatar)
         await updateSession();
       };
-      // fetch(callbackUrl)
       router.push(callbackUrl)
+      await recordPlausibleEvent("avatar-changed", { avatar })
     })
   }, [avatar, initialValue, callbackUrl, router, updateSession]);
 

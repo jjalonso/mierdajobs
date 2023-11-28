@@ -39,7 +39,7 @@ const Layout = async ({ children }: Props) => {
     ">
       <Script
         defer
-        src="https://plausible.io/js/script.js"
+        src={process.env.NODE_ENV === "production" ? "https://plausible.io/js/script.js" : "https://plausible.io/js/script.exclusions.js"}
         data-domain="mierdajobs.com"
       />
       <body className={`

@@ -1,5 +1,6 @@
 "use server";
 
+import { headers } from "next/headers";
 import { getServerSession } from "next-auth";
 
 import authOptions from "../../../(auth)/api/auth/_options/options";
@@ -11,6 +12,7 @@ import { ActionResponse } from "@/app/types";
 import { fetchGPlaceDetails } from "@/lib/google-place/api";
 import { hasUserSubmittedReview } from "@/lib/mongodb/checks";
 import { insertInCollection } from "@/lib/mongodb/insert";
+import { recordPlausibleEvent } from "@/lib/plausible";
 import { sanitizeFormData } from "@/lib/sanitization";
 import { ValidationErrorToObject } from "@/lib/validation";
 
@@ -60,6 +62,19 @@ export const sendReview = async (formData: FormData): Promise<ActionResponse> =>
 
     // Save data in DB and return the modified business
     await insertInCollection("reviews", reviewDocument);
+    await recordPlausibleEvent(
+      "review-submitted",
+      {
+        place_id: castedValues.place_id,
+        user: session.user.email as string,
+        name: result.name
+      },
+      {
+        "X-Forwarded-For": headers().get("x-forwarded-for") || "",
+        "User-Agent": headers().get("user-agent") || ""
+      }
+    );
+
     return {
       code: 201,
       data: {

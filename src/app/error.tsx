@@ -21,9 +21,9 @@ const Error = ({
     <div className="flex h-full flex-col items-center justify-center">
       <Image
         className="mb-8"
-        src="/objects/plunger.png"
-        alt="Desatascador"
-        width={150}
+        src="/objects/alert.png"
+        alt="error"
+        width={250}
         height={0}
         quality={100}
       />

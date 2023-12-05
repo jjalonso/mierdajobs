@@ -2,38 +2,39 @@
 
 import Image from "next/image";
 import React from "react";
+import { twMerge } from "tailwind-merge";
 
 import { Button } from "@/components/button";
 import { useShare } from "@/hooks/use-share";
 
 interface Props {
   shareData: ShareData;
+  className?: string;
 };
 
-const ShareBanner = ({ shareData }: Props) => {
-  const { sharePage, canShare } = useShare(shareData);
+const ShareBanner = ({ shareData, className }: Props) => {
+  const { sharePage } = useShare(shareData);
 
-  return canShare ? <div className="mt-12 flex grow items-end justify-center px-7">
-    <div className="flex items-center gap-4 ">
+  return (
+
+    <div
+      onClick={sharePage}
+      className={twMerge("relative flex w-fit cursor-pointer flex-col items-center gap-4", className)}
+    >
       <Image
-        className="relative"
-        src="/hand-fist.png"
+        src="/objects/hands-love.png"
         width="100"
         height="0"
         alt="Cool hand"
       />
-      <div className="flex flex-col items-center gap-2">
-        <Button
-          variant="secondary"
-          onClick={sharePage}
-        >
-          Comparte
-        </Button>
-        <div className="text-center text-sm text-white">Lucha y ganaremos</div>
-      </div>
+      <Button
+        className="-rotate-6"
+        variant="secondary"
+      >
+        Comparte
+      </Button>
     </div>
-  </div>
-    : null;
+  )
 };
 
 export default ShareBanner;

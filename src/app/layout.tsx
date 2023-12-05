@@ -7,6 +7,8 @@ import "./globals.css";
 import authOptions from "./(auth)/api/auth/_options/options";
 import SessionProvider from "./session-provider";
 
+import Footer from "@/components/footer";
+
 interface Props {
   children: React.ReactNode;
 }
@@ -22,10 +24,12 @@ export const metadata: Metadata = {
 
 const Layout = async ({ children }: Props) => {
   const session = await getServerSession(authOptions);
+
   return (
-    <html
-      lang="es"
-      className="
+    <SessionProvider session={session}>
+      <html
+        lang="es"
+        className="
       flex
       min-h-full
       w-full
@@ -37,26 +41,34 @@ const Layout = async ({ children }: Props) => {
       text-sm
       text-black
     ">
-      <Script
-        defer
-        src={process.env.NODE_ENV === "production" ? "https://plausible.io/js/script.js" : "https://plausible.io/js/script.exclusions.js"}
-        data-domain="mierdajobs.com"
-      />
-      <body className={`
-       ${GeistSans.className}
-        flex
-        min-h-full
-        w-full
-        flex-col
-        px-4
-        pb-8
-        md:px-6
-      `}>
-        <SessionProvider session={session}>
-          {children}
-        </SessionProvider>
-      </body>
-    </html>
+        <Script
+          defer
+          src={process.env.NODE_ENV === "production" ? "https://plausible.io/js/script.js" : "https://plausible.io/js/script.exclusions.js"}
+          data-domain="mierdajobs.com"
+        />
+        <body className={`
+        ${GeistSans.className}
+          flex
+          min-h-full
+          w-full
+          flex-col
+          `}>
+
+          <div className="
+            flex                     
+            grow
+            flex-col
+            justify-start
+            px-4 
+            pb-8 
+            md:px-6
+          ">
+            {children}
+          </div>
+          <Footer />
+        </body>
+      </html>
+    </SessionProvider>
   );
 };
 

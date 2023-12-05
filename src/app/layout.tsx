@@ -1,5 +1,4 @@
 import { GeistSans } from "geist/font/sans";
-import _ from "lodash";
 import { Metadata } from "next";
 import Script from "next/script";
 import { getServerSession } from "next-auth";
@@ -26,10 +25,6 @@ export const metadata: Metadata = {
 const Layout = async ({ children }: Props) => {
   const session = await getServerSession(authOptions);
 
-  const isShareAvailable = () => {
-    "use client";
-    return !_.isUndefined(navigator?.share)
-  }
   return (
     <SessionProvider session={session}>
       <html

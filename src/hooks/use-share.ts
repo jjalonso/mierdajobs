@@ -1,5 +1,6 @@
-import _ from "lodash";
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
+
+import { hasNavigatorFeature } from "@/lib/navigator";
 
 interface UseShareReturn {
   sharePage: () => void
@@ -15,7 +16,7 @@ const useShare = (data: ShareData): UseShareReturn => {
     }
   }, [data])
 
-  const canShare = !_.isUndefined(navigator?.share)
+  const canShare = useMemo(() => hasNavigatorFeature("share"), []);
 
   return { sharePage, canShare };
 };

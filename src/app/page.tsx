@@ -1,9 +1,8 @@
 import { Metadata } from "next";
 import Image from "next/image";
 
-import { FormSearch } from "../components/form-search";
-import Header from "../components/header";
-
+import { FormSearch } from "@/components/form-search";
+import Header from "@/components/header";
 import { Heading } from "@/components/heading";
 
 const Page = () =>
@@ -11,11 +10,12 @@ const Page = () =>
     <Header noLogo />
     <main className="flex flex-col items-center px-8 pt-[10vh]">
       <Image
+        priority
         className="mb-10 w-60"
         src="/logo.png"
-        width="250"
+        width={250}
         quality={100}
-        height="0"
+        height={58.8}
         alt="MierdaJobs"
       />
       <FormSearch />

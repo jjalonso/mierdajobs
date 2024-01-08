@@ -14,8 +14,8 @@ const Page = () =>
         className="mb-10 w-60"
         src="/logo.png"
         width={250}
-        quality={100}
         height={58.8}
+        quality={100}
         alt="MierdaJobs"
       />
       <FormSearch />

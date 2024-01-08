@@ -20,9 +20,9 @@ const Header = async ({ noLogo = false, noAuth = false }: Props) =>
           priority
           className="w-36 md:w-60"
           src="/logo.png"
-          width="250"
+          width={250}
+          height={58.8}
           quality={100}
-          height="0"
           alt="MierdaJobs"
         />
       </a>
